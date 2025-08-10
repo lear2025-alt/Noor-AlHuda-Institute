@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <!-- نفس head الموجود في الملف الأصلي -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سجل الحضور - المتدرب | معهد نور الهدى</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/trainee.css">
+</head>
+
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي (نفس الملف الأصلي) -->
+    <nav class="navbar navbar-expand-lg navbar-dark admin-navbar fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto" href="dashbord_trainee.html">
+                <img src="../images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="40">
+                <span class="d-none d-sm-inline">لوحة المتدرب</span>
+            </a>
+            
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="studentName" class="d-none d-md-inline">م. محمد المتدرب</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-start">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="dashbord_trainee.html">
+                        <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my-courses.html">
+                        <i class="fas fa-book me-2"></i>دوراتي التدريبية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="schedule.html">
+                        <i class="fas fa-calendar-alt me-2"></i>جدولي التدريبي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="attendance.html">
+                        <i class="fas fa-clipboard-list me-2"></i>سجل الحضور
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="grades.html">
+                        <i class="fas fa-chart-line me-2"></i>تقييمي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="assignments.html">
+                        <i class="fas fa-tasks me-2"></i>الواجبات والمشاريع
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="resources.html">
+                        <i class="fas fa-file-alt me-2"></i>الموارد التعليمية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="messages.html">
+                        <i class="fas fa-envelope me-2"></i>الرسائل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.html">
+                        <i class="fas fa-cog me-2"></i>الإعدادات
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+            <div class="container-fluid py-4">
+                <h2 class="page-title"><i class="fas fa-clipboard-list me-2"></i>سجل الحضور</h2>
+                
+                <!-- فلترة السجلات -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="course" class="form-label">الدورة التدريبية</label>
+                                    <select class="form-select" id="course">
+                                        <option selected>جميع الدورات</option>
+                                        <option>أساسيات البرمجة</option>
+                                        <option>قواعد البيانات</option>
+                                        <option>تطوير الويب</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="month" class="form-label">الشهر</label>
+                                    <select class="form-select" id="month">
+                                        <option selected>جميع الأشهر</option>
+                                        <option>يناير</option>
+                                        <option>فبراير</option>
+                                        <option>مارس</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="status" class="form-label">حالة الحضور</label>
+                                    <select class="form-select" id="status">
+                                        <option selected>الكل</option>
+                                        <option>حاضر</option>
+                                        <option>غائب</option>
+                                        <option>متأخر</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- جدول الحضور -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">سجل الحضور</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>التاريخ</th>
+                                        <th>المادة</th>
+                                        <th>حالة الحضور</th>
+                                        <th>وقت التسجيل</th>
+                                        <th>ملاحظات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2023-10-01</td>
+                                        <td>أساسيات البرمجة</td>
+                                        <td><span class="badge bg-success">حاضر</span></td>
+                                        <td>8:55 ص</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2023-10-02</td>
+                                        <td>قواعد البيانات</td>
+                                        <td><span class="badge bg-danger">غائب</span></td>
+                                        <td>-</td>
+                                        <td>إجازة مرضية</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2023-10-03</td>
+                                        <td>تطوير الويب</td>
+                                        <td><span class="badge bg-warning text-dark">متأخر</span></td>
+                                        <td>3:15 م</td>
+                                        <td>ازدحام مروري</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2023-10-04</td>
+                                        <td>أساسيات البرمجة</td>
+                                        <td><span class="badge bg-success">حاضر</span></td>
+                                        <td>8:50 ص</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2023-10-05</td>
+                                        <td>ورشة عمل</td>
+                                        <td><span class="badge bg-success">حاضر</span></td>
+                                        <td>9:45 ص</td>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- ترقيم الصفحات -->
+                        <nav aria-label="Page navigation" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">السابق</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">التالي</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/student.js"></script>
+</body>
+</html>

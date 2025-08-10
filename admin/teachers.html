@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المعلمين | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .teacher-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #dee2e6;
+        }
+        .action-btns .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            margin: 0 2px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .card-header {
+            font-weight: 600;
+        }
+        .form-label.required:after {
+            content: " *";
+            color: #dc3545;
+        }
+        .password-toggle {
+            cursor: pointer;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+        }
+        /* حماية من نسخ البيانات */
+        .protected-data {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+
+
+        /* أنماط لصورة المعلم */
+        .img-thumbnail {
+            border: 3px solid #dee2e6;
+            padding: 0;
+        }
+
+        /* أنماط لعناصر البيانات */
+        .form-control-static {
+            padding: 0.375rem 0;
+            margin-bottom: 0;
+            min-height: 1.5em;
+            border-bottom: 1px solid #eee;
+        }
+        
+            /* إضافة هامش علوي لتجنب التداخل مع الشريط العلوي */
+        body {
+            padding-top: 25px; /* يمكنك تعديل القيمة حسب ارتفاع الشريط العلوي */
+        }
+
+        /* ضبط القائمة الجانبية */
+        .admin-sidebar {
+            margin-top: 0; /* لضمان عدم إضافة هامش إضافي إذا كان body يتحكم بالمسافة */
+        }
+        
+        @media (max-width: 991.98px) {
+        body {
+            padding-top: 56px; /* ارتفاع أقل للشريط العلوي على الشاشات الصغيرة */
+        }
+        }
+
+    </style>
+</head>
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <img src="images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="60" width="60" class="protected-data">
+                <span class="brand-text">لوحة المدير</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" id="notificationsDropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">طلب جديد من ولي الأمر</a></li>
+                        <li><a class="dropdown-item" href="#">تقرير حضور جديد</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" id="userDropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="adminName">أ. محمد المدير</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+     <aside class="admin-sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order_management.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلبات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="students.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلاب
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                    <a class="nav-link " href="parents_management.html"><i class="fas fa-user-friends me-2"></i> إدارة أولياء الأمور</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة المعلمين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.html">
+                            <i class="fas fa-school me-2"></i>إدارة الصفوف
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subjects.html">
+                            <i class="fas fa-book me-2"></i>إدارة المواد
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="timetable.html">
+                            <i class="fas fa-calendar-alt me-2"></i>الجداول الدراسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attendance.html">
+                            <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar me-2"></i>التقارير
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainees.html">
+                            <i class="fas fa-users me-2"></i>إدارة المتدربين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainings.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة الدورات التدريبية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog me-2"></i>الإعدادات
+                        </a>
+                    </li>
+                </ul>
+            
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+            <div class="container-fluid py-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="page-title mb-0"><i class="fas fa-chalkboard-teacher me-2"></i>إدارة المعلمين</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTeacherModal" id="addTeacherBtn">
+                        <i class="fas fa-plus me-2"></i>إضافة معلم جديد
+                    </button>
+                </div>
+
+                <!-- فلترة البحث -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <form class="row g-3" id="searchForm">
+                            <div class="col-md-4">
+                                <label for="searchInput" class="form-label">بحث</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="searchInput" placeholder="ابحث باسم المعلم أو التخصص...">
+                                    <button class="btn btn-outline-secondary" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="specializationFilter" class="form-label">التخصص</label>
+                                <select id="specializationFilter" class="form-select">
+                                    <option value="">كل التخصصات</option>
+                                    <option value="math">الرياضيات</option>
+                                    <option value="science">العلوم</option>
+                                    <option value="arabic">اللغة العربية</option>
+                                    <option value="english">اللغة الإنجليزية</option>
+                                    <option value="history">التاريخ</option>
+                                    <option value="geography">الجغرافيا</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="statusFilter" class="form-label">الحالة</label>
+                                <select id="statusFilter" class="form-select">
+                                    <option value="">كل الحالات</option>
+                                    <option value="active">نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                    <option value="on_leave">في إجازة</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="reset" class="btn btn-outline-secondary w-100" id="resetFilters">
+                                    <i class="fas fa-undo me-2"></i> إعادة تعيين
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- جدول المعلمين -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">قائمة المعلمين</h5>
+                        <div>
+                            <button class="btn btn-sm btn-light me-2" id="exportExcel">
+                                <i class="fas fa-file-excel me-1"></i> تصدير
+                            </button>
+                            <button class="btn btn-sm btn-light" id="printBtn">
+                                <i class="fas fa-print me-1"></i> طباعة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="teachersTable" class="table table-hover table-striped w-100">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th width="50">#</th>
+                                        <th>المعلم</th>
+                                        <th>رقم الهوية</th>
+                                        <th>التخصص</th>
+                                        <th>سنوات الخبرة</th>
+                                        <th>الحالة</th>
+                                        <th>تاريخ التعيين</th>
+                                        <th width="120">إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <img src="../assets/images/teacher1.jpg" alt="صورة المعلم" class="teacher-photo me-2 protected-data">
+                                            <span class="protected-data">أحمد محمد</span>
+                                        </td>
+                                        <td class="protected-data">1234567890</td>
+                                        <td>الرياضيات</td>
+                                        <td>5</td>
+                                        <td><span class="badge bg-success">نشط</span></td>
+                                        <td>2022-09-01</td>
+                                        <td class="action-btns">
+                                            <button class="btn btn-sm btn-outline-primary view-teacher-btn" title="عرض" data-teacher-id="1">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-warning edit-btn" title="تعديل" data-id="2" data-bs-toggle="modal" data-bs-target="#editTeacherModal">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+
+                                            <button class="btn btn-sm btn-outline-danger delete-btn" title="حذف" data-id="1">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>
+                                            <img src="../assets/images/teacher2.jpg" alt="صورة المعلم" class="teacher-photo me-2 protected-data">
+                                            <span class="protected-data">سارة عبد الله</span>
+                                        </td>
+                                        <td class="protected-data">0987654321</td>
+                                        <td>اللغة العربية</td>
+                                        <td>3</td>
+                                        <td><span class="badge bg-success">نشط</span></td>
+                                        <td>2023-01-15</td>
+                                        <td class="action-btns">
+                                            <button class="btn btn-sm btn-outline-primary view-teacher-btn" title="عرض" data-teacher-id="1">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-warning edit-btn" title="تعديل" data-id="2">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger delete-btn" title="حذف" data-id="2">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <!-- يمكن إضافة المزيد من الصفوف هنا -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal إضافة معلم جديد -->
+    <div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="addTeacherModalLabel"><i class="fas fa-user-plus me-2"></i>إضافة معلم جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addTeacherForm" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="fullName" class="form-label required">الاسم الكامل</label>
+                                <input type="text" class="form-control" id="fullName" required>
+                                <div class="invalid-feedback">يرجى إدخال اسم المعلم</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="teacherId" class="form-label required">رقم الهوية</label>
+                                <input type="text" class="form-control" id="teacherId" required>
+                                <div class="invalid-feedback">يرجى إدخال رقم الهوية</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="birthDate" class="form-label required">تاريخ الميلاد</label>
+                                <input type="date" class="form-control" id="birthDate" required>
+                                <div class="invalid-feedback">يرجى إدخال تاريخ الميلاد</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="gender" class="form-label required">الجنس</label>
+                                <select class="form-select" id="gender" required>
+                                    <option value="">اختر...</option>
+                                    <option value="male">ذكر</option>
+                                    <option value="female">أنثى</option>
+                                </select>
+                                <div class="invalid-feedback">يرجى اختيار الجنس</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="specialization" class="form-label required">التخصص</label>
+                                <select class="form-select" id="specialization" required>
+                                    <option value="">اختر التخصص...</option>
+                                    <option value="math">الرياضيات</option>
+                                    <option value="science">العلوم</option>
+                                    <option value="arabic">اللغة العربية</option>
+                                    <option value="english">اللغة الإنجليزية</option>
+                                </select>
+                                <div class="invalid-feedback">يرجى اختيار التخصص</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="experience" class="form-label">سنوات الخبرة</label>
+                                <input type="number" class="form-control" id="experience" min="0">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label required">رقم الهاتف</label>
+                                <input type="tel" class="form-control" id="phone" required>
+                                <div class="invalid-feedback">يرجى إدخال رقم هاتف صحيح</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label required">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="email" required>
+                                <div class="invalid-feedback">يرجى إدخال بريد إلكتروني صحيح</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="status" class="form-label required">الحالة</label>
+                                <select class="form-select" id="status" required>
+                                    <option value="active" selected>نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                    <option value="on_leave">في إجازة</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="hireDate" class="form-label required">تاريخ التعيين</label>
+                                <input type="date" class="form-control" id="hireDate" required>
+                                <div class="invalid-feedback">يرجى إدخال تاريخ التعيين</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">العنوان</label>
+                                <textarea class="form-control" id="address" rows="2"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="username" class="form-label required">اسم المستخدم</label>
+                                <input type="text" class="form-control" id="username" required>
+                                <div class="invalid-feedback">يرجى إدخال اسم مستخدم</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password" class="form-label required">كلمة المرور</label>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control" id="password" required minlength="8">
+                                    <i class="fas fa-eye-slash password-toggle" data-target="password"></i>
+                                    <div class="invalid-feedback">كلمة المرور يجب أن تكون 8 أحرف على الأقل</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="teacherPhoto" class="form-label">صورة المعلم</label>
+                                <input type="file" class="form-control" id="teacherPhoto" accept="image/*">
+                                <small class="text-muted">الصور المسموح بها: JPG, PNG بحد أقصى 2MB</small>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="addTeacherForm" class="btn btn-primary">حفظ المعلم</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Modal تعديل معلم -->
+<div class="modal fade" id="editTeacherModal" tabindex="-1" aria-labelledby="editTeacherModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="editTeacherModalLabel"><i class="fas fa-user-edit me-2"></i>تعديل بيانات المعلم</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editTeacherForm" novalidate>
+                    <input type="hidden" id="editTeacherId">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="editFullName" class="form-label required">الاسم الكامل</label>
+                            <input type="text" class="form-control" id="editFullName" required>
+                            <div class="invalid-feedback">يرجى إدخال اسم المعلم</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editTeacherId" class="form-label required">رقم الهوية</label>
+                            <input type="text" class="form-control" id="editTeacherIdNum" required>
+                            <div class="invalid-feedback">يرجى إدخال رقم الهوية</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editBirthDate" class="form-label required">تاريخ الميلاد</label>
+                            <input type="date" class="form-control" id="editBirthDate" required>
+                            <div class="invalid-feedback">يرجى إدخال تاريخ الميلاد</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editGender" class="form-label required">الجنس</label>
+                            <select class="form-select" id="editGender" required>
+                                <option value="">اختر...</option>
+                                <option value="male">ذكر</option>
+                                <option value="female">أنثى</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار الجنس</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editSpecialization" class="form-label required">التخصص</label>
+                            <select class="form-select" id="editSpecialization" required>
+                                <option value="">اختر التخصص...</option>
+                                <option value="math">الرياضيات</option>
+                                <option value="science">العلوم</option>
+                                <option value="arabic">اللغة العربية</option>
+                                <option value="english">اللغة الإنجليزية</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار التخصص</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editExperience" class="form-label">سنوات الخبرة</label>
+                            <input type="number" class="form-control" id="editExperience" min="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editPhone" class="form-label required">رقم الهاتف</label>
+                            <input type="tel" class="form-control" id="editPhone" required>
+                            <div class="invalid-feedback">يرجى إدخال رقم هاتف صحيح</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editEmail" class="form-label required">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="editEmail" required>
+                            <div class="invalid-feedback">يرجى إدخال بريد إلكتروني صحيح</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editStatus" class="form-label required">الحالة</label>
+                            <select class="form-select" id="editStatus" required>
+                                <option value="active">نشط</option>
+                                <option value="inactive">غير نشط</option>
+                                <option value="on_leave">في إجازة</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editHireDate" class="form-label required">تاريخ التعيين</label>
+                            <input type="date" class="form-control" id="editHireDate" required>
+                            <div class="invalid-feedback">يرجى إدخال تاريخ التعيين</div>
+                        </div>
+                        <div class="col-12">
+                            <label for="editAddress" class="form-label">العنوان</label>
+                            <textarea class="form-control" id="editAddress" rows="2"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editUsername" class="form-label required">اسم المستخدم</label>
+                            <input type="text" class="form-control" id="editUsername" required>
+                            <div class="invalid-feedback">يرجى إدخال اسم مستخدم</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editPassword" class="form-label">كلمة المرور (اتركها فارغة إذا لم ترغب في التغيير)</label>
+                            <div class="position-relative">
+                                <input type="password" class="form-control" id="editPassword" minlength="8">
+                                <i class="fas fa-eye-slash password-toggle" data-target="editPassword"></i>
+                                <div class="invalid-feedback">كلمة المرور يجب أن تكون 8 أحرف على الأقل</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="editTeacherPhoto" class="form-label">صورة المعلم</label>
+                            <input type="file" class="form-control" id="editTeacherPhoto" accept="image/*">
+                            <small class="text-muted">الصور المسموح بها: JPG, PNG بحد أقصى 2MB</small>
+                            <div class="mt-2">
+                                <img id="currentTeacherPhoto" src="" class="img-thumbnail" width="100" style="display:none;">
+                                <button type="button" id="removePhotoBtn" class="btn btn-sm btn-danger mt-2" style="display:none;">
+                                    <i class="fas fa-trash-alt me-1"></i>حذف الصورة
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="submit" form="editTeacherForm" class="btn btn-primary">حفظ التعديلات</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal عرض بيانات المعلم -->
+<div class="modal fade" id="viewTeacherModal" tabindex="-1" aria-labelledby="viewTeacherModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="viewTeacherModalLabel"><i class="fas fa-user-tie me-2"></i>بيانات المعلم</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 text-center mb-4">
+                        <img id="teacherPhotoView" src="images/default-teacher.jpg" class="img-thumbnail rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h4 id="teacherNameView">أحمد محمد</h4>
+                        <span id="teacherStatusView" class="badge bg-success">نشط</span>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">رقم الهوية</label>
+                                <p class="form-control-static" id="teacherIdView">1234567890</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">التخصص</label>
+                                <p class="form-control-static" id="teacherSpecializationView">الرياضيات</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">تاريخ الميلاد</label>
+                                <p class="form-control-static" id="teacherBirthDateView">15/05/1985</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">سنوات الخبرة</label>
+                                <p class="form-control-static" id="teacherExperienceView">10 سنوات</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم الهاتف</label>
+                                <p class="form-control-static" id="teacherPhoneView">+966501234567</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">البريد الإلكتروني</label>
+                                <p class="form-control-static" id="teacherEmailView">ahmed@example.com</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">تاريخ التعيين</label>
+                                <p class="form-control-static" id="teacherHireDateView">01/09/2015</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الجنس</label>
+                                <p class="form-control-static" id="teacherGenderView">ذكر</p>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">العنوان</label>
+                                <p class="form-control-static" id="teacherAddressView">الرياض، حي العليا، شارع الملك فهد</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الصفوف المكلف بها</label>
+                                <div class="d-flex flex-wrap gap-2" id="teacherClassesView">
+                                    <span class="badge bg-secondary">الصف الأول أ</span>
+                                    <span class="badge bg-secondary">الصف الثاني ب</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">المواد المكلف بها</label>
+                                <div class="d-flex flex-wrap gap-2" id="teacherSubjectsView">
+                                    <span class="badge bg-info">الرياضيات</span>
+                                    <span class="badge bg-info">العلوم</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-print me-1"></i> طباعة بطاقة المعلم
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- JS الخاص بالمدير -->
+    <script src="js/admin.js"></script>
+    
+    <script>
+        // تهيئة DataTable
+        $(document).ready(function() {
+            var table = $('#teachersTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/ar.json'
+                },
+                responsive: true,
+                dom: '<"top"f>rt<"bottom"lip><"clear">',
+                pageLength: 10,
+                order: [[0, 'asc']]
+            });
+
+            // البحث في الجدول
+            $('#searchForm').on('submit', function(e) {
+                e.preventDefault();
+                table.search($('#searchInput').val()).draw();
+            });
+
+            // تصفية حسب التخصص
+            $('#specializationFilter').on('change', function() {
+                table.column(3).search(this.value).draw();
+            });
+
+            // تصفية حسب الحالة
+            $('#statusFilter').on('change', function() {
+                table.column(5).search(this.value).draw();
+            });
+
+            // إعادة تعيين الفلاتر
+            $('#resetFilters').on('click', function() {
+                $('#searchInput').val('');
+                $('#specializationFilter').val('');
+                $('#statusFilter').val('');
+                table.search('').columns().search('').draw();
+            });
+
+            // منع نسخ البيانات المحمية
+            $('.protected-data').on('copy cut paste drag drop', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // عرض/إخفاء كلمة المرور
+            $('.password-toggle').on('click', function() {
+                const target = $(this).data('target');
+                const input = $('#' + target);
+                const icon = $(this);
+                
+                if (input.attr('type') === 'password') {
+                    input.attr('type', 'text');
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                } else {
+                    input.attr('type', 'password');
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                }
+            });
+
+            // التحقق من صحة النموذج
+            (function() {
+                'use strict';
+                var forms = document.querySelectorAll('.needs-validation');
+                
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+            })();
+
+            // معالجة إضافة معلم جديد
+            $('#addTeacherForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                if (this.checkValidity()) {
+                    // هنا يمكنك إضافة كود الإضافة الفعلية
+                    alert('تم إضافة المعلم بنجاح');
+                    $('#addTeacherModal').modal('hide');
+                    this.reset();
+                    $(this).removeClass('was-validated');
+                    
+                    // يمكنك هنا إضافة المعلم الجديد للجدول دون الحاجة لإعادة تحميل الصفحة
+                }
+            });
+
+            // معالجة حذف المعلم
+            $(document).on('click', '.delete-btn', function() {
+                if(confirm('هل أنت متأكد من حذف هذا المعلم؟ سيتم حذف جميع بياناته المرتبطة.')) {
+                    const teacherId = $(this).data('id');
+                    const row = $(this).closest('tr');
+                    
+                    // هنا يمكنك إضافة كود الحذف الفعلي
+                    $.ajax({
+                        url: 'api/deleteTeacher.php',
+                        method: 'POST',
+                        data: { id: teacherId },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                row.fadeOut(500, function() {
+                                    table.row($(this)).remove().draw();
+                                });
+                                alert('تم حذف المعلم بنجاح');
+                            } else {
+                                alert('حدث خطأ أثناء حذف المعلم: ' + response.message);
+                            }
+                        },
+                        error: function() {
+                            alert('حدث خطأ أثناء الاتصال بالخادم');
+                        }
+                    });
+                }
+            });
+
+           
+
+            // تصدير إلى Excel
+            $('#exportExcel').on('click', function() {
+                // يمكنك استخدام مكتبة مثل SheetJS لتصدير البيانات
+                alert('سيتم تصدير البيانات إلى ملف Excel');
+            });
+
+            // طباعة الجدول
+            $('#printBtn').on('click', function() {
+                window.print();
+            });
+        });
+
+
+                // عند النقر على زر عرض المعلم
+        $(document).on('click', '.view-teacher-btn', function() {
+            // بيانات المعلم (ستأتي من السطر في الجدول أو من API)
+            const teacherData = {
+                id: $(this).data('teacher-id'),
+                name: $(this).closest('tr').find('td:eq(1)').text(),
+                specialization: $(this).closest('tr').find('td:eq(2)').text(),
+                status: $(this).closest('tr').find('.badge').hasClass('bg-success') ? 'نشط' : 'غير نشط'
+            };
+            
+            // تعبئة البيانات في المودال
+            $('#teacherName').text(teacherData.name);
+            $('#teacherSpecialization').text(teacherData.specialization);
+            $('#teacherId').text(teacherData.id);
+            $('#teacherStatus').text(teacherData.status);
+            
+            // عرض المودال
+            $('#viewTeacherModal').modal('show');
+        });
+
+
+    </script>
+</body>
+</html>

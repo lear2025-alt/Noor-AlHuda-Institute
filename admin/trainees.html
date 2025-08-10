@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المتدربين | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .trainee-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #dee2e6;
+        }
+        .action-btns .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            margin: 0 2px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .card-header {
+            font-weight: 600;
+        }
+        .form-label.required:after {
+            content: " *";
+            color: #dc3545;
+        }
+        .badge-status {
+            font-size: 0.85rem;
+            padding: 0.35em 0.65em;
+        }
+        .course-badge {
+            font-size: 0.8rem;
+            margin: 2px;
+        }
+        
+            /* إضافة هامش علوي لتجنب التداخل مع الشريط العلوي */
+        body {
+            padding-top: 25px; /* يمكنك تعديل القيمة حسب ارتفاع الشريط العلوي */
+        }
+
+        /* ضبط القائمة الجانبية */
+        .admin-sidebar {
+            margin-top: 0; /* لضمان عدم إضافة هامش إضافي إذا كان body يتحكم بالمسافة */
+        }
+        
+        @media (max-width: 991.98px) {
+        body {
+            padding-top: 56px; /* ارتفاع أقل للشريط العلوي على الشاشات الصغيرة */
+        }
+        }
+    </style>
+</head>
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي -->
+     <!-- شريط التنقل العلوي -->
+        <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+            <div class="container-fluid ">
+                <a class="navbar-brand" href="dashboard.html">
+                    <img src="images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="60" width="60" >
+                    <span class="brand-text">لوحة المدير</span>
+                </a>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">1</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                            <li><a class="dropdown-item" href="#">طلب تسجيل جديد  </a></li>
+                        
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            <span id="adminName">أ. محمد المدير</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- القائمة الجانبية -->
+        <div class="admin-wrapper">
+            <aside class="admin-sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order_management.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلبات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="students.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلاب
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                    <a class="nav-link " href="parents_management.html"><i class="fas fa-user-friends me-2"></i> إدارة أولياء الأمور</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة المعلمين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.html">
+                            <i class="fas fa-school me-2"></i>إدارة الصفوف
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subjects.html">
+                            <i class="fas fa-book me-2"></i>إدارة المواد
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="timetable.html">
+                            <i class="fas fa-calendar-alt me-2"></i>الجداول الدراسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attendance.html">
+                            <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar me-2"></i>التقارير
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainees.html">
+                            <i class="fas fa-users me-2"></i>إدارة المتدربين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainings.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة الدورات التدريبية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog me-2"></i>الإعدادات
+                        </a>
+                    </li>
+                </ul>
+            
+        </aside>
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+            <div class="container-fluid py-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="page-title mb-0"><i class="fas fa-user-graduate me-2"></i>إدارة المتدربين</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTraineeModal" id="addTraineeBtn">
+                        <i class="fas fa-plus me-2"></i>إضافة متدرب جديد
+                    </button>
+                </div>
+
+                <!-- فلترة البحث -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <form class="row g-3" id="searchForm">
+                            <div class="col-md-6">
+                                <label for="searchInput" class="form-label">بحث</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="searchInput" placeholder="ابحث بالاسم أو الهاتف أو البريد...">
+                                    <button class="btn btn-outline-secondary" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="courseFilter" class="form-label">الدورة التدريبية</label>
+                                <select id="courseFilter" class="form-select">
+                                    <option value="">جميع الدورات</option>
+                                    <option value="1">دورة البرمجة الأساسية</option>
+                                    <option value="2">دورة التصميم الجرافيكي</option>
+                                    <option value="3">دورة اللغة الإنجليزية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button type="reset" class="btn btn-outline-secondary w-100" id="resetFilters">
+                                    <i class="fas fa-undo me-2"></i> إعادة تعيين
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- جدول المتدربين -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">قائمة المتدربين</h5>
+                        <div>
+                            <button class="btn btn-sm btn-light me-2" id="exportExcel">
+                                <i class="fas fa-file-excel me-1"></i> تصدير
+                            </button>
+                            <button class="btn btn-sm btn-light" id="printBtn">
+                                <i class="fas fa-print me-1"></i> طباعة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="traineesTable" class="table table-hover table-striped w-100">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th width="50">#</th>
+                                        <th>المتدرب</th>
+                                        <th>المعلومات</th>
+                                        <th>الدورات</th>
+                                        <th>الحالة</th>
+                                        <th>تاريخ التسجيل</th>
+                                        <th width="120">إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="images/teacher1.jpg" alt="صورة المتدرب" class="trainee-avatar me-2">
+                                                <div>
+                                                    <h6 class="mb-0">أحمد محمد علي</h6>
+                                                    <small class="text-muted">ID: TRN-2023001</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <small><i class="fas fa-phone me-1"></i> 0912345678</small><br>
+                                            <small><i class="fas fa-envelope me-1"></i> ahmed@example.com</small>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-primary course-badge">البرمجة الأساسية</span>
+                                            <span class="badge bg-success course-badge">الإنجليزية</span>
+                                        </td>
+                                        <td><span class="badge bg-success badge-status">نشط</span></td>
+                                        <td>15/03/2023</td>
+                                        <td class="action-btns">
+                                            <button class="btn btn-sm btn-outline-primary view-btn" title="عرض" data-bs-toggle="modal" data-bs-target="#viewTraineeModal" data-id="1">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-warning edit-btn" title="تعديل" data-bs-toggle="modal" data-bs-target="#editTraineeModal" data-id="1">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger delete-btn" title="حذف" data-id="1">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="images/teacher1.jpg" alt="صورة المتدربة" class="trainee-avatar me-2">
+                                                <div>
+                                                    <h6 class="mb-0">سارة عبد الله</h6>
+                                                    <small class="text-muted">ID: TRN-2023002</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <small><i class="fas fa-phone me-1"></i> 0934567890</small><br>
+                                            <small><i class="fas fa-envelope me-1"></i> sara@example.com</small>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-info course-badge">التصميم الجرافيكي</span>
+                                        </td>
+                                        <td><span class="badge bg-warning text-dark badge-status">موقوف</span></td>
+                                        <td>20/03/2023</td>
+                                        <td class="action-btns">
+                                            <button class="btn btn-sm btn-outline-primary view-btn" title="عرض" data-id="2">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-warning edit-btn" title="تعديل" data-id="2">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger delete-btn" title="حذف" data-id="2">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal إضافة متدرب جديد -->
+    <div class="modal fade" id="addTraineeModal" tabindex="-1" aria-labelledby="addTraineeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="addTraineeModalLabel"><i class="fas fa-plus me-2"></i>إضافة متدرب جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addTraineeForm" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="traineeName" class="form-label required">الاسم الكامل</label>
+                                <input type="text" class="form-control" id="traineeName" required>
+                                <div class="invalid-feedback">يرجى إدخال الاسم الكامل</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="traineeId" class="form-label required">رقم الهوية/الإقامة</label>
+                                <input type="text" class="form-control" id="traineeId" required>
+                                <div class="invalid-feedback">يرجى إدخال رقم الهوية</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="traineePhone" class="form-label required">رقم الهاتف</label>
+                                <input type="tel" class="form-control" id="traineePhone" required>
+                                <div class="invalid-feedback">يرجى إدخال رقم الهاتف</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="traineeEmail" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="traineeEmail">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="traineeGender" class="form-label required">الجنس</label>
+                                <select class="form-select" id="traineeGender" required>
+                                    <option value="">اختر...</option>
+                                    <option value="male">ذكر</option>
+                                    <option value="female">أنثى</option>
+                                </select>
+                                <div class="invalid-feedback">يرجى اختيار الجنس</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="traineeDob" class="form-label">تاريخ الميلاد</label>
+                                <input type="date" class="form-control" id="traineeDob">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="traineeCourses" class="form-label">الدورات التدريبية</label>
+                                <select class="form-select" id="traineeCourses" multiple>
+                                    <option value="1">دورة البرمجة الأساسية</option>
+                                    <option value="2">دورة التصميم الجرافيكي</option>
+                                    <option value="3">دورة اللغة الإنجليزية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="traineeStatus" class="form-label required">حالة المتدرب</label>
+                                <select class="form-select" id="traineeStatus" required>
+                                    <option value="active" selected>نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                    <option value="suspended">موقوف</option>
+                                    <option value="completed">منتهي</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="traineeAddress" class="form-label">العنوان</label>
+                                <textarea class="form-control" id="traineeAddress" rows="2"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="traineePhoto" class="form-label">صورة المتدرب</label>
+                                <input type="file" class="form-control" id="traineePhoto" accept="image/*">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="addTraineeForm" class="btn btn-primary">حفظ المتدرب</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal عرض بيانات المتدرب -->
+    <div class="modal fade" id="viewTraineeModal" tabindex="-1" aria-labelledby="viewTraineeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="viewTraineeModalLabel"><i class="fas fa-user-graduate me-2"></i>بيانات المتدرب</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4">
+                            <img src="../assets/images/avatars/male.png" alt="صورة المتدرب" class="img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                            <h4 class="trainee-name">أحمد محمد علي</h4>
+                            <span class="badge bg-success">نشط</span>
+                            <p class="text-muted mt-2 mb-0">ID: TRN-2023001</p>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">رقم الهوية</label>
+                                    <p class="form-control-static trainee-id">1234567890</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">رقم الهاتف</label>
+                                    <p class="form-control-static trainee-phone">0912345678</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">البريد الإلكتروني</label>
+                                    <p class="form-control-static trainee-email">ahmed@example.com</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">الجنس</label>
+                                    <p class="form-control-static trainee-gender">ذكر</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">تاريخ الميلاد</label>
+                                    <p class="form-control-static trainee-dob">01/01/1995</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">تاريخ التسجيل</label>
+                                    <p class="form-control-static trainee-reg-date">15/03/2023</p>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">الدورات التدريبية</label>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="badge bg-primary">البرمجة الأساسية</span>
+                                        <span class="badge bg-success">الإنجليزية</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">العنوان</label>
+                                    <p class="form-control-static trainee-address">دمشق، شارع الثورة، بناء رقم 15</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-certificate me-1"></i> الشهادات
+                    </button>
+                    <button type="button" class="btn btn-info">
+                        <i class="fas fa-chart-line me-1"></i> التقدم
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal تعديل بيانات متدرب -->
+    <div class="modal fade" id="editTraineeModal" tabindex="-1" aria-labelledby="editTraineeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title" id="editTraineeModalLabel"><i class="fas fa-edit me-2"></i>تعديل بيانات متدرب</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editTraineeForm" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="editTraineeName" class="form-label required">الاسم الكامل</label>
+                            <input type="text" class="form-control" id="editTraineeName" placeholder="أدخل الاسم الكامل" required aria-describedby="editTraineeNameHelp">
+                            <div id="editTraineeNameHelp" class="form-text">يرجى إدخال الاسم الكامل بالعربية.</div>
+                            <div class="invalid-feedback">يرجى إدخال الاسم الكامل</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editTraineeId" class="form-label required">رقم الهوية/الإقامة</label>
+                            <input type="text" class="form-control" id="editTraineeId" placeholder="أدخل رقم الهوية" required aria-describedby="editTraineeIdHelp">
+                            <div id="editTraineeIdHelp" class="form-text">أدخل رقم الهوية أو الإقامة مكون من 10 أرقام.</div>
+                            <div class="invalid-feedback">يرجى إدخال رقم الهوية</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editTraineePhone" class="form-label required">رقم الهاتف</label>
+                            <input type="tel" class="form-control" id="editTraineePhone" placeholder="05XXXXXXXX" required aria-describedby="editTraineePhoneHelp">
+                            <div id="editTraineePhoneHelp" class="form-text">أدخل رقم الهاتف بصيغة صحيحة.</div>
+                            <div class="invalid-feedback">يرجى إدخال رقم الهاتف</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editTraineeEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="editTraineeEmail" placeholder="example@domain.com" aria-describedby="editTraineeEmailHelp">
+                            <div id="editTraineeEmailHelp" class="form-text">البريد الإلكتروني اختياري.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editTraineeGender" class="form-label required">الجنس</label>
+                            <select class="form-select" id="editTraineeGender" required aria-describedby="editTraineeGenderHelp">
+                                <option value="">اختر...</option>
+                                <option value="male">ذكر</option>
+                                <option value="female">أنثى</option>
+                            </select>
+                            <div id="editTraineeGenderHelp" class="form-text">اختر الجنس المناسب.</div>
+                            <div class="invalid-feedback">يرجى اختيار الجنس</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editTraineeDob" class="form-label required">تاريخ الميلاد</label>
+                            <input type="date" class="form-control" id="editTraineeDob" required aria-describedby="editTraineeDobHelp">
+                            <div id="editTraineeDobHelp" class="form-text">أدخل تاريخ الميلاد بدقة.</div>
+                            <div class="invalid-feedback">يرجى إدخال تاريخ الميلاد</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editTraineeCourses" class="form-label">الدورات التدريبية</label>
+                            <select class="form-select select2" id="editTraineeCourses" multiple aria-describedby="editTraineeCoursesHelp">
+                                <option value="1">دورة البرمجة الأساسية</option>
+                                <option value="2">دورة التصميم الجرافيكي</option>
+                                <option value="3">دورة اللغة الإنجليزية</option>
+                            </select>
+                            <div id="editTraineeCoursesHelp" class="form-text">اختر الدورات التي يرغب المتدرب بالالتحاق بها.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editTraineeStatus" class="form-label required">حالة المتدرب</label>
+                            <select class="form-select" id="editTraineeStatus" required aria-describedby="editTraineeStatusHelp">
+                                <option value="active">نشط</option>
+                                <option value="inactive">غير نشط</option>
+                                <option value="suspended">موقوف</option>
+                                <option value="completed">منتهي</option>
+                            </select>
+                            <div id="editTraineeStatusHelp" class="form-text">اختر حالة المتدرب الحالية.</div>
+                            <div class="invalid-feedback">يرجى اختيار حالة المتدرب</div>
+                        </div>
+                        <div class="col-12">
+                            <label for="editTraineeAddress" class="form-label">العنوان</label>
+                            <textarea class="form-control" id="editTraineeAddress" rows="2" placeholder="أدخل العنوان الكامل"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editTraineePhoto" class="form-label">صورة المتدرب</label>
+                            <input type="file" class="form-control" id="editTraineePhoto" accept="image/*" aria-describedby="editTraineePhotoHelp">
+                            <div id="editTraineePhotoHelp" class="form-text">اختر صورة بصيغة PNG أو JPG.</div>
+                            <img id="editPhotoPreview" class="img-fluid mt-2" style="max-width: 150px; display: none;" alt="معاينة الصورة">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="submit" form="editTraineeForm" class="btn btn-warning">حفظ التعديلات</button>
+            </div>
+        </div>
+     </div>
+    /div>
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- JS الخاص بالمدير -->
+    <script src="js/admin.js"></script>
+    <script>
+        // تهيئة DataTable
+        $(document).ready(function() {
+            var table = $('#traineesTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/ar.json'
+                },
+                responsive: true,
+                dom: '<"top"f>rt<"bottom"lip><"clear">',
+                pageLength: 10,
+                order: [[0, 'asc']]
+            });
+
+            // البحث في الجدول
+            $('#searchForm').on('submit', function(e) {
+                e.preventDefault();
+                table.search($('#searchInput').val()).draw();
+            });
+
+            // تصفية حسب الدورة
+            $('#courseFilter').on('change', function() {
+                table.column(3).search(this.value).draw();
+            });
+
+            // إعادة تعيين الفلاتر
+            $('#resetFilters').on('click', function() {
+                $('#searchInput').val('');
+                $('#courseFilter').val('');
+                table.search('').columns().search('').draw();
+            });
+
+            // التحقق من صحة النموذج
+            (function() {
+                'use strict';
+                var forms = document.querySelectorAll('.needs-validation');
+                
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+            })();
+
+            // معالجة إضافة متدرب جديد
+            $('#addTraineeForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                if (this.checkValidity()) {
+                    // هنا يمكنك إضافة كود الإضافة الفعلية
+                    alert('تم إضافة المتدرب بنجاح');
+                    $('#addTraineeModal').modal('hide');
+                    this.reset();
+                    $(this).removeClass('was-validated');
+                    
+                    // يمكنك هنا إضافة المتدرب الجديد للجدول دون الحاجة لإعادة تحميل الصفحة
+                }
+            });
+
+            // معالجة حذف المتدرب
+            $(document).on('click', '.delete-btn', function() {
+                if(confirm('هل أنت متأكد من حذف هذا المتدرب؟ سيتم حذف جميع بياناته المرتبطة.')) {
+                    const traineeId = $(this).data('id');
+                    const row = $(this).closest('tr');
+                    
+                    // هنا يمكنك إضافة كود الحذف الفعلي
+                    $.ajax({
+                        url: 'api/deleteTrainee.php',
+                        method: 'POST',
+                        data: { id: traineeId },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                row.fadeOut(500, function() {
+                                    table.row($(this)).remove().draw();
+                                });
+                                alert('تم حذف المتدرب بنجاح');
+                            } else {
+                                alert('حدث خطأ أثناء حذف المتدرب: ' + response.message);
+                            }
+                        },
+                        error: function() {
+                            alert('حدث خطأ أثناء الاتصال بالخادم');
+                        }
+                    });
+                }
+            });
+
+            // معالجة عرض بيانات المتدرب
+            $(document).on('click', '.view-btn', function() {
+                const traineeId = $(this).data('id');
+                
+                // هنا يمكنك جلب بيانات المتدرب من الخادم
+                $.ajax({
+                    url: 'api/getTrainee.php',
+                    method: 'GET',
+                    data: { id: traineeId },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            const trainee = response.data;
+                            $('#viewTraineeModal .trainee-name').text(trainee.name);
+                            $('#viewTraineeModal .trainee-id').text(trainee.id_number);
+                            $('#viewTraineeModal .trainee-phone').text(trainee.phone);
+                            $('#viewTraineeModal .trainee-email').text(trainee.email || 'غير محدد');
+                            $('#viewTraineeModal .trainee-gender').text(trainee.gender === 'male' ? 'ذكر' : 'أنثى');
+                            $('#viewTraineeModal .trainee-dob').text(trainee.dob || 'غير محدد');
+                            $('#viewTraineeModal .trainee-reg-date').text(trainee.registration_date);
+                            $('#viewTraineeModal .trainee-address').text(trainee.address || 'غير محدد');
+                            
+                            // تحديث حالة المتدرب
+                            const statusBadge = $('#viewTraineeModal .badge');
+                            statusBadge.removeClass('bg-success bg-warning bg-danger bg-info');
+                            if (trainee.status === 'active') {
+                                statusBadge.addClass('bg-success').text('نشط');
+                            } else if (trainee.status === 'inactive') {
+                                statusBadge.addClass('bg-warning text-dark').text('غير نشط');
+                            } else if (trainee.status === 'suspended') {
+                                statusBadge.addClass('bg-danger').text('موقوف');
+                            } else {
+                                statusBadge.addClass('bg-info').text('منتهي');
+                            }
+                            
+                            // تحديث الدورات
+                            const coursesContainer = $('#viewTraineeModal .d-flex.flex-wrap');
+                            coursesContainer.empty();
+                            trainee.courses.forEach(course => {
+                                coursesContainer.append(`<span class="badge bg-primary">${course.name}</span>`);
+                            });
+                            
+                            // تحديث الصورة
+                            const photo = $('#viewTraineeModal .img-thumbnail');
+                            if (trainee.photo) {
+                                photo.attr('src', 'uploads/trainees/' + trainee.photo);
+                            } else {
+                                photo.attr('src', trainee.gender === 'male' ? '../assets/images/avatars/male.png' : '../assets/images/avatars/female.png');
+                            }
+                        } else {
+                            alert('حدث خطأ أثناء جلب بيانات المتدرب');
+                        }
+                    },
+                    error: function() {
+                        alert('حدث خطأ أثناء الاتصال بالخادم');
+                    }
+                });
+            });
+
+            
+      
+
+
+
+            // تصدير إلى Excel
+            $('#exportExcel').on('click', function() {
+                // يمكنك استخدام مكتبة مثل SheetJS لتصدير البيانات
+                alert('سيتم تصدير البيانات إلى ملف Excel');
+            });
+
+            // طباعة الجدول
+            $('#printBtn').on('click', function() {
+                window.print();
+            });
+        });
+
+
+    </script>
+</body>
+</html>

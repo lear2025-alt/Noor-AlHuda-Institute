@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي - الطالب | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/student.css">
+</head>
+<body class="student-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashbord_student.html">
+                <img src="../images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="40">
+                <span class="brand-text">لوحة الطالب</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">2</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">واجب جديد في الرياضيات</a></li>
+                        <li><a class="dropdown-item" href="#">تقرير الحضور الأسبوعي</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="studentName">أحمد محمد</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item active" href="profile.html"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- القائمة الجانبية -->
+    <div class="student-wrapper">
+        <aside class="student-sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashbord_student.html">
+                        <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="schedule.html">
+                        <i class="fas fa-calendar-alt me-2"></i>الجدول الدراسي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="attendance.html">
+                        <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="grades.html">
+                        <i class="fas fa-chart-line me-2"></i>الدرجات والتقييم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="homework.html">
+                        <i class="fas fa-book me-2"></i>الواجبات المدرسية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="exams.html">
+                        <i class="fas fa-file-alt me-2"></i>الاختبارات
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="materials.html">
+                        <i class="fas fa-download me-2"></i>المواد التعليمية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="messages.html">
+                        <i class="fas fa-envelope me-2"></i>الرسائل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="profile.html">
+                        <i class="fas fa-user me-2"></i>الملف الشخصي
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="student-content">
+            <div class="container-fluid py-4">
+                <h2 class="page-title mb-4"><i class="fas fa-user me-2"></i>الملف الشخصي</h2>
+                
+                <div class="row">
+                    <div class="col-lg-4">
+                        <!-- معلومات الطالب -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">معلومات الطالب</h5>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="profile-img mb-3">
+                                    <img src="https://via.placeholder.com/150" class="rounded-circle" width="120" height="120" alt="صورة الطالب">
+                                    <button class="btn btn-sm btn-secondary mt-2">
+                                        <i class="fas fa-camera me-1"></i> تغيير الصورة
+                                    </button>
+                                </div>
+                                <h4>أحمد محمد علي</h4>
+                                <p class="text-muted">الصف: العاشر - القسم: أ</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-id-card me-2"></i>رقم الهوية</span>
+                                    <span>ST-2023-1254</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-birthday-cake me-2"></i>تاريخ الميلاد</span>
+                                    <span>15/05/2007</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-phone me-2"></i>رقم الهاتف</span>
+                                    <span>+966 50 123 4567</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-envelope me-2"></i>البريد الإلكتروني</span>
+                                    <span>ahmed@example.com</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- معلومات ولي الأمر -->
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">معلومات ولي الأمر</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-user me-2"></i>الاسم</span>
+                                    <span>محمد علي أحمد</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-phone me-2"></i>رقم الهاتف</span>
+                                    <span>+966 55 765 4321</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-envelope me-2"></i>البريد الإلكتروني</span>
+                                    <span>parent@example.com</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span><i class="fas fa-home me-2"></i>العنوان</span>
+                                    <span>الرياض - حي النخيل</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-8">
+                        <!-- الإحصائيات -->
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <div class="stat-card bg-primary text-white">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3>92%</h3>
+                                        <p>نسبة الحضور</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="stat-card bg-success text-white">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="stat-info">
+                                        <h3>85%</h3>
+                                        <p>المعدل العام</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- المواد الدراسية -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0">المواد الدراسية</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>المادة</th>
+                                                <th>المعلم</th>
+                                                <th>الدرجة</th>
+                                                <th>الحالة</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>الرياضيات</td>
+                                                <td>أ. أحمد محمد</td>
+                                                <td>95%</td>
+                                                <td><span class="badge bg-success">ممتاز</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>اللغة العربية</td>
+                                                <td>أ. سعاد عبد الله</td>
+                                                <td>88%</td>
+                                                <td><span class="badge bg-primary">جيد جداً</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>العلوم</td>
+                                                <td>أ. يوسف خالد</td>
+                                                <td>82%</td>
+                                                <td><span class="badge bg-info">جيد</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>اللغة الإنجليزية</td>
+                                                <td>أ. محمد علي</td>
+                                                <td>90%</td>
+                                                <td><span class="badge bg-success">ممتاز</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- سجل الحضور الأخير -->
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-warning text-dark">
+                                <h5 class="mb-0">سجل الحضور الأخير</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>التاريخ</th>
+                                                <th>الحصة الأولى</th>
+                                                <th>الحصة الثانية</th>
+                                                <th>الحصة الثالثة</th>
+                                                <th>الحصة الرابعة</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2023-10-15</td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2023-10-14</td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                                <td><span class="badge bg-danger">غائب</span></td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2023-10-13</td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                                <td><span class="badge bg-success">حاضر</span></td>
+                                                <td><span class="badge bg-warning">متأخر</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+</html>

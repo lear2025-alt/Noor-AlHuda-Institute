@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام التسجيل - معهد نور الهدى التعليمي</title>
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+    <style>
+        :root {
+            --primary-color: #2c5f8a;
+            --secondary-color: #4b8b9d;
+            --accent-color: #f5a623;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            height: 60px;
+            margin-left: 15px;
+        }
+        
+        .form-section {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .subject-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .footer a{
+            text-decoration: none;
+        }
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .subject-card.selected {
+            border: 2px solid var(--primary-color);
+            background-color: rgba(44, 95, 138, 0.05);
+        }
+        
+        .subject-card .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            padding: 12px 15px;
+        }
+        
+        .teacher-option {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .price-tag {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: #e0e0e0;
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 20%;
+            transition: width 0.3s ease;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #234a6d;
+            border-color: #234a6d;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .test-question {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .test-question h5 {
+            color: var(--primary-color);
+        }
+        
+        .summary-card {
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-color);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--primary-color);
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            color: #666;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+        
+        .step.active .step-number {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .step.active .step-label {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .step.completed .step-label {
+            color: var(--success-color);
+        }
+        
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 50%;
+            left: -50%;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: -1;
+        }
+        
+        .step.completed:not(:last-child):after {
+            background: var(--success-color);
+        }
+        
+        @media (max-width: 768px) {
+            .step-label {
+                font-size: 0.7rem;
+            }
+        }
+       
+
+                /* تعريف المتغيرات للألوان والانتقالات */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #343a40;
+            --accent-color: #28a745;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+          
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        }
+
+        .footer-about img {
+            margin-bottom: 15px;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3 {
+            color: var(--white);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-right: 5px;
+        }
+
+        .footer-contact ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-contact li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            margin-left: 10px;
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-top: 3px;
+        }
+
+        .footer-contact p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        .footer-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التقدم -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- الرأس -->
+    <header class="header">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <img src="images/Noor_Alhuda_logo.png" alt="شعار معهد نور الهدى" class="logo">
+                <div>
+                    <h3 class="mb-0">نظام التسجيل الإلكتروني</h3>
+                    <p class="mb-0">معهد نور الهدى التعليمي</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- مؤشر الخطوات -->
+    <div class="container mt-4">
+        <div class="step-indicator">
+            <div class="step active" id="step1">
+                <div class="step-number">1</div>
+                <div class="step-label">المعلومات الشخصية</div>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-number">2</div>
+                <div class="step-label">ولي الأمر</div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-number">3</div>
+                <div class="step-label">المرحلة الدراسية</div>
+            </div>
+            <div class="step" id="step4">
+                <div class="step-number">4</div>
+                <div class="step-label">اختيار المواد</div>
+            </div>
+            <div class="step" id="step5">
+                <div class="step-number">5</div>
+                <div class="step-label">اختبار المستوى</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- نموذج التسجيل -->
+    <div class="container py-4">
+        <form id="studentRegistrationForm">
+            <!-- القسم 1: المعلومات الشخصية -->
+            <div class="form-section active" id="section1">
+                <h3 class="section-title">المعلومات الشخصية والحساب للطالب</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="fullName" class="form-label">الاسم الكامل</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="birthDate" class="form-label">تاريخ الميلاد</label>
+                        <input type="date" class="form-control" id="birthDate" required>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">الجنس</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                                <label class="form-check-label" for="male">ذكر</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                <label class="form-check-label" for="female">أنثى</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="phone" class="form-label">رقم التواصل</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="email" placeholder="ادخل البريد الالكتروني">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="password" class="form-label">كلمة المرور)</label>
+                        <input type="password" class="form-control" id="password" placeholder="ادخل كلمة المرور">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="address" class="form-label">العنوان</label>
+                        <input type="text" class="form-control" id="address" required>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="photo" class="form-label">صورة شخصية (اختيارية)</label>
+                    <input type="file" class="form-control" id="photo" accept="image/*">
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                    <div></div>
+                    <button type="button" class="btn btn-primary next-section" data-next="section2">
+                        التالي <i class="fas fa-arrow-left ms-2"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- القسم 2: معلومات ولي الأمر -->
+            <div class="form-section" id="section2">
+                <h3 class="section-title">معلومات ولي الأمر</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="guardianName" class="form-label">اسم ولي الأمر</label>
+                        <input type="text" class="form-control" id="guardianName" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="guardianPhone" class="form-label">رقم تواصل ولي الأمر</label>
+                        <input type="tel" class="form-control" id="guardianPhone" required>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="guardianEmail" class="form-label">البريد الالكتروني لولي الأمر</label>
+                    <input type="email" class="form-control" id="guardianEmail">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="guardianRelation" class="form-label">صلة القرابة</label>
+                    <select class="form-select" id="guardianRelation" required>
+                        <option value="" selected disabled>اختر صلة القرابة</option>
+                        <option value="father">الأب</option>
+                        <option value="mother">الأم</option>
+                        <option value="brother">الأخ</option>
+                        <option value="sister">الأخت</option>
+                        <option value="uncle">العم/الخال</option>
+                        <option value="other">آخر</option>
+                    </select>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-outline-primary prev-section" data-prev="section1">
+                        <i class="fas fa-arrow-right me-2"></i> السابق
+                    </button>
+                    <button type="button" class="btn btn-primary next-section" data-next="section3">
+                        التالي <i class="fas fa-arrow-left ms-2"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- القسم 3: المعلومات الأكاديمية -->
+            <div class="form-section" id="section3">
+                <h3 class="section-title">المعلومات الأكاديمية</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="educationLevel" class="form-label">المرحلة الدراسية</label>
+                        <select class="form-select" id="educationLevel" required>
+                            <option value="" selected disabled>اختر المرحلة</option>
+                            <option value="kindergarten">الروضة</option>
+                            <option value="primary">المرحلة الابتدائية</option>
+                            <option value="intermediate">المرحلة المتوسطة</option>
+                            <option value="secondary">المرحلة الثانوية</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="grade" class="form-label">الصف</label>
+                        <select class="form-select" id="grade" required>
+                            <option value="" selected disabled>اختر المرحلة أولاً</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="previousSchool" class="form-label">المدرسة السابقة (إن وجدت)</label>
+                    <input type="text" class="form-control" id="previousSchool">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="academicNotes" class="form-label">ملاحظات أكاديمية (إن وجدت)</label>
+                    <textarea class="form-control" id="academicNotes" rows="3"></textarea>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-outline-primary prev-section" data-prev="section2">
+                        <i class="fas fa-arrow-right me-2"></i> السابق
+                    </button>
+                    <button type="button" class="btn btn-primary next-section" data-next="section4">
+                        التالي <i class="fas fa-arrow-left ms-2"></i>
+                    </button>
+                </div>
+            </div>
+            
+                    <!-- القسم 4: اختيار المواد -->
+        <div class="form-section" id="section4">
+            <h3 class="section-title">اختيار المواد الدراسية</h3>
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong>ملاحظة:</strong> يرجى اختيار المواد المراد التسجيل فيها. يمكنك اختيار مادة واحدة أو أكثر حسب الحاجة.
+            </div>
+            
+            <div class="row" id="subjectsContainer">
+                <!-- مثال لبطاقة مادة - سيتم تعبئتها ديناميكياً -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card subject-card h-100">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <span>الرياضيات</span>
+                            <span class="badge bg-light text-primary">500 ر.س</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text text-muted">مادة الرياضيات للمرحلة الابتدائية تشمل أساسيات الحساب والهندسة</p>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">اختر المعلم:</label>
+                                <select class="form-select teacher-select">
+                                    <option value="t1">أ. أحمد محمد - 500 ر.س</option>
+                                    <option value="t2">أ. سامي علي - 550 ر.س</option>
+                                    <option value="t3">أ. مريم خالد - 450 ر.س</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-check form-switch">
+                                <input class="form-check-input subject-checkbox" type="checkbox" id="mathCheck">
+                                <label class="form-check-label fw-bold" for="mathCheck">اختيار هذه المادة</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card subject-card h-100">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <span>اللغة العربية</span>
+                            <span class="badge bg-light text-primary">450 ر.س</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text text-muted">مادة اللغة العربية تشمل القراءة، الكتابة، القواعد والنصوص</p>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">اختر المعلم:</label>
+                                <select class="form-select teacher-select">
+                                    <option value="t4">أ. فاطمة حسن - 450 ر.س</option>
+                                    <option value="t5">أ. ليلى عبدالله - 500 ر.س</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-check form-switch">
+                                <input class="form-check-input subject-checkbox" type="checkbox" id="arabicCheck">
+                                <label class="form-check-label fw-bold" for="arabicCheck">اختيار هذه المادة</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card subject-card h-100">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <span>العلوم</span>
+                            <span class="badge bg-light text-primary">400 ر.س</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text text-muted">مادة العلوم تشمل الفيزياء، الكيمياء والأحياء حسب المرحلة</p>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">اختر المعلم:</label>
+                                <select class="form-select teacher-select">
+                                    <option value="t6">أ. يوسف خالد - 400 ر.س</option>
+                                    <option value="t7">أ. ناصر أحمد - 450 ر.س</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-check form-switch">
+                                <input class="form-check-input subject-checkbox" type="checkbox" id="scienceCheck">
+                                <label class="form-check-label fw-bold" for="scienceCheck">اختيار هذه المادة</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-4 summary-card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-file-invoice me-2"></i>ملخص الطلب</h5>
+                </div>
+                <div class="card-body">
+                    <div id="selectedSubjectsSummary">
+                        <p class="text-muted mb-0">لم يتم اختيار أي مواد بعد</p>
+                    </div>
+                    <div class="mt-3 pt-3 border-top">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">المبلغ الإجمالي:</h5>
+                            <h4 class="mb-0 fw-bold text-success"><span id="totalAmount">0</span> ر.س</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-outline-primary prev-section" data-prev="section3">
+                    <i class="fas fa-arrow-right me-2"></i> السابق
+                </button>
+                <button type="button" class="btn btn-primary next-section" data-next="section5">
+                    التالي <i class="fas fa-arrow-left ms-2"></i>
+                </button>
+            </div>
+        </div>
+            
+            <!-- القسم 5: اختبار تحديد المستوى -->
+            <div class="form-section" id="section5">
+                <h3 class="section-title">اختبار تحديد المستوى</h3>
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>تنبيه:</strong> هذا الاختبار إلزامي لتقييم مستوى الطالب في المواد المختارة. الرجاء الإجابة بدقة.
+                </div>
+                
+                <div id="placementTestContainer">
+                    <!-- سيتم تعبئة الأسئلة ديناميكياً هنا -->
+                    <div class="text-center py-5" id="loadingTest">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">تحميل...</span>
+                        </div>
+                        <p class="mt-3">جاري تحضير الاختبار...</p>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-outline-primary prev-section" data-prev="section4">
+                        <i class="fas fa-arrow-right me-2"></i> السابق
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-paper-plane me-2"></i> إرسال الطلب
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <!-- التذييل -->
+ <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-2 mb-lg-0">
+                    <div class="footer-about">
+                        <img src="images/Noor_Alhuda_logo.png" alt="شعار معهد نور الهدى" height="120" width="120">
+                        <p class="">معهد نور الهدى التعليمي يقدم تعليماً حديثاً يجمع بين الأصالة والمعاصرة، ويسهم في بناء شخصية الطالب بناءً متكاملاً.</p>
+                        <div class="social-links">
+                         <a href="https://wa.me/+963951742878" class="social-icon"><i class="fab fa-whatsapp"></i></a>                   
+                        <a href="https://www.facebook.com/share/1Et35C8YKg/" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://t.me/+963951742878" class="social-icon"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="mailto:I.nooralhuda2025@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>             
+                        <a href="https://www.instagram.com/i.nooralhuda2025" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h3>روابط سريعة</h3>
+                        <ul>
+                            <li><a href="#home">الرئيسية</a></li>
+                            <li><a href="#about">عن المعهد</a></li>
+                            <li><a href="#departments">الأقسام</a></li>
+                            <li><a href="#courses">الدورات</a></li>
+                            <li><a href="#teachers">المعلمون</a></li>
+                            <li><a href="#contact">التواصل</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h3>الدورات</h3>
+                        <ul>
+                            <li><a href="#courses">برمجة الأطفال</a></li>
+                            <li><a href="#courses">قيادة الحاسب الآلي</a></li>
+                            <li><a href="#courses">الإنجليزية المحادثة</a></li>
+                            <li><a href="#courses">التصميم الجرافيكي</a></li>
+                            <li><a href="#courses">تطوير الويب للمبتدئين</a></li>
+                            <li><a href="#courses">التسويق الرقمي</a></li>
+                            <li><a href="#toggle-courses">عرض جميع الدورات</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-contact">
+                        <h3>معلومات التواصل</h3>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt">
+
+                            </i> حلب مخيم النيرب مفرق الشنكل _ مقابل منزل آل زيدان</li>
+
+                            <li><i class="fas fa-phone-alt"></i> 878 742 951 963+</li>
+                            <li><i class="fas fa-envelope"></i> I.nooralhuda2025@gmail.com</li>
+                            <li><i class="fas fa-clock"></i> الأحد - الخميس: 7:30ص - 3:30م</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0"> جميع الحقوق محفوظة © معهد نور الهدى 2025</p>
+                   
+                </div>   
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">تصميم وتطوير <a href="#" class="text-white">فريق المعهد</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- مكتبات JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // قاعدة بيانات المواد لكل مرحلة
+            const subjectsDatabase = {
+                'kindergarten_kg1': [
+                    {
+                        id: 'kg_math',
+                        name: 'مبادئ الرياضيات',
+                        description: 'تعلم الأرقام والعمليات الحسابية البسيطة',
+                        teachers: [
+                            {id: 't101', name: 'أ. منى أحمد', price: 300},
+                            {id: 't102', name: 'أ. هدى محمد', price: 350}
+                        ]
+                    },
+                    {
+                        id: 'kg_arabic',
+                        name: 'مبادئ اللغة العربية',
+                        description: 'تعلم الحروف والكلمات الأساسية',
+                        teachers: [
+                            {id: 't103', name: 'أ. سارة خالد', price: 300},
+                            {id: 't104', name: 'أ. ليلى عبدالله', price: 320}
+                        ]
+                    }
+                ],
+                'primary_1': [
+                    {
+                        id: 'p1_math',
+                        name: 'الرياضيات للصف الأول',
+                        description: 'تعلم العمليات الحسابية الأساسية',
+                        teachers: [
+                            {id: 't201', name: 'أ. أحمد محمد', price: 400},
+                            {id: 't202', name: 'أ. سامي علي', price: 450}
+                        ]
+                    },
+                    {
+                        id: 'p1_arabic',
+                        name: 'اللغة العربية للصف الأول',
+                        description: 'قراءة وكتابة وقواعد أساسية',
+                        teachers: [
+                            {id: 't203', name: 'أ. فاطمة حسن', price: 400},
+                            {id: 't204', name: 'أ. مريم وليد', price: 420}
+                        ]
+                    },
+                    {
+                        id: 'p1_science',
+                        name: 'العلوم للصف الأول',
+                        description: 'مفاهيم علمية بسيطة',
+                        teachers: [
+                            {id: 't205', name: 'أ. يوسف خالد', price: 380}
+                        ]
+                    }
+                ],
+                'secondary_11_science': [
+                    {
+                        id: 's11_physics',
+                        name: 'الفيزياء - علمي',
+                        description: 'منهج الفيزياء للصف الحادي عشر علمي',
+                        teachers: [
+                            {id: 't301', name: 'أ. محمد حسن', price: 600},
+                            {id: 't302', name: 'أ. خالد عبدالله', price: 650}
+                        ]
+                    },
+                    {
+                        id: 's11_chemistry',
+                        name: 'الكيمياء - علمي',
+                        description: 'منهج الكيمياء للصف الحادي عشر علمي',
+                        teachers: [
+                            {id: 't303', name: 'أ. علي محمود', price: 600},
+                            {id: 't304', name: 'أ. ناصر أحمد', price: 620}
+                        ]
+                    },
+                    {
+                        id: 's11_biology',
+                        name: 'الأحياء - علمي',
+                        description: 'منهج الأحياء للصف الحادي عشر علمي',
+                        teachers: [
+                            {id: 't305', name: 'أ. سعاد عبدالرحمن', price: 580}
+                        ]
+                    }
+                ]
+                // يمكن إضافة المزيد من المواد للمراحل الأخرى
+            };
+            
+            // قاعدة بيانات اختبارات المواد
+            const testsDatabase = {
+                'p1_math': [
+                    {
+                        question: "ما هو ناتج 5 + 3؟",
+                        options: [
+                            {id: 'q1_a', text: "7", correct: false},
+                            {id: 'q1_b', text: "8", correct: true},
+                            {id: 'q1_c', text: "9", correct: false}
+                        ]
+                    },
+                    {
+                        question: "ما هو العدد الأكبر بين 12 و 15؟",
+                        options: [
+                            {id: 'q2_a', text: "12", correct: false},
+                            {id: 'q2_b', text: "15", correct: true},
+                            {id: 'q2_c', text: "متساويان", correct: false}
+                        ]
+                    }
+                ],
+                'p1_arabic': [
+                    {
+                        question: "ما هي الحرف الأول في كلمة 'مدرسة'؟",
+                        options: [
+                            {id: 'q1_a', text: "م", correct: true},
+                            {id: 'q1_b', text: "د", correct: false},
+                            {id: 'q1_c', text: "ر", correct: false}
+                        ]
+                    }
+                ]
+                // يمكن إضافة المزيد من الاختبارات للمواد الأخرى
+            };
+            
+            // تحديث شريط التقدم
+            function updateProgressBar(section) {
+                const progress = {
+                    'section1': 20,
+                    'section2': 40,
+                    'section3': 60,
+                    'section4': 80,
+                    'section5': 100
+                };
+                $('#progressBar').css('width', progress[section] + '%');
+            }
+            
+            // تحديث مؤشر الخطوات
+            function updateStepIndicator(currentSection) {
+                const steps = {
+                    'section1': 'step1',
+                    'section2': 'step2',
+                    'section3': 'step3',
+                    'section4': 'step4',
+                    'section5': 'step5'
+                };
+                
+                // إعادة تعيين جميع الخطوات
+                $('.step').removeClass('active completed');
+                
+                // تعيين الخطوات السابقة كمكتملة
+                let foundCurrent = false;
+                for (const [section, step] of Object.entries(steps)) {
+                    if (section === currentSection) {
+                        $('#' + step).addClass('active');
+                        foundCurrent = true;
+                    } else if (!foundCurrent) {
+                        $('#' + step).addClass('completed');
+                    }
+                }
+            }
+            
+            // التنقل بين الأقسام
+            $('.next-section').click(function() {
+                const nextSection = $(this).data('next');
+                $('.form-section').removeClass('active');
+                $('#' + nextSection).addClass('active');
+                updateProgressBar(nextSection);
+                updateStepIndicator(nextSection);
+                
+                // إذا كانت الخطوة التالية هي اختيار المواد، قم بتحميل المواد
+                if (nextSection === 'section4') {
+                    loadSubjects();
+                }
+                
+                // إذا كانت الخطوة التالية هي الاختبار، قم بتحميل الاختبار
+                if (nextSection === 'section5') {
+                    loadPlacementTest();
+                }
+            });
+            
+            $('.prev-section').click(function() {
+                const prevSection = $(this).data('prev');
+                $('.form-section').removeClass('active');
+                $('#' + prevSection).addClass('active');
+                updateProgressBar(prevSection);
+                updateStepIndicator(prevSection);
+            });
+            
+            // تحديث الصفوف بناءً على المرحلة الدراسية
+            $('#educationLevel').change(function() {
+                const level = $(this).val();
+                const gradeSelect = $('#grade');
+                gradeSelect.empty().append('<option value="" selected disabled>اختر الصف</option>');
+                
+                if (level === 'kindergarten') {
+                    gradeSelect.append('<option value="kg1">الروضة الأولى</option>');
+                    gradeSelect.append('<option value="kg2">الروضة الثانية</option>');
+                } else if (level === 'primary') {
+                    for (let i = 1; i <= 6; i++) {
+                        gradeSelect.append(`<option value="${i}">الصف ${i} ابتدائي</option>`);
+                    }
+                } else if (level === 'intermediate') {
+                    for (let i = 7; i <= 9; i++) {
+                        gradeSelect.append(`<option value="${i}">الصف ${i} متوسط</option>`);
+                    }
+                } else if (level === 'secondary') {
+                    gradeSelect.append('<option value="10">الصف العاشر</option>');
+                    gradeSelect.append('<option value="11_science">الصف الحادي عشر علمي</option>');
+                    gradeSelect.append('<option value="11_literary">الصف الحادي عشر أدبي</option>');
+                    gradeSelect.append('<option value="12_science">البكالوريا علمي</option>');
+                    gradeSelect.append('<option value="12_literary">البكالوريا أدبي</option>');
+                }
+            });
+            
+            // تحميل المواد الدراسية حسب الصف المختار
+            function loadSubjects() {
+                const level = $('#educationLevel').val();
+                const grade = $('#grade').val();
+                const container = $('#subjectsContainer');
+                
+                container.empty().append(`
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">تحميل...</span>
+                        </div>
+                        <p class="mt-3">جاري تحميل المواد المتاحة...</p>
+                    </div>
+                `);
+                
+                // محاكاة جلب البيانات من الخادم
+                setTimeout(function() {
+                    const key = `${level}_${grade}`;
+                    const subjects = subjectsDatabase[key] || [];
+                    
+                    container.empty();
+                    
+                    if (subjects.length === 0) {
+                        container.append(`
+                            <div class="col-12">
+                                <div class="alert alert-warning">
+                                    لا توجد مواد متاحة لهذه المرحلة حالياً. يرجى التواصل مع الإدارة.
+                                </div>
+                            </div>
+                        `);
+                        return;
+                    }
+                    
+                    subjects.forEach(function(subject) {
+                        const teachersOptions = subject.teachers.map(teacher => 
+                            `<option value="${teacher.id}">${teacher.name} - ${teacher.price} ر.س</option>`
+                        ).join('');
+                        
+                        container.append(`
+                            <div class="col-md-4 mb-4 subject-card" data-subject-id="${subject.id}">
+                                <div class="card h-100">
+                                    <div class="card-header">
+                                        ${subject.name}
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">${subject.description}</p>
+                                        <div class="mb-3">
+                                            <label class="form-label">المعلم:</label>
+                                            <select class="form-select teacher-select">
+                                                ${teachersOptions}
+                                            </select>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input subject-checkbox" type="checkbox" value="${subject.id}" id="${subject.id}_check">
+                                            <label class="form-check-label" for="${subject.id}_check">اختيار هذه المادة</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+                    
+                    // إضافة حدث تغيير لصناديق الاختيار
+                    $('.subject-checkbox').change(function() {
+                        const subjectId = $(this).val();
+                        const subjectCard = $(this).closest('.subject-card');
+                        
+                        if ($(this).is(':checked')) {
+                            subjectCard.addClass('selected');
+                        } else {
+                            subjectCard.removeClass('selected');
+                        }
+                        
+                        updateSelectedSubjectsSummary();
+                    });
+                }, 1000);
+            }
+            
+            // تحديث ملخص المواد المختارة
+            function updateSelectedSubjectsSummary() {
+                const selectedSubjects = [];
+                let totalAmount = 0;
+                
+                $('.subject-checkbox:checked').each(function() {
+                    const subjectId = $(this).val();
+                    const subjectName = $(this).closest('.card').find('.card-header').text();
+                    const teacherSelect = $(this).closest('.card-body').find('.teacher-select');
+                    const teacherName = teacherSelect.find('option:selected').text().split(' - ')[0];
+                    const price = parseInt(teacherSelect.find('option:selected').text().split(' - ')[1]);
+                    
+                    selectedSubjects.push({
+                        name: subjectName,
+                        teacher: teacherName,
+                        price: price
+                    });
+                    
+                    totalAmount += price;
+                });
+                
+                let summaryHtml = '';
+                if (selectedSubjects.length > 0) {
+                    summaryHtml += '<ul class="list-group list-group-flush">';
+                    selectedSubjects.forEach(function(subject) {
+                        summaryHtml += `
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">${subject.name}</h6>
+                                    <small class="text-muted">${subject.teacher}</small>
+                                </div>
+                                <span class="badge bg-primary rounded-pill">${subject.price} ر.س</span>
+                            </li>
+                        `;
+                    });
+                    summaryHtml += '</ul>';
+                } else {
+                    summaryHtml = '<p class="text-muted mb-0">لم يتم اختيار أي مواد بعد</p>';
+                }
+                
+                $('#selectedSubjectsSummary').html(summaryHtml);
+                $('#totalAmount').text(totalAmount);
+            }
+            
+            // تحميل اختبار تحديد المستوى
+            function loadPlacementTest() {
+                const container = $('#placementTestContainer');
+                $('#loadingTest').show();
+                
+                // محاكاة جلب البيانات من الخادم
+                setTimeout(function() {
+                    $('#loadingTest').hide();
+                    
+                    // جمع المواد المختارة
+                    const selectedSubjects = [];
+                    $('.subject-checkbox:checked').each(function() {
+                        selectedSubjects.push($(this).val());
+                    });
+                    
+                    // إذا لم يتم اختيار أي مواد
+                    if (selectedSubjects.length === 0) {
+                        container.append(`
+                            <div class="alert alert-danger">
+                                لم يتم اختيار أي مواد. الرجاء العودة واختيار مواد لإجراء الاختبار.
+                            </div>
+                        `);
+                        return;
+                    }
+                    
+                    // تحميل الاختبارات للمواد المختارة
+                    selectedSubjects.forEach(function(subjectId) {
+                        const subjectTests = testsDatabase[subjectId] || [];
+                        
+                        if (subjectTests.length > 0) {
+                            const subjectName = $(`[data-subject-id="${subjectId}"] .card-header`).text();
+                            
+                            let testHtml = `
+                                <div class="card mb-4 subject-test" data-subject="${subjectId}">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0">اختبار مادة ${subjectName}</h5>
+                                    </div>
+                                    <div class="card-body">
+                            `;
+                            
+                            subjectTests.forEach(function(test, index) {
+                                testHtml += `
+                                    <div class="test-question">
+                                        <h5>السؤال ${index + 1}: ${test.question}</h5>
+                                        <div class="ps-3">
+                                `;
+                                
+                                test.options.forEach(function(option) {
+                                    testHtml += `
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="${subjectId}_q${index + 1}" id="${option.id}" value="${option.id}">
+                                            <label class="form-check-label" for="${option.id}">${option.text}</label>
+                                        </div>
+                                    `;
+                                });
+                                
+                                testHtml += `
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                            
+                            testHtml += `
+                                    </div>
+                                </div>
+                            `;
+                            
+                            container.append(testHtml);
+                        } else {
+                            container.append(`
+                                <div class="alert alert-info">
+                                    لا يوجد اختبار تحديد مستوى لمادة ${subjectName} حالياً.
+                                </div>
+                            `);
+                        }
+                    });
+                }, 1500);
+            }
+            
+            // إرسال النموذج
+            $('#studentRegistrationForm').submit(function(e) {
+                e.preventDefault();
+                
+                // جمع بيانات النموذج
+                const formData = {
+                    personalInfo: {
+                        fullName: $('#fullName').val(),
+                        birthDate: $('#birthDate').val(),
+                        gender: $('input[name="gender"]:checked').val(),
+                        phone: $('#phone').val(),
+                        email: $('#email').val(),
+                        address: $('#address').val(),
+                        photo: $('#photo').val()
+                    },
+                    guardianInfo: {
+                        name: $('#guardianName').val(),
+                        phone: $('#guardianPhone').val(),
+                        email: $('#guardianEmail').val(),
+                        relation: $('#guardianRelation').val()
+                    },
+                    academicInfo: {
+                        level: $('#educationLevel').val(),
+                        grade: $('#grade').val(),
+                        previousSchool: $('#previousSchool').val(),
+                        notes: $('#academicNotes').val()
+                    },
+                    selectedSubjects: [],
+                    testAnswers: {},
+                    totalAmount: parseInt($('#totalAmount').text()) || 0
+                };
+                
+                // جمع المواد المختارة
+                $('.subject-checkbox:checked').each(function() {
+                    const subjectId = $(this).val();
+                    const subjectName = $(this).closest('.card').find('.card-header').text();
+                    const teacherSelect = $(this).closest('.card-body').find('.teacher-select');
+                    const teacherId = teacherSelect.val();
+                    const teacherName = teacherSelect.find('option:selected').text().split(' - ')[0];
+                    const price = parseInt(teacherSelect.find('option:selected').text().split(' - ')[1]);
+                    
+                    formData.selectedSubjects.push({
+                        id: subjectId,
+                        name: subjectName,
+                        teacherId: teacherId,
+                        teacherName: teacherName,
+                        price: price
+                    });
+                });
+                
+                // جمع إجابات الاختبار
+                $('.subject-test').each(function() {
+                    const subject = $(this).data('subject');
+                    formData.testAnswers[subject] = {};
+                    
+                    $(this).find('input[type="radio"]:checked').each(function() {
+                        const questionName = $(this).attr('name');
+                        const answer = $(this).val();
+                        formData.testAnswers[subject][questionName] = answer;
+                    });
+                });
+                
+                // هنا يمكنك إرسال البيانات إلى السيرفر باستخدام Ajax
+                console.log('بيانات النموذج:', formData); // لعرض البيانات في الكونسول (للتجربة فقط)
+                
+                // عرض رسالة نجاح
+                Swal.fire({
+                    icon: 'success',
+                    title: 'تم إرسال الطلب بنجاح',
+                    text: 'سيتم مراجعة طلبك من قبل الإدارة وسيتم التواصل معكم قريباً',
+                    confirmButtonText: 'حسناً',
+                    confirmButtonColor: '#2c5f8a'
+                }).then(() => {
+                    // إعادة تعيين النموذج
+                    $('#studentRegistrationForm')[0].reset();
+                    $('.form-section').removeClass('active');
+                    $('#section1').addClass('active');
+                    updateProgressBar('section1');
+                    updateStepIndicator('section1');
+                    $('#subjectsContainer').empty();
+                    $('#placementTestContainer').empty();
+                    $('#selectedSubjectsSummary').html('<p class="text-muted mb-0">لم يتم اختيار أي مواد بعد</p>');
+                    $('#totalAmount').text('0');
+                });
+            });
+        });
+    </script>
+    <!-- SweetAlert لعرض الرسائل -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

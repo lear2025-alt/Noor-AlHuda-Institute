@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - المعلم | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/teacher.css">
+    <style>
+       
+
+        /* الكروت */
+        .card {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: white;
+            background-color: #34495e !important;
+        }
+
+        .card-header i {
+            margin-left: 8px;
+        }
+
+        /* الجداول */
+        .table-responsive {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background-color: #34495e;
+            color: white;
+            border-bottom: none;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(52, 73, 94, 0.1);
+        }
+
+        
+
+        /* البادجات */
+        .badge {
+            font-weight: 500;
+            padding: 5px 10px;
+        }
+
+        .badge-primary {
+            background-color: #3498db;
+        }
+
+        .badge-danger {
+            background-color: #e74c3c;
+        }
+
+        .badge-success {
+            background-color: #2ecc71;
+        }
+
+        /* Modal Styles */
+        .modal-content {
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            background-color: #34495e;
+            color: white;
+            border-radius: 8px 8px 0 0;
+            padding: 15px 20px;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #eee;
+            padding: 15px 20px;
+        }
+
+        
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .admin-wrapper {
+                flex-direction: column;
+            }
+            
+            .admin-sidebar {
+                width: 100%;
+                min-height: auto;
+                position: static;
+            }
+            
+            .admin-content {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark admin-navbar fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto" href="dashbord_teacher.html">
+                <img src="../images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="40">
+                <span class="d-none d-sm-inline">لوحة المعلم</span>
+            </a>
+            
+            
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="teacherName" class="d-none d-md-inline">أ. أحمد المعلم</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-start">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashbord_teacher.html">
+                        <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="classes.html">
+                        <i class="fas fa-school me-2"></i>صفوفي الدراسية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="students.html">
+                        <i class="fas fa-users me-2"></i>طلابي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="attendance.html">
+                        <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="assessment.html">
+                        <i class="fas fa-check-circle me-2"></i>تقييم الطلاب
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="schedule.html">
+                        <i class="fas fa-calendar-alt me-2"></i>جدولي الدراسي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="assignments.html">
+                        <i class="fas fa-tasks me-2"></i>الواجبات والاختبارات
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="messages.html">
+                        <i class="fas fa-envelope me-2"></i>الرسائل
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="admin-content">
+            <h2 class="page-title"><i class="fas fa-book"></i> الواجبات والاختبارات</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="ابحث عن واجب أو اختبار...">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6 text-start">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAssignmentModal">
+                        <i class="fas fa-plus me-2"></i>إضافة واجب جديد
+                    </button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header"><i class="fas fa-tasks me-2"></i>قائمة الواجبات والاختبارات</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>العنوان</th>
+                                    <th>النوع</th>
+                                    <th>الصف</th>
+                                    <th>المادة</th>
+                                    <th>تاريخ التسليم</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>واجب الرياضيات الفصلي</td>
+                                    <td><span class="badge badge-primary">واجب</span></td>
+                                    <td>العاشر أ</td>
+                                    <td>الرياضيات</td>
+                                    <td>2025-08-10</td>
+                                    <td><span class="badge badge-success">نشط</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary view-btn" data-bs-toggle="modal" data-bs-target="#viewAssignmentModal">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-secondary edit-btn" data-bs-toggle="modal" data-bs-target="#editAssignmentModal">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteAssignmentModal">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>اختبار الفيزياء الشهري</td>
+                                    <td><span class="badge badge-danger">اختبار</span></td>
+                                    <td>الحادي عشر علمي</td>
+                                    <td>الفيزياء</td>
+                                    <td>2025-08-15</td>
+                                    <td><span class="badge badge-success">نشط</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary view-btn" data-bs-toggle="modal" data-bs-target="#viewAssignmentModal">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-secondary edit-btn" data-bs-toggle="modal" data-bs-target="#editAssignmentModal">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteAssignmentModal">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>مشروع الكيمياء العملي</td>
+                                    <td><span class="badge badge-success">مشروع</span></td>
+                                    <td>العاشر ب</td>
+                                    <td>الكيمياء</td>
+                                    <td>2025-08-20</td>
+                                    <td><span class="badge badge-success">نشط</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary view-btn" data-bs-toggle="modal" data-bs-target="#viewAssignmentModal">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-secondary edit-btn" data-bs-toggle="modal" data-bs-target="#editAssignmentModal">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteAssignmentModal">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <nav aria-label="Page navigation" class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">السابق</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">التالي</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal إضافة واجب جديد -->
+    <div class="modal fade" id="addAssignmentModal" tabindex="-1" aria-labelledby="addAssignmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAssignmentModalLabel">
+                        <i class="fas fa-plus-circle me-2"></i>إضافة واجب/اختبار جديد
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newAssignmentForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="assignmentTitle" class="form-label">عنوان الواجب/الاختبار</label>
+                                <input type="text" class="form-control" id="assignmentTitle" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="assignmentType" class="form-label">النوع</label>
+                                <select class="form-select" id="assignmentType" required>
+                                    <option value="">اختر النوع</option>
+                                    <option value="واجب">واجب</option>
+                                    <option value="اختبار">اختبار</option>
+                                    <option value="مشروع">مشروع</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="assignmentClass" class="form-label">الصف الدراسي</label>
+                                <select class="form-select" id="assignmentClass" required>
+                                    <option value="">اختر الصف</option>
+                                    <option value="العاشر أ">العاشر أ</option>
+                                    <option value="العاشر ب">العاشر ب</option>
+                                    <option value="الحادي عشر علمي">الحادي عشر علمي</option>
+                                    <option value="الحادي عشر أدبي">الحادي عشر أدبي</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="assignmentSubject" class="form-label">المادة الدراسية</label>
+                                <select class="form-select" id="assignmentSubject" required>
+                                    <option value="">اختر المادة</option>
+                                    <option value="الرياضيات">الرياضيات</option>
+                                    <option value="الفيزياء">الفيزياء</option>
+                                    <option value="الكيمياء">الكيمياء</option>
+                                    <option value="اللغة العربية">اللغة العربية</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="assignmentDate" class="form-label">تاريخ التسليم</label>
+                                <input type="date" class="form-control" id="assignmentDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="assignmentFile" class="form-label">رفع الملف (اختياري)</label>
+                                <input type="file" class="form-control" id="assignmentFile">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="assignmentDescription" class="form-label">التعليمات والإرشادات</label>
+                            <textarea class="form-control" id="assignmentDescription" rows="4"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" id="saveAssignment">حفظ الواجب</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal تعديل واجب -->
+    <div class="modal fade" id="editAssignmentModal" tabindex="-1" aria-labelledby="editAssignmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editAssignmentModalLabel">
+                        <i class="fas fa-edit me-2"></i>تعديل واجب/اختبار
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editAssignmentForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editAssignmentTitle" class="form-label">عنوان الواجب/الاختبار</label>
+                                <input type="text" class="form-control" id="editAssignmentTitle" value="واجب الرياضيات الفصلي" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editAssignmentType" class="form-label">النوع</label>
+                                <select class="form-select" id="editAssignmentType" required>
+                                    <option value="واجب" selected>واجب</option>
+                                    <option value="اختبار">اختبار</option>
+                                    <option value="مشروع">مشروع</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editAssignmentClass" class="form-label">الصف الدراسي</label>
+                                <select class="form-select" id="editAssignmentClass" required>
+                                    <option value="العاشر أ" selected>العاشر أ</option>
+                                    <option value="العاشر ب">العاشر ب</option>
+                                    <option value="الحادي عشر علمي">الحادي عشر علمي</option>
+                                    <option value="الحادي عشر أدبي">الحادي عشر أدبي</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editAssignmentSubject" class="form-label">المادة الدراسية</label>
+                                <select class="form-select" id="editAssignmentSubject" required>
+                                    <option value="الرياضيات" selected>الرياضيات</option>
+                                    <option value="الفيزياء">الفيزياء</option>
+                                    <option value="الكيمياء">الكيمياء</option>
+                                    <option value="اللغة العربية">اللغة العربية</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="editAssignmentDate" class="form-label">تاريخ التسليم</label>
+                                <input type="date" class="form-control" id="editAssignmentDate" value="2025-08-10" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="editAssignmentFile" class="form-label">تغيير الملف (اختياري)</label>
+                                <input type="file" class="form-control" id="editAssignmentFile">
+                                <small class="text-muted">الملف الحالي: math_assignment.pdf</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editAssignmentDescription" class="form-label">التعليمات والإرشادات</label>
+                            <textarea class="form-control" id="editAssignmentDescription" rows="4">حل جميع المسائل في الصفحات من 45 إلى 50 مع توضيح خطوات الحل.</textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" id="updateAssignment">حفظ التعديلات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal عرض تفاصيل الواجب -->
+    <div class="modal fade" id="viewAssignmentModal" tabindex="-1" aria-labelledby="viewAssignmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewAssignmentModalLabel">
+                        <i class="fas fa-info-circle me-2"></i>تفاصيل الواجب/الاختبار
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h4 id="viewAssignmentTitle">واجب الرياضيات الفصلي</h4>
+                            <span class="badge badge-primary" id="viewAssignmentType">واجب</span>
+                        </div>
+                        <div class="col-md-4 text-start">
+                            <button class="btn btn-sm btn-outline-secondary" id="printAssignment">
+                                <i class="fas fa-print me-1"></i>طباعة
+                            </button>
+                            <button class="btn btn-sm btn-outline-primary" id="downloadAssignment">
+                                <i class="fas fa-download me-1"></i>تحميل
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p><strong><i class="fas fa-school me-2"></i>الصف:</strong> <span id="viewAssignmentClass">العاشر أ</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong><i class="fas fa-book me-2"></i>المادة:</strong> <span id="viewAssignmentSubject">الرياضيات</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p><strong><i class="fas fa-calendar-alt me-2"></i>تاريخ التسليم:</strong> <span id="viewAssignmentDate">2025-08-10</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong><i class="fas fa-file me-2"></i>الملف المرفق:</strong> 
+                                <a href="#" id="viewAssignmentFile" class="text-primary">math_assignment.pdf</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-list-check me-2"></i>التعليمات</h5>
+                        <div class="p-3 bg-light rounded" id="viewAssignmentDescription">
+                            <p>حل جميع المسائل في الصفحات من 45 إلى 50 مع توضيح خطوات الحل.</p>
+                            <p>يجب أن يكون الحل بخط اليد ومسحوباً بوضوح.</p>
+                            <p>سيتم خصم درجات على التأخير في التسليم.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal تأكيد الحذف -->
+    <div class="modal fade" id="deleteAssignmentModal" tabindex="-1" aria-labelledby="deleteAssignmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteAssignmentModalLabel">
+                        <i class="fas fa-exclamation-triangle me-2"></i>تأكيد الحذف
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>هل أنت متأكد من رغبتك في حذف هذا الواجب/الاختبار؟</p>
+                    <p class="fw-bold" id="assignmentToDelete">واجب الرياضيات الفصلي - العاشر أ</p>
+                    <p class="text-danger">هذا الإجراء لا يمكن التراجع عنه.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">نعم، احذف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // تفعيل/إلغاء القائمة الجانبية على الأجهزة الصغيرة
+            $('#sidebarToggle').click(function() {
+                $('.admin-sidebar').toggleClass('active');
+            });
+            
+            // حفظ الواجب الجديد
+            $('#saveAssignment').click(function() {
+                // هنا يمكنك إضافة كود لحفظ البيانات
+                alert('تم حفظ الواجب بنجاح');
+                $('#addAssignmentModal').modal('hide');
+                $('#newAssignmentForm')[0].reset();
+            });
+            
+            // حفظ التعديلات على الواجب
+            $('#updateAssignment').click(function() {
+                // هنا يمكنك إضافة كود لتحديث البيانات
+                alert('تم تحديث الواجب بنجاح');
+                $('#editAssignmentModal').modal('hide');
+            });
+            
+            // تأكيد حذف الواجب
+            $('#confirmDelete').click(function() {
+                // هنا يمكنك إضافة كود لحذف البيانات
+                alert('تم حذف الواجب بنجاح');
+                $('#deleteAssignmentModal').modal('hide');
+            });
+            
+            // طباعة الواجب
+            $('#printAssignment').click(function() {
+                window.print();
+            });
+            
+            // تحميل ملف الواجب
+            $('#downloadAssignment').click(function() {
+                alert('سيتم تحميل الملف');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الطلاب | لوحة تحكم المدير</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .student-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .action-btns .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+            /* إضافة هامش علوي لتجنب التداخل مع الشريط العلوي */
+        body {
+            padding-top: 25px; /* يمكنك تعديل القيمة حسب ارتفاع الشريط العلوي */
+        }
+
+        /* ضبط القائمة الجانبية */
+        .admin-sidebar {
+            margin-top: 0; /* لضمان عدم إضافة هامش إضافي إذا كان body يتحكم بالمسافة */
+        }
+        
+        @media (max-width: 991.98px) {
+        body {
+            padding-top: 56px; /* ارتفاع أقل للشريط العلوي على الشاشات الصغيرة */
+        }
+        }
+    </style>
+</head>
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <img src="images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="60" width="60">
+                <span class="brand-text">لوحة المدير</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">طلب جديد من ولي الأمر</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="adminName">أ. محمد المدير</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+         <aside class="admin-sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order_management.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلبات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="students.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلاب
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                    <a class="nav-link " href="parents_management.html"><i class="fas fa-user-friends me-2"></i> إدارة أولياء الأمور</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة المعلمين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.html">
+                            <i class="fas fa-school me-2"></i>إدارة الصفوف
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subjects.html">
+                            <i class="fas fa-book me-2"></i>إدارة المواد
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="timetable.html">
+                            <i class="fas fa-calendar-alt me-2"></i>الجداول الدراسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attendance.html">
+                            <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar me-2"></i>التقارير
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainees.html">
+                            <i class="fas fa-users me-2"></i>إدارة المتدربين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainings.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة الدورات التدريبية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog me-2"></i>الإعدادات
+                        </a>
+                    </li>
+                </ul>
+            
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+            <div class="container-fluid py-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="page-title mb-0"><i class="fas fa-users me-2"></i>إدارة الطلاب</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+                        <i class="fas fa-plus me-2"></i>إضافة طالب جديد
+                    </button>
+                </div>
+
+                <!-- فلترة البحث -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <form class="row g-3">
+                            <div class="col-md-4">
+                                <label for="searchInput" class="form-label">بحث</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="searchInput" placeholder="ابحث باسم الطالب أو الرقم الأكاديمي">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="classFilter" class="form-label">الصف</label>
+                                <select id="classFilter" class="form-select">
+                                    <option value="">كل الصفوف</option>
+                                    <option value="1">الصف الأول</option>
+                                    <option value="2">الصف الثاني</option>
+                                    <!-- يمكن إضافة باقي الصفوف -->
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="statusFilter" class="form-label">الحالة</label>
+                                <select id="statusFilter" class="form-select">
+                                    <option value="">كل الحالات</option>
+                                    <option value="active">نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-filter me-2"></i>تصفية
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- جدول الطلاب -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">قائمة الطلاب</h5>
+                        <div>
+                            <button id="exportExcel" class="btn btn-sm btn-light me-2">
+                                <i class="fas fa-file-excel me-1"></i> تصدير
+                            </button>
+                            <button id="printBtn" class="btn btn-sm btn-light">
+                                <i class="fas fa-print me-1"></i> طباعة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="50">#</th>
+                                        <th>الطالب</th>
+                                        <th>الرقم الأكاديمي</th>
+                                        <th>الصف</th>
+                                        <th>ولي الأمر</th>
+                                        <th>الحالة</th>
+                                        <th>تاريخ التسجيل</th>
+                                        <th width="120">إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <img src="../assets/images/student1.jpg" alt="صورة الطالب" class="student-photo me-2">
+                                            أحمد محمد
+                                        </td>
+                                        <td>2023001</td>
+                                        <td>العاشر أ</td>
+                                        <td>وليد أحمد</td>
+                                        <td><span class="badge bg-success">نشط</span></td>
+                                        <td>2023-09-01</td>
+                                        <td class="action-btns">
+                                            <button class="btn btn-sm btn-outline-primary" title="عرض" data-bs-toggle="modal" data-bs-target="#viewStudentModal">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-warning" title="تعديل" data-bs-toggle="modal" data-bs-target="#editStudentModal">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger btn-delete" title="حذف">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>
+                                            <img src="../assets/images/student2.jpg" alt="صورة الطالب" class="student-photo me-2">
+                                            سارة عبد الله
+                                        </td>
+                                        <td>2023002</td>
+                                        <td>التاسع ب</td>
+                                        <td>سمر خالد</td>
+                                        <td><span class="badge bg-success">نشط</span></td>
+                                        <td>2023-09-01</td>
+                                        <td class="action-btns">
+                                            <button class="btn btn-sm btn-outline-primary" title="عرض">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-warning" title="تعديل" data-bs-toggle="modal" data-bs-target="#editStudentModal">
+                                                 <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger btn-delete" title="حذف">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <!-- يمكن إضافة المزيد من الصفوف -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- الترقيم -->
+                        <nav aria-label="Page navigation" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">السابق</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">التالي</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal إضافة طالب جديد -->
+    <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="addStudentModalLabel"><i class="fas fa-user-plus me-2"></i>إضافة طالب جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addStudentForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="fullName" class="form-label">الاسم الكامل</label>
+                                <input type="text" class="form-control" id="fullName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="studentId" class="form-label">الرقم الأكاديمي</label>
+                                <input type="text" class="form-control" id="studentId" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="birthDate" class="form-label">تاريخ الميلاد</label>
+                                <input type="date" class="form-control" id="birthDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="gender" class="form-label">الجنس</label>
+                                <select class="form-select" id="gender" required>
+                                    <option value="">اختر...</option>
+                                    <option value="male">ذكر</option>
+                                    <option value="female">أنثى</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="class" class="form-label">الصف</label>
+                                <select class="form-select" id="class" required>
+                                    <option value="">اختر الصف...</option>
+                                    <option value="1">الصف الأول</option>
+                                    <option value="2">الصف الثاني</option>
+                                    <!-- يمكن إضافة باقي الصفوف -->
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="parent" class="form-label">ولي الأمر</label>
+                                <select class="form-select" id="parent" required>
+                                    <option value="">اختر ولي الأمر...</option>
+                                    <option value="1">وليد أحمد</option>
+                                    <option value="2">سمر خالد</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="address" class="form-label">العنوان</label>
+                                <textarea class="form-control" id="address" rows="2"></textarea>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password" class="form-label"> كلمة المرور</label>
+                                <input type="password" class="form-control" id="password">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">رقم الهاتف</label>
+                                <input type="tel" class="form-control" id="phone">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="studentPhoto" class="form-label">صورة الطالب</label>
+                                <input type="file" class="form-control" id="studentPhoto" accept="image/*">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="addStudentForm" class="btn btn-primary">حفظ الطالب</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- نافذة التعديل Modal -->
+<div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="editStudentModalLabel"><i class="fas fa-user-edit me-2"></i>تعديل بيانات الطالب</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editStudentForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="editFullName" class="form-label">الاسم الكامل</label>
+                            <input type="text" class="form-control" id="editFullName" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editStudentId" class="form-label">الرقم الأكاديمي</label>
+                            <input type="text" class="form-control" id="editStudentId" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editBirthDate" class="form-label">تاريخ الميلاد</label>
+                            <input type="date" class="form-control" id="editBirthDate" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editGender" class="form-label">الجنس</label>
+                            <select class="form-select" id="editGender" required>
+                                <option value="">اختر...</option>
+                                <option value="male">ذكر</option>
+                                <option value="female">أنثى</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editClass" class="form-label">الصف</label>
+                            <select class="form-select" id="editClass" required>
+                                <option value="">اختر الصف...</option>
+                                <option value="1">الصف الأول</option>
+                                <option value="2">الصف الثاني</option>
+                                <!-- يمكن إضافة باقي الصفوف -->
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editParent" class="form-label">ولي الأمر</label>
+                            <select class="form-select" id="editParent" required>
+                                <option value="">اختر ولي الأمر...</option>
+                                <option value="1">وليد أحمد</option>
+                                <option value="2">سمر خالد</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="editAddress" class="form-label">العنوان</label>
+                            <textarea class="form-control" id="editAddress" rows="2"></textarea>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="editEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="editEmail">
+                        </div>
+                        <div class="col-md-6">
+                                <label for="password" class="form-label"> كلمة المرور</label>
+                                <input type="password" class="form-control" id="password">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editPhone" class="form-label">رقم الهاتف</label>
+                            <input type="tel" class="form-control" id="editPhone">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="editStudentPhoto" class="form-label">صورة الطالب</label>
+                            <input type="file" class="form-control" id="editStudentPhoto" accept="image/*">
+                            <div class="mt-2">
+                                <img id="currentPhotoPreview" src="" class="img-thumbnail" width="100" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="submit" form="editStudentForm" class="btn btn-primary">حفظ التعديلات</button>
+            </div>
+        </div>
+    </div>
+</div>   
+
+    <!-- Modal عرض بيانات الطالب -->
+<div class="modal fade" id="viewStudentModal" tabindex="-1" aria-labelledby="viewStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="viewStudentModalLabel"><i class="fas fa-user-graduate me-2"></i>بيانات الطالب</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 text-center mb-4">
+                        <img src="../assets/images/student1.jpg" alt="صورة الطالب" class="img-thumbnail mb-3" style="max-width: 200px;">
+                        <h4 class="student-name">أحمد محمد</h4>
+                        <span class="badge bg-success">نشط</span>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">الرقم الأكاديمي</label>
+                                <p class="form-control-static student-id">2023001</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">تاريخ الميلاد</label>
+                                <p class="form-control-static birth-date">2005-03-15</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الجنس</label>
+                                <p class="form-control-static gender">ذكر</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الصف</label>
+                                <p class="form-control-static class">العاشر أ</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">ولي الأمر</label>
+                                <p class="form-control-static parent">وليد أحمد</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم هاتف ولي الأمر</label>
+                                <p class="form-control-static parent-phone">+966501234567</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">تاريخ التسجيل</label>
+                                <p class="form-control-static registration-date">2023-09-01</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">البريد الإلكتروني</label>
+                                <p class="form-control-static email">ahmed@school.edu</p>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">العنوان</label>
+                                <p class="form-control-static address">الرياض - حي النخيل</p>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">ملاحظات</label>
+                                <p class="form-control-static notes">لا يوجد ملاحظات</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-print me-1"></i> طباعة البطاقة الطالب
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- JS الخاص بالمدير -->
+    <script src="js/admin.js"></script>
+    <script>
+        // معالجة حذف الطالب
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(confirm('هل أنت متأكد من حذف هذا الطالب؟ سيتم حذف جميع بياناته المرتبطة.')) {
+                    const row = this.closest('tr');
+                    row.style.opacity = '0.5';
+                    // هنا يمكنك إضافة كود الحذف الفعلي
+                    setTimeout(() => {
+                        row.remove();
+                        alert('تم حذف الطالب بنجاح');
+                    }, 1000);
+                }
+            });
+        });
+
+        // معالجة إضافة طالب جديد
+        document.getElementById('addStudentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // هنا يمكنك إضافة كود الإضافة الفعلية
+            alert('تم إضافة الطالب بنجاح');
+            $('#addStudentModal').modal('hide');
+            this.reset();
+            
+            // يمكنك هنا إضافة الطالب الجديد للجدول دون الحاجة لإعادة تحميل الصفحة
+        });
+
+           // تصدير إلى Excel
+            $('#exportExcel').on('click', function() {
+                // يمكنك استخدام مكتبة مثل SheetJS لتصدير البيانات
+                alert('سيتم تصدير البيانات إلى ملف Excel');
+            });
+
+            // طباعة الجدول
+            $('#printBtn').on('click', function() {
+                window.print();
+            });
+
+    </script>
+</body>
+</html>

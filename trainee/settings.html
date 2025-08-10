@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات - المتدرب | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS الخاص بالمتدرب -->
+    <link rel="stylesheet" href="css/trainee.css">
+</head>
+
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark admin-navbar fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto" href="dashboard.html">
+                <img src="../images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="40">
+                <span class="d-none d-sm-inline">لوحة المتدرب</span>
+            </a>
+            
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="studentName" class="d-none d-md-inline">م. محمد المتدرب</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-start">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html">
+                        <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my-courses.html">
+                        <i class="fas fa-book me-2"></i>دوراتي التدريبية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="schedule.html">
+                        <i class="fas fa-calendar-alt me-2"></i>جدولي التدريبي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="attendance.html">
+                        <i class="fas fa-clipboard-list me-2"></i>سجل الحضور
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="grades.html">
+                        <i class="fas fa-chart-line me-2"></i>تقييمي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="assignments.html">
+                        <i class="fas fa-tasks me-2"></i>الواجبات والمشاريع
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="resources.html">
+                        <i class="fas fa-file-alt me-2"></i>الموارد التعليمية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="messages.html">
+                        <i class="fas fa-envelope me-2"></i>الرسائل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="settings.html">
+                        <i class="fas fa-cog me-2"></i>الإعدادات
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+            <div class="container-fluid py-4">
+                <h2 class="page-title"><i class="fas fa-cog me-2"></i>الإعدادات</h2>
+                
+                <div class="row">
+                    <div class="col-lg-4">
+                        <!-- قائمة الإعدادات -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">خيارات الإعدادات</h5>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <a href="#profile-settings" class="list-group-item list-group-item-action active" data-bs-toggle="tab">
+                                    <i class="fas fa-user-cog me-2"></i>إعدادات الملف الشخصي
+                                </a>
+                                <a href="#account-settings" class="list-group-item list-group-item-action" data-bs-toggle="tab">
+                                    <i class="fas fa-lock me-2"></i>إعدادات الحساب
+                                </a>
+                                <a href="#notification-settings" class="list-group-item list-group-item-action" data-bs-toggle="tab">
+                                    <i class="fas fa-bell me-2"></i>إعدادات الإشعارات
+                                </a>
+                                <a href="#privacy-settings" class="list-group-item list-group-item-action" data-bs-toggle="tab">
+                                    <i class="fas fa-shield-alt me-2"></i>الخصوصية
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-8">
+                        <!-- محتوى الإعدادات -->
+                        <div class="tab-content">
+                            <!-- إعدادات الملف الشخصي -->
+                            <div class="tab-pane fade show active" id="profile-settings">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0"><i class="fas fa-user-cog me-2"></i>إعدادات الملف الشخصي</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row mb-4">
+                                                <div class="col-md-4 text-center">
+                                                    <img src="../images/teacher1.jpg" alt="صورة المستخدم" class="rounded-circle mb-3" width="120">
+                                                    <div>
+                                                        <button type="button" class="btn btn-sm btn-outline-primary me-2">
+                                                            <i class="fas fa-upload me-1"></i> تغيير الصورة
+                                                        </button>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-trash me-1"></i> حذف
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="mb-3">
+                                                        <label for="fullName" class="form-label">الاسم الكامل</label>
+                                                        <input type="text" class="form-control" id="fullName" value="محمد عبدالله المتدرب">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                                                        <input type="email" class="form-control" id="email" value="mohamed@example.com">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="phone" class="form-label">رقم الجوال</label>
+                                                        <input type="tel" class="form-control" id="phone" value="+966501234567">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="bio" class="form-label">نبذة عني</label>
+                                                <textarea class="form-control" id="bio" rows="3">طالب في معهد نور الهدى متخصص في تطوير البرمجيات</textarea>
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-save me-2"></i> حفظ التغييرات
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- إعدادات الحساب -->
+                            <div class="tab-pane fade" id="account-settings">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0"><i class="fas fa-lock me-2"></i>إعدادات الحساب</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="currentPassword" class="form-label">كلمة المرور الحالية</label>
+                                                <input type="password" class="form-control" id="currentPassword">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="newPassword" class="form-label">كلمة المرور الجديدة</label>
+                                                <input type="password" class="form-control" id="newPassword">
+                                                <div class="form-text">يجب أن تحتوي على 8 أحرف على الأقل</div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="confirmPassword" class="form-label">تأكيد كلمة المرور الجديدة</label>
+                                                <input type="password" class="form-control" id="confirmPassword">
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-save me-2"></i> تغيير كلمة المرور
+                                                </button>
+                                            </div>
+                                        </form>
+                                        
+                                        <hr class="my-4">
+                                        
+                                        <h5 class="mb-3"><i class="fas fa-trash-alt me-2 text-danger"></i>حذف الحساب</h5>
+                                        <p class="text-muted mb-4">بمجرد حذف حسابك، لن تتمكن من استرداد أي بيانات مرتبطة به. الرجاء التأكد قبل المتابعة.</p>
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                                            <i class="fas fa-trash me-2"></i> حذف حسابي
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- إعدادات الإشعارات -->
+                            <div class="tab-pane fade" id="notification-settings">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0"><i class="fas fa-bell me-2"></i>إعدادات الإشعارات</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <h6 class="mb-3">إشعارات البريد الإلكتروني</h6>
+                                            <div class="form-check form-switch mb-3">
+                                                
+                                                 <input class="form-check-input" type="checkbox" id="emailNotifications" checked >
+                                                <label class="form-check-label" for="emailNotifications">تفعيل إشعارات البريد الإلكتروني</label>
+                                            </div>
+                                            
+                                            <div class="mb-4">
+                                                <label class="form-label">أنواع الإشعارات</label>
+                                                                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" id="courseUpdates" checked>
+                                                    <label class="form-check-label" for="courseUpdates">تحديثات الدورة التدريبية</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" id="assignmentDeadlines" checked>
+                                                    <label class="form-check-label" for="assignmentDeadlines">مواعيد تسليم الواجبات</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" id="newMessages" checked>
+                                                    <label class="form-check-label" for="newMessages">الرسائل الجديدة</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="systemAlerts">
+                                                    <label class="form-check-label" for="systemAlerts">تنبيهات النظام</label>
+                                                </div>
+                                            </div>
+                                            
+                                            <hr class="my-4">
+                                            
+                                            <h6 class="mb-3">إشعارات التطبيق</h6>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" id="pushNotifications" checked>
+                                                <label class="form-check-label" for="pushNotifications">تفعيل الإشعارات الفورية</label>
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-save me-2"></i> حفظ التغييرات
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- إعدادات الخصوصية -->
+                            <div class="tab-pane fade" id="privacy-settings">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>إعدادات الخصوصية</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <h6 class="mb-3">الملف الشخصي</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">من يمكنه رؤية ملفك الشخصي؟</label>
+                                                <select class="form-select">
+                                                    <option value="public" selected>الجميع</option>
+                                                    <option value="students">زملائي في المعهد فقط</option>
+                                                    <option value="instructors">المدربون فقط</option>
+                                                    <option value="private">خاص (أنا فقط)</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="mb-4">
+                                                <label class="form-label">من يمكنه التواصل معك؟</label>
+                                                <select class="form-select">
+                                                    <option value="everyone" selected>الجميع</option>
+                                                    <option value="students">زملائي في المعهد فقط</option>
+                                                    <option value="instructors">المدربون فقط</option>
+                                                    <option value="none">لا أحد</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <hr class="my-4">
+                                            
+                                            <h6 class="mb-3">النشاط</h6>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" id="showOnlineStatus" checked>
+                                                <label class="form-check-label" for="showOnlineStatus">إظهار حالة الاتصال</label>
+                                            </div>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" id="showCourses" checked>
+                                                <label class="form-check-label" for="showCourses">إظهار الدورات المسجلة</label>
+                                            </div>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="showAchievements" checked>
+                                                <label class="form-check-label" for="showAchievements">إظهار الإنجازات والشهادات</label>
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-end mt-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-save me-2"></i> حفظ التغييرات
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal حذف الحساب -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteAccountModalLabel"><i class="fas fa-exclamation-triangle me-2"></i>تأكيد حذف الحساب</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">هل أنت متأكد أنك تريد حذف حسابك نهائياً؟</p>
+                    <p class="text-muted">سيتم حذف جميع بياناتك بما في ذلك الدورات التدريبية والتقييمات والواجبات. لا يمكن التراجع عن هذا الإجراء.</p>
+                    <div class="mb-3">
+                        <label for="deletePassword" class="form-label">أدخل كلمة المرور للتأكيد</label>
+                        <input type="password" class="form-control" id="deletePassword" placeholder="كلمة المرور الحالية">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-danger">حذف الحساب</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

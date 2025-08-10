@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التقارير | لوحة تحكم المدير</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .report-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .report-card .card-header {
+            font-weight: 700;
+        }
+        .report-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+        .filter-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        .badge-download {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+            /* إضافة هامش علوي لتجنب التداخل مع الشريط العلوي */
+        body {
+            padding-top: 25px; /* يمكنك تعديل القيمة حسب ارتفاع الشريط العلوي */
+        }
+
+        /* ضبط القائمة الجانبية */
+        .admin-sidebar {
+            margin-top: 0; /* لضمان عدم إضافة هامش إضافي إذا كان body يتحكم بالمسافة */
+        }
+        
+        @media (max-width: 991.98px) {
+        body {
+            padding-top: 56px; /* ارتفاع أقل للشريط العلوي على الشاشات الصغيرة */
+        }
+        }
+    </style>
+</head>
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <img src="images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="60"  width="60">
+                <span class="brand-text">لوحة المدير</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">تقرير الحضور الشهري جاهز</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="adminName">أ. محمد المدير</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order_management.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلبات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="students.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلاب
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                    <a class="nav-link " href="parents_management.html"><i class="fas fa-user-friends me-2"></i> إدارة أولياء الأمور</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة المعلمين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.html">
+                            <i class="fas fa-school me-2"></i>إدارة الصفوف
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subjects.html">
+                            <i class="fas fa-book me-2"></i>إدارة المواد
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="timetable.html">
+                            <i class="fas fa-calendar-alt me-2"></i>الجداول الدراسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attendance.html">
+                            <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar me-2"></i>التقارير
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainees.html">
+                            <i class="fas fa-users me-2"></i>إدارة المتدربين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainings.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة الدورات التدريبية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog me-2"></i>الإعدادات
+                        </a>
+                    </li>
+                </ul>
+            
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+            <div class="container-fluid py-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="page-title mb-0"><i class="fas fa-chart-bar me-2"></i>نظام التقارير</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#generateReportModal">
+                        <i class="fas fa-plus me-2"></i>تقرير مخصص
+                    </button>
+                </div>
+
+                <!-- فلترة البحث -->
+                <div class="card mb-4 shadow-sm filter-card">
+                    <div class="card-body">
+                        <form class="row g-3">
+                            <div class="col-md-4">
+                                <label for="reportType" class="form-label">نوع التقرير</label>
+                                <select id="reportType" class="form-select">
+                                    <option value="">كل التقارير</option>
+                                    <option value="attendance">تقارير الحضور</option>
+                                    <option value="students">تقارير الطلاب</option>
+                                    <option value="teachers">تقارير المعلمين</option>
+                                    <option value="financial">تقارير مالية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dateRange" class="form-label">الفترة الزمنية</label>
+                                <select id="dateRange" class="form-select">
+                                    <option value="">كل الفترات</option>
+                                    <option value="today">اليوم</option>
+                                    <option value="week">هذا الأسبوع</option>
+                                    <option value="month">هذا الشهر</option>
+                                    <option value="year">هذه السنة</option>
+                                    <option value="custom">مخصص</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-filter me-2"></i>تصفية
+                                </button>
+                            </div>
+                            <div class="col-md-6 custom-date-range" style="display:none;">
+                                <label for="startDate" class="form-label">من تاريخ</label>
+                                <input type="date" class="form-control" id="startDate">
+                            </div>
+                            <div class="col-md-6 custom-date-range" style="display:none;">
+                                <label for="endDate" class="form-label">إلى تاريخ</label>
+                                <input type="date" class="form-control" id="endDate">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- بطاقات التقارير السريعة -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card report-card text-white bg-primary">
+                            <div class="card-body text-center">
+                                <div class="report-icon">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+                                <h5 class="card-title">تقرير الحضور اليومي</h5>
+                                <p class="card-text">نسبة الحضور اليوم: 87%</p>
+                                <a href="#" class="btn btn-light btn-sm">
+                                    <i class="fas fa-eye me-1"></i> عرض التقرير
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card report-card text-white bg-success">
+                            <div class="card-body text-center">
+                                <div class="report-icon">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <h5 class="card-title">تقرير الطلاب</h5>
+                                <p class="card-text">إجمالي الطلاب: 245</p>
+                                <a href="#" class="btn btn-light btn-sm">
+                                    <i class="fas fa-eye me-1"></i> عرض التقرير
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card report-card text-white bg-info">
+                            <div class="card-body text-center">
+                                <div class="report-icon">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                                <h5 class="card-title">تقرير المعلمين</h5>
+                                <p class="card-text">إجمالي المعلمين: 32</p>
+                                <a href="#" class="btn btn-light btn-sm">
+                                    <i class="fas fa-eye me-1"></i> عرض التقرير
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card report-card text-white bg-warning">
+                            <div class="card-body text-center">
+                                <div class="report-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <h5 class="card-title">تقرير مالي</h5>
+                                <p class="card-text">إجمالي المصروفات: 25,000 ر.س</p>
+                                <a href="#" class="btn btn-light btn-sm">
+                                    <i class="fas fa-eye me-1"></i> عرض التقرير
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- التقارير المحفوظة -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">التقارير المحفوظة</h5>
+                        <div class="d-flex">
+                            <button class="btn btn-sm btn-light me-2" id="refreshReports">
+                                <i class="fas fa-sync-alt me-1"></i> تحديث
+                            </button>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="fas fa-sort me-1"></i> ترتيب حسب
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#">الأحدث</a></li>
+                                    <li><a class="dropdown-item" href="#">الأقدم</a></li>
+                                    <li><a class="dropdown-item" href="#">النوع</a></li>
+                                    <li><a class="dropdown-item" href="#">الحجم</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="50">#</th>
+                                        <th>اسم التقرير</th>
+                                        <th>النوع</th>
+                                        <th>تاريخ الإنشاء</th>
+                                        <th>أنشأ بواسطة</th>
+                                        <th>الحجم</th>
+                                        <th width="150">إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <i class="fas fa-file-excel text-success me-2"></i>
+                                            تقرير الحضور الشهري - نوفمبر 2023
+                                        </td>
+                                        <td><span class="badge bg-primary">حضور</span></td>
+                                        <td>2023-11-30</td>
+                                        <td>أ. محمد المدير</td>
+                                        <td>2.5 MB</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" title="عرض">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="تحميل">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" title="حذف">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>
+                                            <i class="fas fa-file-pdf text-danger me-2"></i>
+                                            تقرير الطلاب الجدد - الفصل الأول
+                                        </td>
+                                        <td><span class="badge bg-success">طلاب</span></td>
+                                        <td>2023-09-15</td>
+                                        <td>أ. أحمد المشرف</td>
+                                        <td>1.8 MB</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" title="عرض">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="تحميل">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" title="حذف">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>
+                                            <i class="fas fa-file-word text-primary me-2"></i>
+                                            تقرير الأنشطة المدرسية - 2023
+                                        </td>
+                                        <td><span class="badge bg-info">أنشطة</span></td>
+                                        <td>2023-06-30</td>
+                                        <td>أ. سارة النشاط</td>
+                                        <td>3.2 MB</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" title="عرض">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="تحميل">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger" title="حذف">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <!-- يمكن إضافة المزيد من التقارير -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- الترقيم -->
+                        <nav aria-label="Page navigation" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">السابق</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">التالي</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- الإحصائيات والرسوم البيانية -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">إحصائيات الحضور الشهرية</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="attendanceStatsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">توزيع الطلاب حسب الصفوف</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="studentsDistributionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal إنشاء تقرير مخصص -->
+    <div class="modal fade" id="generateReportModal" tabindex="-1" aria-labelledby="generateReportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="generateReportModalLabel"><i class="fas fa-plus-circle me-2"></i>إنشاء تقرير مخصص</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="generateReportForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="reportName" class="form-label">اسم التقرير</label>
+                                <input type="text" class="form-control" id="reportName" placeholder="أدخل اسم التقرير" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="reportTypeSelect" class="form-label">نوع التقرير</label>
+                                <select class="form-select" id="reportTypeSelect" required>
+                                    <option value="">اختر نوع التقرير...</option>
+                                    <option value="attendance">تقرير الحضور</option>
+                                    <option value="students">تقرير الطلاب</option>
+                                    <option value="teachers">تقرير المعلمين</option>
+                                    <option value="financial">تقرير مالي</option>
+                                    <option value="custom">تقرير مخصص</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="reportFormat" class="form-label">صيغة التقرير</label>
+                                <select class="form-select" id="reportFormat" required>
+                                    <option value="pdf">PDF</option>
+                                    <option value="excel">Excel</option>
+                                    <option value="word">Word</option>
+                                    <option value="html">HTML</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="reportDateRange" class="form-label">الفترة الزمنية</label>
+                                <select class="form-select" id="reportDateRange" required>
+                                    <option value="today">اليوم</option>
+                                    <option value="week">هذا الأسبوع</option>
+                                    <option value="month">هذا الشهر</option>
+                                    <option value="year">هذه السنة</option>
+                                    <option value="custom">فترة مخصصة</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 custom-range-field" style="display:none;">
+                                <label for="customStartDate" class="form-label">تاريخ البداية</label>
+                                <input type="date" class="form-control" id="customStartDate">
+                            </div>
+                            <div class="col-md-6 custom-range-field" style="display:none;">
+                                <label for="customEndDate" class="form-label">تاريخ النهاية</label>
+                                <input type="date" class="form-control" id="customEndDate">
+                            </div>
+                            <div class="col-12">
+                                <label for="reportFilters" class="form-label">تصفية البيانات</label>
+                                <div class="border p-3">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="filterByClass">
+                                        <label class="form-check-label" for="filterByClass">تصفية حسب الصف</label>
+                                        <select class="form-select mt-1" id="classSelectFilter" disabled>
+                                            <option value="">اختر الصف...</option>
+                                            <option value="1">الصف الأول</option>
+                                            <option value="2">الصف الثاني</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="filterByGender">
+                                        <label class="form-check-label" for="filterByGender">تصفية حسب الجنس</label>
+                                        <select class="form-select mt-1" id="genderSelectFilter" disabled>
+                                            <option value="">اختر الجنس...</option>
+                                            <option value="male">ذكور</option>
+                                            <option value="female">إناث</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="reportNotes" class="form-label">ملاحظات</label>
+                                <textarea class="form-control" id="reportNotes" rows="3" placeholder="أدخل أي ملاحظات إضافية"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-info">
+                        <i class="fas fa-eye me-1"></i> معاينة
+                    </button>
+                    <button type="submit" form="generateReportForm" class="btn btn-primary">
+                        <i class="fas fa-file-download me-1"></i> إنشاء التقرير
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- JS الخاص بالمدير -->
+    <script src="js/admin.js"></script>
+    <script>
+        // عرض/إخفاء حقول التاريخ المخصصة
+        $('#dateRange').change(function() {
+            if($(this).val() === 'custom') {
+                $('.custom-date-range').show();
+            } else {
+                $('.custom-date-range').hide();
+            }
+        });
+
+        // عرض/إخفاء حقول الفترة المخصصة في المودال
+        $('#reportDateRange').change(function() {
+            if($(this).val() === 'custom') {
+                $('.custom-range-field').show();
+            } else {
+                $('.custom-range-field').hide();
+            }
+        });
+
+        // تفعيل/تعطيل حقول التصفية عند التحديد
+        $('#filterByClass').change(function() {
+            $('#classSelectFilter').prop('disabled', !$(this).is(':checked'));
+        });
+
+        $('#filterByGender').change(function() {
+            $('#genderSelectFilter').prop('disabled', !$(this).is(':checked'));
+        });
+
+        // إنشاء الرسوم البيانية
+        const attendanceCtx = document.getElementById('attendanceStatsChart').getContext('2d');
+        const attendanceStatsChart = new Chart(attendanceCtx, {
+            type: 'line',
+            data: {
+                labels: ['سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر', 'يناير', 'فبراير'],
+                datasets: [{
+                    label: 'نسبة الحضور',
+                    data: [85, 88, 87, 90, 89, 92],
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        rtl: true
+                    },
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 80,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        const studentsCtx = document.getElementById('studentsDistributionChart').getContext('2d');
+        const studentsDistributionChart = new Chart(studentsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['الصف الأول', 'الصف الثاني', 'الصف الثالث', 'الصف الرابع', 'الصف الخامس', 'الصف السادس'],
+                datasets: [{
+                    data: [45, 40, 38, 42, 35, 45],
+                    backgroundColor: [
+                        '#007bff',
+                        '#28a745',
+                        '#ffc107',
+                        '#dc3545',
+                        '#6c757d',
+                        '#17a2b8'
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        rtl: true
+                    },
+                }
+            }
+        });
+
+        // معالجة حذف التقرير
+        $('.btn-outline-danger').click(function() {
+            if(confirm('هل أنت متأكد من حذف هذا التقرير؟')) {
+                $(this).closest('tr').fadeOut(300, function() {
+                    $(this).remove();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

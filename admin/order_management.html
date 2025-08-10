@@ -1,0 +1,658 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الطلبات | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+                 
+        /* إضافة هامش علوي لتجنب التداخل مع الشريط العلوي */
+        body {
+            padding-top: 25px; /* يمكنك تعديل القيمة حسب ارتفاع الشريط العلوي */
+        }
+
+        /* ضبط القائمة الجانبية */
+        .admin-sidebar {
+            margin-top: 0; /* لضمان عدم إضافة هامش إضافي إذا كان body يتحكم بالمسافة */
+        }
+        
+        @media (max-width: 991.98px) {
+        body {
+            padding-top: 56px; /* ارتفاع أقل للشريط العلوي على الشاشات الصغيرة */
+        }
+        } 
+
+    </style>
+</head>
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <img src="images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="60" width="60" class="protected-data">
+                <span class="brand-text">لوحة المدير</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" id="notificationsDropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">طلب تسجيل جديد من معلم</a></li>
+                        <li><a class="dropdown-item" href="#">  طلب تسجيل جديد من طالب</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" id="userDropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="adminName">أ. محمد المدير</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+      <aside class="admin-sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order_management.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلبات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="students.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلاب
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                    <a class="nav-link " href="parents_management.html"><i class="fas fa-user-friends me-2"></i> إدارة أولياء الأمور</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة المعلمين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.html">
+                            <i class="fas fa-school me-2"></i>إدارة الصفوف
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subjects.html">
+                            <i class="fas fa-book me-2"></i>إدارة المواد
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="timetable.html">
+                            <i class="fas fa-calendar-alt me-2"></i>الجداول الدراسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attendance.html">
+                            <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar me-2"></i>التقارير
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainees.html">
+                            <i class="fas fa-users me-2"></i>إدارة المتدربين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainings.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة الدورات التدريبية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog me-2"></i>الإعدادات
+                        </a>
+                    </li>
+                </ul>
+            
+        </aside>
+
+      <div class="admin-content">
+            <h2 class="page-title m">إدارة الطلبات</h2>
+
+            <ul class="nav nav-tabs mb-4">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#student-orders">طلبات الطلاب</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#teacher-orders">طلبات المعلمين</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="student-orders">
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="stat-card bg-primary text-white">
+                                <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                                <div class="stat-info">
+                                    <h3>20</h3>
+                                    <p>إجمالي طلبات الطلاب</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card bg-warning text-white">
+                                <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                                <div class="stat-info">
+                                    <h3>10</h3>
+                                    <p>طلبات الطلاب المعلقة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>اسم الطالب</th>
+                                    <th>الصف</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>عدد المواد</th>
+                                    <th>تاريخ الطلب</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>أحمد محمد</td>
+                                    <td>العاشر أ</td>
+                                    <td>ahmed.mohammed@example.com</td>
+                                    <td>3</td>
+                                    <td>2025-08-06</td>
+                                    <td><span class="badge bg-warning">معلق</span></td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm action-btn accept-btn" data-type="student" data-id="1">قبول</button>
+                                        <button class="btn btn-danger btn-sm action-btn reject-btn" data-type="student" data-id="1">رفض</button>
+                                        <button class="btn btn-info btn-sm action-btn details-btn" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#detailsModal"
+                                                data-type="student"
+                                                data-id="1"
+                                                data-name="أحمد محمد"
+                                                data-class="العاشر أ"
+                                                data-email="ahmed.mohammed@example.com"
+                                                data-phone="963951742878"
+                                                data-address="حلب - مخيم النيرب"
+                                                data-birthdate="2010-05-15"
+                                                data-gender="ذكر"
+                                                data-guardian-name="محمد أحمد"
+                                                data-guardian-phone="963951742879"
+                                                data-guardian-relation="الأب"
+                                                data-subjects='[{"name":"الرياضيات","teacher":"أ. أحمد محمد","price":500},{"name":"اللغة العربية","teacher":"أ. فاطمة حسن","price":450},{"name":"العلوم","teacher":"أ. يوسف خالد","price":400}]'
+                                                data-test-results='{"الرياضيات":[{"question":"ما هو ناتج 5 + 3؟","answer":"8","correct":true},{"question":"ما هو العدد الأكبر بين 12 و 15؟","answer":"15","correct":true}],"اللغة العربية":[{"question":"ما هي الحرف الأول في كلمة 'مدرسة'؟","answer":"م","correct":true}]}'
+                                                data-total="1350"
+                                                data-date="2025-08-06"
+                                                data-status="معلق">عرض التفاصيل</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>سارة عبد الله</td>
+                                    <td>التاسع ب</td>
+                                    <td>sara.abdullah@example.com</td>
+                                    <td>2</td>
+                                    <td>2025-08-05</td>
+                                    <td><span class="badge bg-success">مقبول</span></td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm action-btn accept-btn" data-type="student" data-id="2">قبول</button>
+                                        <button class="btn btn-danger btn-sm action-btn reject-btn" data-type="student" data-id="2">رفض</button>
+                                        <button class="btn btn-info btn-sm action-btn details-btn" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#detailsModal"
+                                                data-type="student"
+                                                data-id="2"
+                                                data-name="سارة عبد الله"
+                                                data-class="التاسع ب"
+                                                data-email="sara.abdullah@example.com"
+                                                data-phone="963951742880"
+                                                data-address="حلب - شارع الجامعة"
+                                                data-birthdate="2011-03-22"
+                                                data-gender="أنثى"
+                                                data-guardian-name="عبد الله محمد"
+                                                data-guardian-phone="963951742881"
+                                                data-guardian-relation="الأب"
+                                                data-subjects='[{"name":"الرياضيات","teacher":"أ. سامي علي","price":550},{"name":"اللغة العربية","teacher":"أ. ليلى عبدالله","price":500}]'
+                                                data-test-results='{"الرياضيات":[{"question":"ما هو ناتج 5 + 3؟","answer":"8","correct":true},{"question":"ما هو العدد الأكبر بين 12 و 15؟","answer":"12","correct":false}],"اللغة العربية":[{"question":"ما هي الحرف الأول في كلمة 'مدرسة'؟","answer":"م","correct":true}]}'
+                                                data-total="1050"
+                                                data-date="2025-08-05"
+                                                data-status="مقبول">عرض التفاصيل</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>خالد وليد</td>
+                                    <td>الحادي عشر علمي</td>
+                                    <td>khaled.waleed@example.com</td>
+                                    <td>1</td>
+                                    <td>2025-08-04</td>
+                                    <td><span class="badge bg-danger">مرفوض</span></td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm action-btn accept-btn" data-type="student" data-id="3">قبول</button>
+                                        <button class="btn btn-danger btn-sm action-btn reject-btn" data-type="student" data-id="3">رفض</button>
+                                        <button class="btn btn-info btn-sm action-btn details-btn" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#detailsModal"
+                                                data-type="student"
+                                                data-id="3"
+                                                data-name="خالد وليد"
+                                                data-class="الحادي عشر علمي"
+                                                data-email="khaled.waleed@example.com"
+                                                data-phone="963951742882"
+                                                data-address="حلب - شارع بغداد"
+                                                data-birthdate="2009-11-10"
+                                                data-gender="ذكر"
+                                                data-guardian-name="وليد خالد"
+                                                data-guardian-phone="963951742883"
+                                                data-guardian-relation="الأب"
+                                                data-subjects='[{"name":"الفيزياء","teacher":"أ. محمد حسن","price":600}]'
+                                                data-test-results='{"الفيزياء":[{"question":"ما هي وحدة قياس القوة؟","answer":"نيوتن","correct":true}]}'
+                                                data-total="600"
+                                                data-date="2025-08-04"
+                                                data-status="مرفوض">عرض التفاصيل</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="teacher-orders">
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="stat-card bg-primary text-white">
+                                <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                                <div class="stat-info">
+                                    <h3>8</h3>
+                                    <p>إجمالي طلبات المعلمين</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card bg-warning text-white">
+                                <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                                <div class="stat-info">
+                                    <h3>3</h3>
+                                    <p>طلبات المعلمين المعلقة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>اسم المعلم</th>
+                                    <th>التخصص</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>تاريخ الطلب</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>أ. يوسف خالد</td>
+                                    <td>العلوم</td>
+                                    <td>yusuf.khaled@example.com</td>
+                                    <td>2025-08-06</td>
+                                    <td><span class="badge bg-warning">معلق</span></td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm action-btn accept-btn" data-type="teacher" data-id="1">قبول</button>
+                                        <button class="btn btn-danger btn-sm action-btn reject-btn" data-type="teacher" data-id="1">رفض</button>
+                                        <button class="btn btn-info btn-sm action-btn details-btn" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#detailsModal"
+                                                data-type="teacher"
+                                                data-id="1"
+                                                data-name="أ. يوسف خالد"
+                                                data-specialization="العلوم"
+                                                data-email="yusuf.khaled@example.com"
+                                                data-phone="963951742884"
+                                                data-id-number="123456789"
+                                                data-birthdate="1985-07-20"
+                                                data-gender="ذكر"
+                                                data-education="بكالوريوس"
+                                                data-experience="10"
+                                                data-previous-work="مدرسة النور - مدرس علوم"
+                                                data-salary-syp="500000"
+                                                data-salary-usd="50"
+                                                data-address="حلب - شارع القوتلي"
+                                                data-date="2025-08-06"
+                                                data-status="معلق">عرض التفاصيل</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>أ. فاطمة حسن</td>
+                                    <td>اللغة العربية</td>
+                                    <td>fatima.hassan@example.com</td>
+                                    <td>2025-08-05</td>
+                                    <td><span class="badge bg-success">مقبول</span></td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm action-btn accept-btn" data-type="teacher" data-id="2">قبول</button>
+                                        <button class="btn btn-danger btn-sm action-btn reject-btn" data-type="teacher" data-id="2">رفض</button>
+                                        <button class="btn btn-info btn-sm action-btn details-btn" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#detailsModal"
+                                                data-type="teacher"
+                                                data-id="2"
+                                                data-name="أ. فاطمة حسن"
+                                                data-specialization="اللغة العربية"
+                                                data-email="fatima.hassan@example.com"
+                                                data-phone="963951742885"
+                                                data-id-number="987654321"
+                                                data-birthdate="1988-09-15"
+                                                data-gender="أنثى"
+                                                data-education="ماجستير"
+                                                data-experience="8"
+                                                data-previous-work="ثانوية الباسل - مدرسة لغة عربية"
+                                                data-salary-syp="450000"
+                                                data-salary-usd="45"
+                                                data-address="حلب - شارع الجمهورية"
+                                                data-date="2025-08-05"
+                                                data-status="مقبول">عرض التفاصيل</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>أ. مريم خالد</td>
+                                    <td>الرياضيات</td>
+                                    <td>maryam.khaled@example.com</td>
+                                    <td>2025-08-04</td>
+                                    <td><span class="badge bg-danger">مرفوض</span></td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm action-btn accept-btn" data-type="teacher" data-id="3">قبول</button>
+                                        <button class="btn btn-danger btn-sm action-btn reject-btn" data-type="teacher" data-id="3">رفض</button>
+                                        <button class="btn btn-info btn-sm action-btn details-btn" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#detailsModal"
+                                                data-type="teacher"
+                                                data-id="3"
+                                                data-name="أ. مريم خالد"
+                                                data-specialization="الرياضيات"
+                                                data-email="maryam.khaled@example.com"
+                                                data-phone="963951742886"
+                                                data-id-number="456789123"
+                                                data-birthdate="1990-03-25"
+                                                data-gender="أنثى"
+                                                data-education="بكالوريوس"
+                                                data-experience="5"
+                                                data-previous-work="مدرسة الأندلس - مدرسة رياضيات"
+                                                data-salary-syp="400000"
+                                                data-salary-usd="40"
+                                                data-address="حلب - حي السكري"
+                                                data-date="2025-08-04"
+                                                data-status="مرفوض">عرض التفاصيل</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Request Details -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">تفاصيل الطلب</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+                </div>
+                <div class="modal-body" id="modalBodyContent">
+                    <!-- سيتم تعبئة المحتوى هنا بواسطة JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        // Handle Details Button Click
+        document.querySelectorAll('.details-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const type = this.dataset.type;
+                const modalBody = document.getElementById('modalBodyContent');
+                let content = '';
+                
+                if (type === 'student') {
+                    // عرض تفاصيل طلب الطالب
+                    content = `
+                        <div class="detail-item">
+                            <strong>رقم الطلب:</strong> ${this.dataset.id}
+                        </div>
+                        <div class="detail-item">
+                            <strong>نوع الطلب:</strong> تسجيل طالب جديد
+                        </div>
+                        <h4 class="mt-4 mb-3">المعلومات الشخصية</h4>
+                        <div class="detail-item">
+                            <strong>الاسم الكامل:</strong> ${this.dataset.name}
+                        </div>
+                        <div class="detail-item">
+                            <strong>الصف:</strong> ${this.dataset.class}
+                        </div>
+                        <div class="detail-item">
+                            <strong>تاريخ الميلاد:</strong> ${this.dataset.birthdate}
+                        </div>
+                        <div class="detail-item">
+                            <strong>الجنس:</strong> ${this.dataset.gender}
+                        </div>
+                        <div class="detail-item">
+                            <strong>البريد الإلكتروني:</strong> ${this.dataset.email}
+                        </div>
+                        <div class="detail-item">
+                            <strong>رقم الهاتف:</strong> ${this.dataset.phone}
+                        </div>
+                        <div class="detail-item">
+                            <strong>العنوان:</strong> ${this.dataset.address}
+                        </div>
+                        
+                        <h4 class="mt-4 mb-3">معلومات ولي الأمر</h4>
+                        <div class="detail-item">
+                            <strong>اسم ولي الأمر:</strong> ${this.dataset.guardianName}
+                        </div>
+                        <div class="detail-item">
+                            <strong>رقم الهاتف:</strong> ${this.dataset.guardianPhone}
+                        </div>
+                        <div class="detail-item">
+                            <strong>صلة القرابة:</strong> ${this.dataset.guardianRelation}
+                        </div>
+                        
+                        <h4 class="mt-4 mb-3">المواد المختارة</h4>
+                        <ul class="subject-list">
+                            ${JSON.parse(this.dataset.subjects).map(subject => `
+                                <li>
+                                    <strong>${subject.name}</strong> - ${subject.teacher} (${subject.price} ل.س)
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <div class="detail-item">
+                            <strong>المبلغ الإجمالي:</strong> ${this.dataset.total} ل.س
+                        </div>
+                        
+                        <h4 class="mt-4 mb-3">نتائج اختبار المستوى</h4>
+                        ${Object.entries(JSON.parse(this.dataset.testResults)).map(([subject, questions]) => `
+                            <div class="test-results">
+                                <h5>${subject}</h5>
+                                ${questions.map((q, i) => `
+                                    <div class="test-question">
+                                        <p><strong>السؤال ${i+1}:</strong> ${q.question}</p>
+                                        <p><strong>الإجابة:</strong> ${q.answer} 
+                                            <span class="badge ${q.correct ? 'bg-success' : 'bg-danger'}">
+                                                ${q.correct ? 'صحيح' : 'خطأ'}
+                                            </span>
+                                        </p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `).join('')}
+                        
+                        <div class="detail-item mt-4">
+                            <strong>تاريخ الطلب:</strong> ${this.dataset.date}
+                        </div>
+                        <div class="detail-item">
+                            <strong>الحالة:</strong> <span class="badge ${this.dataset.status === 'مقبول' ? 'bg-success' : this.dataset.status === 'مرفوض' ? 'bg-danger' : 'bg-warning'}">${this.dataset.status}</span>
+                        </div>
+                    `;
+                } else {
+                    // عرض تفاصيل طلب المعلم
+                    content = `
+                        <div class="detail-item">
+                            <strong>رقم الطلب:</strong> ${this.dataset.id}
+                        </div>
+                        <div class="detail-item">
+                            <strong>نوع الطلب:</strong> تسجيل معلم جديد
+                        </div>
+                        <h4 class="mt-4 mb-3">المعلومات الشخصية</h4>
+                        <div class="detail-item">
+                            <strong>الاسم الكامل:</strong> ${this.dataset.name}
+                        </div>
+                        <div class="detail-item">
+                            <strong>التخصص:</strong> ${this.dataset.specialization}
+                        </div>
+                        <div class="detail-item">
+                            <strong>رقم الهوية:</strong> ${this.dataset.idNumber}
+                        </div>
+                        <div class="detail-item">
+                            <strong>تاريخ الميلاد:</strong> ${this.dataset.birthdate}
+                        </div>
+                        <div class="detail-item">
+                            <strong>الجنس:</strong> ${this.dataset.gender}
+                        </div>
+                        <div class="detail-item">
+                            <strong>البريد الإلكتروني:</strong> ${this.dataset.email}
+                        </div>
+                        <div class="detail-item">
+                            <strong>رقم الهاتف:</strong> ${this.dataset.phone}
+                        </div>
+                        <div class="detail-item">
+                            <strong>العنوان:</strong> ${this.dataset.address}
+                        </div>
+                        
+                        <h4 class="mt-4 mb-3">المعلومات الأكاديمية</h4>
+                        <div class="detail-item">
+                            <strong>الشهادة العلمية:</strong> ${this.dataset.education}
+                        </div>
+                        <div class="detail-item">
+                            <strong>سنوات الخبرة:</strong> ${this.dataset.experience} سنوات
+                        </div>
+                        <div class="detail-item">
+                            <strong>الأعمال السابقة:</strong> ${this.dataset.previousWork}
+                        </div>
+                        
+                        <h4 class="mt-4 mb-3">الراتب المتوقع</h4>
+                        <div class="detail-item">
+                            <strong>بالليرة السورية:</strong> ${this.dataset.salarySyp} ل.س
+                        </div>
+                        <div class="detail-item">
+                            <strong>بالدولار:</strong> ${this.dataset.salaryUsd} $
+                        </div>
+                        
+                        <div class="detail-item mt-4">
+                            <strong>تاريخ الطلب:</strong> ${this.dataset.date}
+                        </div>
+                        <div class="detail-item">
+                            <strong>الحالة:</strong> <span class="badge ${this.dataset.status === 'مقبول' ? 'bg-success' : this.dataset.status === 'مرفوض' ? 'bg-danger' : 'bg-warning'}">${this.dataset.status}</span>
+                        </div>
+                    `;
+                }
+                
+                modalBody.innerHTML = content;
+            });
+        });
+
+        // Handle Accept Button Click
+        document.querySelectorAll('.accept-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const type = this.dataset.type;
+                Swal.fire({
+                    title: 'تم قبول الطلب',
+                    text: `تم قبول طلب ${type === 'student' ? 'الطالب' : 'المعلم'} رقم ${id} بنجاح`,
+                    icon: 'success',
+                    confirmButtonText: 'حسناً'
+                }).then(() => {
+                    // هنا يمكنك إضافة كود لتحديث حالة الطلب في الجدول
+                    const row = this.closest('tr');
+                    row.querySelector('td:nth-child(7) span').className = 'badge bg-success';
+                    row.querySelector('td:nth-child(7) span').textContent = 'مقبول';
+                });
+            });
+        });
+
+        // Handle Reject Button Click
+        document.querySelectorAll('.reject-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const type = this.dataset.type;
+                Swal.fire({
+                    title: 'تم رفض الطلب',
+                    text: `تم رفض طلب ${type === 'student' ? 'الطالب' : 'المعلم'} رقم ${id}`,
+                    icon: 'error',
+                    confirmButtonText: 'حسناً'
+                }).then(() => {
+                    // هنا يمكنك إضافة كود لتحديث حالة الطلب في الجدول
+                    const row = this.closest('tr');
+                    row.querySelector('td:nth-child(7) span').className = 'badge bg-danger';
+                    row.querySelector('td:nth-child(7) span').textContent = 'مرفوض';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

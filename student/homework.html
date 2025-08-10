@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - الطالب | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/student.css">
+</head>
+<body class="student-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashbord_student.html">
+                <img src="../images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="40">
+                <span class="brand-text">لوحة الطالب</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">2</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">واجب جديد في الرياضيات</a></li>
+                        <li><a class="dropdown-item" href="#">تقرير الحضور الأسبوعي</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="studentName">أحمد محمد</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- القائمة الجانبية -->
+    <div class="student-wrapper">
+        <aside class="student-sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="dashbord_student.html">
+                        <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="schedule.html">
+                        <i class="fas fa-calendar-alt me-2"></i>الجدول الدراسي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="attendance.html">
+                        <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="grades.html">
+                        <i class="fas fa-chart-line me-2"></i>الدرجات والتقييم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="homework.html">
+                        <i class="fas fa-book me-2"></i>الواجبات المدرسية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="exams.html">
+                        <i class="fas fa-file-alt me-2"></i>الاختبارات
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="materials.html">
+                        <i class="fas fa-download me-2"></i>المواد التعليمية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="messages.html">
+                        <i class="fas fa-envelope me-2"></i>الرسائل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">
+                        <i class="fas fa-user me-2"></i>الملف الشخصي
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="student-content">
+            <div class="container-fluid py-4">
+                <h2 class="page-title mb-4"><i class="fas fa-book me-2"></i>الواجبات المدرسية</h2>
+                
+                <!-- إحصائيات الواجبات -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="stat-card bg-primary">
+                            <div class="stat-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>5</h3>
+                                <p>واجبات جديدة</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card bg-warning">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>2</h3>
+                                <p>قريبة من الموعد</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-card bg-success">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>12</h3>
+                                <p>واجبات مكتملة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- فلترة الواجبات -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-primary">
+                                <i class="fas fa-filter me-2"></i>تصفية الواجبات
+                            </div>
+                            <div class="card-body">
+                                <form class="row g-3">
+                                    <div class="col-md-3">
+                                        <label for="statusFilter" class="form-label">الحالة</label>
+                                        <select class="form-select" id="statusFilter">
+                                            <option selected>الكل</option>
+                                            <option>غير مكتمل</option>
+                                            <option>مكتمل</option>
+                                            <option>متأخر</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="subjectFilter" class="form-label">المادة</label>
+                                        <select class="form-select" id="subjectFilter">
+                                            <option selected>جميع المواد</option>
+                                            <option>الرياضيات</option>
+                                            <option>اللغة العربية</option>
+                                            <option>العلوم</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="dateFilter" class="form-label">التاريخ</label>
+                                        <select class="form-select" id="dateFilter">
+                                            <option selected>الكل</option>
+                                            <option>هذا الأسبوع</option>
+                                            <option>هذا الشهر</option>
+                                            <option>متأخر</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 d-flex align-items-end">
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <i class="fas fa-filter me-1"></i>تصفية
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                <!-- قائمة الواجبات -->
+                <div class="card">
+                   <div class="card-header bg-primary">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <h5 class="mb-0 text-end"><i class="fas fa-list-check me-2"></i>قائمة الواجبات</h5>
+                            <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#addAssignmentModal">
+                                <i class="fas fa-plus me-1"></i>إضافة واجب
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="homework-list">
+                            <!-- واجب غير مكتمل -->
+                            <div class="homework-item urgent">
+                                <div class="homework-icon">
+                                    <i class="fas fa-exclamation-circle text-danger"></i>
+                                </div>
+                                <div class="homework-content">
+                                    <div class="d-flex justify-content-between">
+                                        <h5>تمارين الرياضيات - الفصل الثالث</h5>
+                                        <span class="badge bg-danger">عاجل</span>
+                                    </div>
+                                    <div class="homework-meta">
+                                        <span><i class="fas fa-book me-1"></i>الرياضيات</span>
+                                        <span><i class="fas fa-user me-1"></i>أ. أحمد محمد</span>
+                                        <span><i class="fas fa-clock me-1"></i>ينتهي غداً</span>
+                                    </div>
+                                    <p class="homework-desc">حل جميع التمارين من الصفحة 45 إلى 50 في الكتاب المدرسي</p>
+                                    <div class="homework-actions">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#assignmentDetailsModal">
+                                            <i class="fas fa-eye me-1"></i>عرض التفاصيل
+                                        </button>
+                                        <button class="btn btn-sm btn-success">
+                                            <i class="fas fa-check me-1"></i>تسليم الواجب
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- واجب غير مكتمل -->
+                            <div class="homework-item">
+                                <div class="homework-icon">
+                                    <i class="fas fa-clock text-warning"></i>
+                                </div>
+                                <div class="homework-content">
+                                    <div class="d-flex justify-content-between">
+                                        <h5>بحث عن الخلايا النباتية</h5>
+                                        <span class="badge bg-warning text-dark">قريب</span>
+                                    </div>
+                                    <div class="homework-meta">
+                                        <span><i class="fas fa-book me-1"></i>العلوم</span>
+                                        <span><i class="fas fa-user me-1"></i>أ. يوسف خالد</span>
+                                        <span><i class="fas fa-clock me-1"></i>ينتهي بعد 3 أيام</span>
+                                    </div>
+                                    <p class="homework-desc">إعداد بحث قصير عن الخلايا النباتية مع صور توضيحية</p>
+                                    <div class="homework-actions">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#assignmentDetailsModal">
+                                            <i class="fas fa-eye me-1"></i>عرض التفاصيل
+                                        </button>
+                                        <button class="btn btn-sm btn-success">
+                                            <i class="fas fa-check me-1"></i>تسليم الواجب
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- واجب مكتمل -->
+                            <div class="homework-item completed">
+                                <div class="homework-icon">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                </div>
+                                <div class="homework-content">
+                                    <div class="d-flex justify-content-between">
+                                        <h5>قراءة قصة ونبذة عنها</h5>
+                                        <span class="badge bg-success">مكتمل</span>
+                                    </div>
+                                    <div class="homework-meta">
+                                        <span><i class="fas fa-book me-1"></i>اللغة العربية</span>
+                                        <span><i class="fas fa-user me-1"></i>أ. سعاد عبد الله</span>
+                                        <span><i class="fas fa-clock me-1"></i>تم التسليم: 2023-10-10</span>
+                                    </div>
+                                    <p class="homework-desc">قراءة قصة "الأيام" لطه حسين وإعداد نبذة عنها</p>
+                                    <div class="homework-grade">
+                                        <strong>التقييم:</strong> 95% <span class="badge bg-success">ممتاز</span>
+                                    </div>
+                                    <div class="homework-actions">
+                                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#assignmentDetailsModal">
+                                            <i class="fas fa-eye me-1"></i>عرض التفاصيل
+                                        </button>
+                                        <button class="btn btn-sm btn-info">
+                                            <i class="fas fa-download me-1"></i>تحميل الملاحظات
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ترقيم الصفحات -->
+                        <nav aria-label="Page navigation" class="mt-4">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">السابق</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">التالي</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal إضافة واجب -->
+    <div class="modal fade" id="addAssignmentModal" tabindex="-1" aria-labelledby="addAssignmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="addAssignmentModalLabel"><i class="fas fa-plus-circle me-2"></i>إضافة واجب جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="assignmentForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="assignmentTitle" class="form-label">عنوان الواجب</label>
+                                <input type="text" class="form-control" id="assignmentTitle" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="assignmentSubject" class="form-label">المادة</label>
+                                <select class="form-select" id="assignmentSubject" required>
+                                    <option value="" selected disabled>اختر المادة</option>
+                                    <option value="math">الرياضيات</option>
+                                    <option value="arabic">اللغة العربية</option>
+                                    <option value="science">العلوم</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="assignmentDescription" class="form-label">تفاصيل الواجب</label>
+                                <textarea class="form-control" id="assignmentDescription" rows="4" required></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="assignmentDueDate" class="form-label">موعد التسليم</label>
+                                <input type="datetime-local" class="form-control" id="assignmentDueDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="assignmentFile" class="form-label">إرفاق ملف (اختياري)</label>
+                                <input class="form-control" type="file" id="assignmentFile">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="assignmentForm" class="btn btn-primary">حفظ الواجب</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal عرض التفاصيل -->
+    <div class="modal fade" id="assignmentDetailsModal" tabindex="-1" aria-labelledby="assignmentDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="assignmentDetailsModalLabel"><i class="fas fa-info-circle me-2"></i>تفاصيل الواجب</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="assignment-details">
+                        <h4 class="detail-title mb-4">تمارين الرياضيات - الفصل الثالث</h4>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="fas fa-book me-2"></i>المادة:</span>
+                                    <span class="detail-value">الرياضيات</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="fas fa-user me-2"></i>المعلم:</span>
+                                    <span class="detail-value">أ. أحمد محمد</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="fas fa-calendar me-2"></i>تاريخ الإعطاء:</span>
+                                    <span class="detail-value">15/10/2023</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label"><i class="fas fa-clock me-2"></i>موعد التسليم:</span>
+                                    <span class="detail-value text-danger">20/10/2023 (غداً)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section mb-4">
+                            <h5 class="section-title"><i class="fas fa-align-left me-2"></i>تعليمات الواجب</h5>
+                            <p class="section-content">حل جميع التمارين من الصفحة 45 إلى 50 في الكتاب المدرسي، مع ضرورة توضيح خطوات الحل بشكل كامل وعدم الاكتفاء بالإجابة النهائية فقط.</p>
+                        </div>
+                        
+                        <div class="detail-section mb-4">
+                            <h5 class="section-title"><i class="fas fa-paperclip me-2"></i>الملفات المرفقة</h5>
+                            <div class="attachments">
+                                <a href="#" class="attachment-item">
+                                    <i class="fas fa-file-pdf me-2"></i>تمارين_الفصل_الثالث.pdf
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h5 class="section-title"><i class="fas fa-upload me-2"></i>تسليم الواجب</h5>
+                            <form class="submit-form">
+                                <div class="mb-3">
+                                    <label for="homeworkFile" class="form-label">رفع الحل</label>
+                                    <input class="form-control" type="file" id="homeworkFile" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="homeworkNotes" class="form-label">ملاحظات (اختياري)</label>
+                                    <textarea class="form-control" id="homeworkNotes" rows="2"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-check me-1"></i>تسليم الواجب
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+</html>

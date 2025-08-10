@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات | لوحة تحكم المدير</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        
+            /* إضافة هامش علوي لتجنب التداخل مع الشريط العلوي */
+        body {
+            padding-top: 25px; /* يمكنك تعديل القيمة حسب ارتفاع الشريط العلوي */
+        }
+
+        /* ضبط القائمة الجانبية */
+        .admin-sidebar {
+            margin-top: 0; /* لضمان عدم إضافة هامش إضافي إذا كان body يتحكم بالمسافة */
+        }
+        
+        @media (max-width: 991.98px) {
+        body {
+            padding-top: 56px; /* ارتفاع أقل للشريط العلوي على الشاشات الصغيرة */
+        }
+        }
+       
+
+       
+
+    </style>
+</head>
+<body class="admin-dashboard theme-light">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <img src="images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="60" width="60">
+                <span class="brand-text">لوحة المدير</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">1</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">طلب جديد من ولي الأمر</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="adminName">أ. محمد المدير</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+         <aside class="admin-sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order_management.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلبات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="students.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلاب
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                    <a class="nav-link " href="parents_management.html"><i class="fas fa-user-friends me-2"></i> إدارة أولياء الأمور</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة المعلمين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.html">
+                            <i class="fas fa-school me-2"></i>إدارة الصفوف
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subjects.html">
+                            <i class="fas fa-book me-2"></i>إدارة المواد
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="timetable.html">
+                            <i class="fas fa-calendar-alt me-2"></i>الجداول الدراسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attendance.html">
+                            <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar me-2"></i>التقارير
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainees.html">
+                            <i class="fas fa-users me-2"></i>إدارة المتدربين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainings.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة الدورات التدريبية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog me-2"></i>الإعدادات
+                        </a>
+                    </li>
+                </ul>
+            
+        </aside>
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+            <div class="container-fluid py-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="page-title mb-0"><i class="fas fa-cog me-2"></i>الإعدادات</h2>
+                    <button class="btn btn-primary" id="saveSettings"><i class="fas fa-save me-2"></i>حفظ التغييرات</button>
+                </div>
+
+                <!-- بطاقات الإعدادات السريعة -->
+                <div class="row mb-4">
+                    <div class="col-md-3 mb-4">
+                        <div class="card settings-card h-100 text-center p-3">
+                            <i class="fas fa-school settings-icon"></i>
+                            <h5>إعدادات المدرسة</h5>
+                            <p class="text-muted">تعديل معلومات المدرسة الأساسية</p>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#schoolSettingsModal">
+                                تعديل <i class="fas fa-edit ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card settings-card h-100 text-center p-3">
+                            <i class="fas fa-calendar-alt settings-icon"></i>
+                            <h5>إعدادات العام الدراسي</h5>
+                            <p class="text-muted">تحديد بداية ونهاية العام الدراسي</p>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#academicYearModal">
+                                تعديل <i class="fas fa-edit ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card settings-card h-100 text-center p-3">
+                            <i class="fas fa-user-shield settings-icon"></i>
+                            <h5>صلاحيات المستخدمين</h5>
+                            <p class="text-muted">إدارة صلاحيات المستخدمين والأدوار</p>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#permissionsModal">
+                                تعديل <i class="fas fa-edit ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="card settings-card h-100 text-center p-3">
+                            <i class="fas fa-bell settings-icon"></i>
+                            <h5>إعدادات الإشعارات</h5>
+                            <p class="text-muted">تخصيص إعدادات الإشعارات</p>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#notificationsModal">
+                                تعديل <i class="fas fa-edit ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تبويبات الإعدادات -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#generalSettings">
+                                    <i class="fas fa-sliders-h me-2"></i>الإعدادات العامة
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#systemSettings">
+                                    <i class="fas fa-server me-2"></i>إعدادات النظام
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#emailSettings">
+                                    <i class="fas fa-envelope me-2"></i>إعدادات البريد
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#backupSettings">
+                                    <i class="fas fa-database me-2"></i>النسخ الاحتياطي
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <!-- تبويب الإعدادات العامة -->
+                            <div class="tab-pane fade show active" id="generalSettings">
+                                <form id="generalSettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="schoolName" class="form-label">اسم المدرسة</label>
+                                            <input type="text" class="form-control" id="schoolName" value="معهد نور الهدى">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="schoolLogo" class="form-label">شعار المدرسة</label>
+                                            <input type="file" class="form-control" id="schoolLogo">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="timezone" class="form-label">المنطقة الزمنية</label>
+                                            <select class="form-select" id="timezone">
+                                                <option value="Asia/Syria" selected>سوريا (UTC+3)</option>
+                                                <option value="Asia/Riyadh">الرياض (UTC+3)</option>
+                                                <option value="Asia/Dubai">دبي (UTC+4)</option>
+                                                <option value="Asia/Kuwait">الكويت (UTC+3)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="language" class="form-label">لغة النظام</label>
+                                            <select class="form-select" id="language">
+                                                <option value="ar" selected>العربية</option>
+                                                <option value="en">الإنجليزية</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="dateFormat" class="form-label">تنسيق التاريخ</label>
+                                            <select class="form-select" id="dateFormat">
+                                                <option value="dd/mm/yyyy" selected>يوم/شهر/سنة (25/12/2023)</option>
+                                                <option value="mm/dd/yyyy">شهر/يوم/سنة (12/25/2023)</option>
+                                                <option value="yyyy-mm-dd">سنة-شهر-يوم (2023-12-25)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="theme" class="form-label">الثيم</label>
+                                            <select class="form-select" id="theme">
+                                                <option value="light" selected>فاتح</option>
+                                                <option value="dark">داكن</option>
+                                                <option value="blue">أزرق</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="maintenanceMode">
+                                                <label class="form-check-label" for="maintenanceMode">وضع الصيانة</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- تبويب إعدادات النظام -->
+                            <div class="tab-pane fade" id="systemSettings">
+                                <form id="systemSettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="sessionTimeout" class="form-label">مهلة الجلسة (دقائق)</label>
+                                            <input type="number" class="form-control" id="sessionTimeout" value="30" min="5">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="recordsPerPage" class="form-label">عدد السجلات في الصفحة</label>
+                                            <input type="number" class="form-control" id="recordsPerPage" value="25" min="5" max="100">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="loginAttempts" class="form-label">محاولات تسجيل الدخول المسموحة</label>
+                                            <input type="number" class="form-control" id="loginAttempts" value="5" min="1" max="10">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="passwordExpiry" class="form-label">انتهاء صلاحية كلمة المرور (أيام)</label>
+                                            <input type="number" class="form-control" id="passwordExpiry" value="90" min="30">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="forcePasswordChange" checked>
+                                                <label class="form-check-label" for="forcePasswordChange">إجبار المستخدمين على تغيير كلمة المرور عند أول دخول</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="enableAuditLog" checked>
+                                                <label class="form-check-label" for="enableAuditLog">تفعيل سجل التدقيق</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- تبويب إعدادات البريد -->
+                            <div class="tab-pane fade" id="emailSettings">
+                                <form id="emailSettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="mailDriver" class="form-label">نظام البريد</label>
+                                            <select class="form-select" id="mailDriver">
+                                                <option value="smtp" selected>SMTP</option>
+                                                <option value="mailgun">Mailgun</option>
+                                                <option value="sendmail">Sendmail</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailFrom" class="form-label">البريد المرسل منه</label>
+                                            <input type="email" class="form-control" id="mailFrom" value="no-reply@nooralhuda.edu">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailHost" class="form-label">خادم البريد (Host)</label>
+                                            <input type="text" class="form-control" id="mailHost" value="smtp.nooralhuda.edu">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailPort" class="form-label">المنفذ (Port)</label>
+                                            <input type="number" class="form-control" id="mailPort" value="587">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailUsername" class="form-label">اسم المستخدم</label>
+                                            <input type="text" class="form-control" id="mailUsername" value="admin@nooralhuda.edu">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailPassword" class="form-label">كلمة المرور</label>
+                                            <input type="password" class="form-control" id="mailPassword" placeholder="أدخل كلمة المرور">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="mailEncryption" class="form-label">التشفير</label>
+                                            <select class="form-select" id="mailEncryption">
+                                                <option value="tls" selected>TLS</option>
+                                                <option value="ssl">SSL</option>
+                                                <option value="">بدون تشفير</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="button" class="btn btn-outline-primary" id="testEmail">
+                                                <i class="fas fa-paper-plane me-2"></i>اختبار إرسال البريد
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- تبويب النسخ الاحتياطي -->
+                            <div class="tab-pane fade" id="backupSettings">
+                                <form id="backupSettingsForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="backupFrequency" class="form-label">تكرار النسخ الاحتياطي</label>
+                                            <select class="form-select" id="backupFrequency">
+                                                <option value="daily" selected>يومي</option>
+                                                <option value="weekly">أسبوعي</option>
+                                                <option value="monthly">شهري</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="backupTime" class="form-label">وقت النسخ الاحتياطي</label>
+                                            <input type="time" class="form-control" id="backupTime" value="02:00">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="backupLocation" class="form-label">موقع الحفظ</label>
+                                            <select class="form-select" id="backupLocation">
+                                                <option value="local" selected>خادم محلي</option>
+                                                <option value="google_drive">Google Drive</option>
+                                                <option value="dropbox">Dropbox</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="keepBackups" class="form-label">الاحتفاظ بالنسخ لمدة (أيام)</label>
+                                            <input type="number" class="form-control" id="keepBackups" value="30" min="7">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h6>آخر نسخة احتياطية</h6>
+                                                    <p class="text-muted mb-0">backup_2023_12_25_020000.zip - 25/12/2023 02:00</p>
+                                                </div>
+                                                <div>
+                                                    <button type="button" class="btn btn-primary me-2" id="createBackup">
+                                                        <i class="fas fa-plus-circle me-2"></i>إنشاء نسخة احتياطية الآن
+                                                    </button>
+                                                    <button type="button" class="btn btn-outline-secondary" id="downloadBackups">
+                                                        <i class="fas fa-download me-2"></i>تحميل النسخ السابقة
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal إعدادات المدرسة -->
+    <div class="modal fade" id="schoolSettingsModal" tabindex="-1" aria-labelledby="schoolSettingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="schoolSettingsModalLabel"><i class="fas fa-school me-2"></i>إعدادات المدرسة</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="schoolSettingsForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="modalSchoolName" class="form-label">اسم المدرسة</label>
+                                <input type="text" class="form-control" id="modalSchoolName" value="معهد نور الهدى">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="modalSchoolCode" class="form-label">الكود الخاص بالمدرسة</label>
+                                <input type="text" class="form-control" id="modalSchoolCode" value="SCH-12345">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="modalSchoolPhone" class="form-label">هاتف المدرسة</label>
+                                <input type="tel" class="form-control" id="modalSchoolPhone" value="+966112345678">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="modalSchoolEmail" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="modalSchoolEmail" value="info@nooralhuda.edu">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="modalSchoolPrincipal" class="form-label">مدير المدرسة</label>
+                                <input type="text" class="form-control" id="modalSchoolPrincipal" value="أ. محمد أحمد">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="modalSchoolLogo" class="form-label">شعار المدرسة</label>
+                                <input type="file" class="form-control" id="modalSchoolLogo">
+                            </div>
+                            <div class="col-12">
+                                <label for="modalSchoolAddress" class="form-label">عنوان المدرسة</label>
+                                <textarea class="form-control" id="modalSchoolAddress" rows="2">شارع الثورة، دمشق</textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="modalSchoolAbout" class="form-label">معلومات عن المدرسة</label>
+                                <textarea class="form-control" id="modalSchoolAbout" rows="4">معهد نور الهدى مؤسسة تعليمية رائدة تأسست عام 2025 تقدم تعليماً متميزاً وفق المنهج الوطني</textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="schoolSettingsForm" class="btn btn-primary">حفظ التغييرات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal إعدادات العام الدراسي -->
+    <div class="modal fade" id="academicYearModal" tabindex="-1" aria-labelledby="academicYearModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="academicYearModalLabel"><i class="fas fa-calendar-alt me-2"></i>إعدادات العام الدراسي</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="academicYearForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="currentAcademicYear" class="form-label">العام الدراسي الحالي</label>
+                                <input type="text" class="form-control" id="currentAcademicYear" value="1444-1445">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="yearStatus" class="form-label">حالة العام الدراسي</label>
+                                <select class="form-select" id="yearStatus">
+                                    <option value="active" selected>نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                    <option value="planning">في مرحلة التخطيط</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="yearStartDate" class="form-label">تاريخ البداية</label>
+                                <input type="date" class="form-control" id="yearStartDate" value="2025-09-01">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="yearEndDate" class="form-label">تاريخ النهاية</label>
+                                <input type="date" class="form-control" id="yearEndDate" value="2026-06-30">
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="autoYearSwitch" checked>
+                                    <label class="form-check-label" for="autoYearSwitch">التحويل التلقائي للعام الدراسي عند انتهاء التاريخ</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="academicYearForm" class="btn btn-primary">حفظ التغييرات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal صلاحيات المستخدمين -->
+    <div class="modal fade" id="permissionsModal" tabindex="-1" aria-labelledby="permissionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="permissionsModalLabel"><i class="fas fa-user-shield me-2"></i>صلاحيات المستخدمين</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="permissionsForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <h5>صلاحيات المدير</h5>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="manageStudents" checked>
+                                    <label class="form-check-label" for="manageStudents">إدارة الطلاب</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="manageTeachers" checked>
+                                    <label class="form-check-label" for="manageTeachers">إدارة المعلمين</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="manageClasses" checked>
+                                    <label class="form-check-label" for="manageClasses">إدارة الصفوف</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="manageSettings" checked>
+                                    <label class="form-check-label" for="manageSettings">تعديل الإعدادات</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>صلاحيات المعلم</h5>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="viewStudents" checked>
+                                    <label class="form-check-label" for="viewStudents">عرض الطلاب</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="addGrades" checked>
+                                    <label class="form-check-label" for="addGrades">إضافة الدرجات</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="takeAttendance" checked>
+                                    <label class="form-check-label" for="takeAttendance">تسجيل الحضور</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="sendMessages">
+                                    <label class="form-check-label" for="sendMessages">إرسال رسائل</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <h5>إنشاء دور جديد</h5>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="customRole" placeholder="أدخل اسم الدور الجديد">
+                                    <button class="btn btn-outline-secondary" type="button" id="addRoleBtn">إضافة</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="permissionsForm" class="btn btn-primary">حفظ الصلاحيات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal إعدادات الإشعارات -->
+    <div class="modal fade" id="notificationsModal" tabindex="-1" aria-labelledby="notificationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="notificationsModalLabel"><i class="fas fa-bell me-2"></i>إعدادات الإشعارات</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="notificationsForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <h5>نوع الإشعارات</h5>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                    <label class="form-check-label" for="emailNotifications">البريد الإلكتروني</label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="smsNotifications">
+                                    <label class="form-check-label" for="smsNotifications">رسائل SMS</label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="pushNotifications" checked>
+                                    <label class="form-check-label" for="pushNotifications">إشعارات التطبيق</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>صوت الإشعار</h5>
+                                <select class="form-select" id="notificationSound">
+                                    <option value="default" selected>الصوت الافتراضي</option>
+                                    <option value="chime">جرس</option>
+                                    <option value="alert">تنبيه</option>
+                                    <option value="none">بلا صوت</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <h5>إشعارات النظام</h5>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="newStudentNotification" checked>
+                                    <label class="form-check-label" for="newStudentNotification">إشعار تسجيل طالب جديد</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="absenceNotification" checked>
+                                    <label class="form-check-label" for="absenceNotification">إشعار غياب الطلاب</label>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="gradeNotification">
+                                    <label class="form-check-label" for="gradeNotification">إشعار إضافة درجات</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="notificationEmail" class="form-label">البريد الإلكتروني للإشعارات</label>
+                                <input type="email" class="form-control" id="notificationEmail" value="notifications@nooralhuda.edu">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="notificationsForm" class="btn btn-primary">حفظ الإعدادات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+       
+
+        // حفظ الإعدادات العامة
+        document.getElementById('saveSettings').addEventListener('click', function () {
+            alert('تم حفظ الإعدادات بنجاح');
+        });
+
+        // إرسال نموذج إعدادات المدرسة
+        document.getElementById('schoolSettingsForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('تم حفظ إعدادات المدرسة بنجاح');
+            $('#schoolSettingsModal').modal('hide');
+        });
+
+        // إرسال نموذج إعدادات العام الدراسي
+        document.getElementById('academicYearForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('تم حفظ إعدادات العام الدراسي بنجاح');
+            $('#academicYearModal').modal('hide');
+        });
+
+        // إرسال نموذج الصلاحيات
+        document.getElementById('permissionsForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('تم حفظ إعدادات الصلاحيات بنجاح');
+            $('#permissionsModal').modal('hide');
+        });
+
+        // إرسال نموذج الإشعارات
+        document.getElementById('notificationsForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('تم حفظ إعدادات الإشعارات بنجاح');
+            $('#notificationsModal').modal('hide');
+        });
+
+        // إضافة دور جديد
+        document.getElementById('addRoleBtn').addEventListener('click', function () {
+            const roleName = document.getElementById('customRole').value.trim();
+            if (roleName) {
+                alert(`تم إضافة الدور الجديد: ${roleName}`);
+                document.getElementById('customRole').value = '';
+            } else {
+                alert('يرجى إدخال اسم الدور');
+            }
+        });
+
+        // اختبار إرسال البريد
+        document.getElementById('testEmail').addEventListener('click', function () {
+            const email = prompt('أدخل البريد الإلكتروني الذي تريد إرسال رسالة الاختبار إليه:');
+            if (email) {
+                alert(`سيتم إرسال رسالة اختبار إلى: ${email}\nسيتم تنفيذ هذه الوظيفة عند ربط النظام بخادم بريد فعلي`);
+            }
+        });
+
+        // إنشاء نسخة احتياطية
+        document.getElementById('createBackup').addEventListener('click', function () {
+            if (confirm('هل أنت متأكد من إنشاء نسخة احتياطية الآن؟')) {
+                alert('جاري إنشاء النسخة الاحتياطية...');
+                setTimeout(() => {
+                    alert('تم إنشاء النسخة الاحتياطية بنجاح');
+                }, 2000);
+            }
+        });
+
+        // تحميل النسخ الاحتياطية
+        document.getElementById('downloadBackups').addEventListener('click', function () {
+            alert('جاري تحميل النسخ الاحتياطية السابقة...');
+        });
+    </script>
+</body>
+</html>

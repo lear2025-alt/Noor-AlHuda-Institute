@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الدورات التدريبية | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        .course-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+        }
+        .action-btns .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            margin: 0 2px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .card-header {
+            font-weight: 600;
+        }
+        .form-label.required:after {
+            content: " *";
+            color: #dc3545;
+        }
+        .badge-status {
+            font-size: 0.85rem;
+            padding: 0.35em 0.65em;
+        }
+        .price-badge {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .course-card {
+            transition: transform 0.2s;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+        .duration-badge {
+            background-color: #e3f2fd;
+            color: #0d6efd;
+        }
+        
+            /* إضافة هامش علوي لتجنب التداخل مع الشريط العلوي */
+        body {
+            padding-top: 25px; /* يمكنك تعديل القيمة حسب ارتفاع الشريط العلوي */
+        }
+
+        /* ضبط القائمة الجانبية */
+        .admin-sidebar {
+            margin-top: 0; /* لضمان عدم إضافة هامش إضافي إذا كان body يتحكم بالمسافة */
+        }
+        
+        @media (max-width: 991.98px) {
+        body {
+            padding-top: 56px; /* ارتفاع أقل للشريط العلوي على الشاشات الصغيرة */
+        }
+        } 
+    </style>
+</head>
+<body class="admin-dashboard">
+      <!-- شريط التنقل العلوي -->
+        <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+            <div class="container-fluid ">
+                <a class="navbar-brand" href="dashboard.html">
+                    <img src="images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="60" width="60" >
+                    <span class="brand-text">لوحة المدير</span>
+                </a>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">3</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                            <li><a class="dropdown-item" href="#">طلب جديد من ولي الأمر</a></li>
+                            <li><a class="dropdown-item" href="#">تقرير حضور جديد</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            <span id="adminName">أ. محمد المدير</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order_management.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلبات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="students.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلاب
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                    <a class="nav-link " href="parents_management.html"><i class="fas fa-user-friends me-2"></i> إدارة أولياء الأمور</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة المعلمين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.html">
+                            <i class="fas fa-school me-2"></i>إدارة الصفوف
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subjects.html">
+                            <i class="fas fa-book me-2"></i>إدارة المواد
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="timetable.html">
+                            <i class="fas fa-calendar-alt me-2"></i>الجداول الدراسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attendance.html">
+                            <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar me-2"></i>التقارير
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainees.html">
+                            <i class="fas fa-users me-2"></i>إدارة المتدربين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainings.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة الدورات التدريبية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog me-2"></i>الإعدادات
+                        </a>
+                    </li>
+                </ul>
+            
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+            <div class="container-fluid py-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="page-title mb-0"><i class="fas fa-certificate me-2"></i>إدارة الدورات التدريبية</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCourseModal" id="addCourseBtn">
+                        <i class="fas fa-plus me-2"></i>إضافة دورة جديدة
+                    </button>
+                </div>
+
+                <!-- فلترة البحث -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <form class="row g-3" id="searchForm">
+                            <div class="col-md-6">
+                                <label for="searchInput" class="form-label">بحث</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="searchInput" placeholder="ابحث باسم الدورة أو المدرب...">
+                                    <button class="btn btn-outline-secondary" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="typeFilter" class="form-label">نوع الدورة</label>
+                                <select id="typeFilter" class="form-select">
+                                    <option value="">كل الأنواع</option>
+                                    <option value="free">مجانية</option>
+                                    <option value="paid">مدفوعة</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="statusFilter" class="form-label">حالة الدورة</label>
+                                <select id="statusFilter" class="form-select">
+                                    <option value="">كل الحالات</option>
+                                    <option value="active">نشطة</option>
+                                    <option value="inactive">غير نشطة</option>
+                                    <option value="upcoming">قادمة</option>
+                                    <option value="completed">منتهية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button type="reset" class="btn btn-outline-secondary w-100" id="resetFilters">
+                                    <i class="fas fa-undo me-2"></i> إعادة تعيين
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- عرض الدورات بطريقتين -->
+                <ul class="nav nav-tabs mb-4" id="coursesTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="table-tab" data-bs-toggle="tab" data-bs-target="#table-view" type="button" role="tab">عرض جدولي</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="cards-tab" data-bs-toggle="tab" data-bs-target="#cards-view" type="button" role="tab">عرض بطاقات</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="coursesTabContent">
+                    <!-- العرض الجدولي -->
+                    <div class="tab-pane fade show active" id="table-view" role="tabpanel">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">قائمة الدورات التدريبية</h5>
+                                <div>
+                                    <button class="btn btn-sm btn-light me-2" id="exportExcel">
+                                        <i class="fas fa-file-excel me-1"></i> تصدير
+                                    </button>
+                                    <button class="btn btn-sm btn-light" id="printBtn">
+                                        <i class="fas fa-print me-1"></i> طباعة
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="coursesTable" class="table table-hover table-striped w-100">
+                                        <thead class="table-primary">
+                                            <tr>
+                                                <th width="50">#</th>
+                                                <th>الدورة</th>
+                                                <th>المدرب</th>
+                                                <th>المدة</th>
+                                                <th>السعر</th>
+                                                <th>المتدربون</th>
+                                                <th>الحالة</th>
+                                                <th width="120">إجراءات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="images/course6.jpg" alt="صورة الدورة" class="course-img me-2">
+                                                        <div>
+                                                            <h6 class="mb-0">البرمجة الأساسية</h6>
+                                                            <small class="text-muted">الكود: CRS-001</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>أ. أحمد محمد</td>
+                                                <td>
+                                                    <span class="badge duration-badge">30 ساعة</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-success price-badge">$100 / 500,000 ل.س</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info">15 متدرب</span>
+                                                </td>
+                                                <td><span class="badge bg-success badge-status">نشطة</span></td>
+                                                <td class="action-btns">
+                                                    <button class="btn btn-sm btn-outline-primary view-btn" title="عرض" data-bs-toggle="modal" data-bs-target="#viewCourseModal" data-id="1">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-warning edit-btn" title="تعديل" data-bs-toggle="modal" data-bs-target="#editCourseModal" data-id="1">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger delete-btn" title="حذف" data-id="1">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="images/course5.png" alt="صورة الدورة" class="course-img me-2">
+                                                        <div>
+                                                            <h6 class="mb-0">التصميم الجرافيكي</h6>
+                                                            <small class="text-muted">الكود: CRS-002</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>أ. سارة عبد الله</td>
+                                                <td>
+                                                    <span class="badge duration-badge">20 ساعة</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-success price-badge">$80 / 400,000 ل.س</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info">8 متدربين</span>
+                                                </td>
+                                                <td><span class="badge bg-warning text-dark badge-status">قادمة</span></td>
+                                                <td class="action-btns">
+                                                    <button class="btn btn-sm btn-outline-primary view-btn" title="عرض" data-id="2">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-warning edit-btn" title="تعديل" data-id="2">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger delete-btn" title="حذف" data-id="2">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="images/course6.jpg" alt="صورة الدورة" class="course-img me-2">
+                                                        <div>
+                                                            <h6 class="mb-0">الإنجليزية للمبتدئين</h6>
+                                                            <small class="text-muted">الكود: CRS-003</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>أ. جون سميث</td>
+                                                <td>
+                                                    <span class="badge duration-badge">40 ساعة</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-secondary price-badge">مجانية</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info">25 متدرب</span>
+                                                </td>
+                                                <td><span class="badge bg-success badge-status">نشطة</span></td>
+                                                <td class="action-btns">
+                                                    <button class="btn btn-sm btn-outline-primary view-btn" title="عرض" data-id="3">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-warning edit-btn" title="تعديل" data-id="3">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-danger delete-btn" title="حذف" data-id="3">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- عرض البطاقات -->
+                    <div class="tab-pane fade" id="cards-view" role="tabpanel">
+                        <div class="row g-4">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card course-card h-100 shadow-sm">
+                                    <img src="images/course6.jpg" class="card-img-top" alt="صورة الدورة" style="height: 160px; object-fit: cover;">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <span class="badge bg-success">نشطة</span>
+                                            <span class="badge duration-badge">30 ساعة</span>
+                                        </div>
+                                        <h5 class="card-title">البرمجة الأساسية</h5>
+                                        <p class="card-text text-muted">تعلم أساسيات البرمجة باستخدام لغة Python</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="fas fa-user-tie me-1 text-primary"></i>
+                                                <small>أ. أحمد محمد</small>
+                                            </div>
+                                            <span class="badge bg-success price-badge">$100</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-white border-top-0">
+                                        <div class="d-flex justify-content-between">
+                                            <button class="btn btn-sm btn-outline-primary view-btn" data-id="1">
+                                                <i class="fas fa-eye me-1"></i> التفاصيل
+                                            </button>
+                                            <span class="badge bg-info align-self-center">15 متدرب</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card course-card h-100 shadow-sm">
+                                    <img src="images/course5.png" class="card-img-top" alt="صورة الدورة" style="height: 160px; object-fit: cover;">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <span class="badge bg-warning text-dark">قادمة</span>
+                                            <span class="badge duration-badge">20 ساعة</span>
+                                        </div>
+                                        <h5 class="card-title">التصميم الجرافيكي</h5>
+                                        <p class="card-text text-muted">أساسيات التصميم باستخدام برنامج Photoshop</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="fas fa-user-tie me-1 text-primary"></i>
+                                                <small>أ. سارة عبد الله</small>
+                                            </div>
+                                            <span class="badge bg-success price-badge">$80</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-white border-top-0">
+                                        <div class="d-flex justify-content-between">
+                                            <button class="btn btn-sm btn-outline-primary view-btn" data-id="2">
+                                                <i class="fas fa-eye me-1"></i> التفاصيل
+                                            </button>
+                                            <span class="badge bg-info align-self-center">8 متدربين</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card course-card h-100 shadow-sm">
+                                    <img src="images/course6.jpg" class="card-img-top" alt="صورة الدورة" style="height: 160px; object-fit: cover;">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <span class="badge bg-success">نشطة</span>
+                                            <span class="badge duration-badge">40 ساعة</span>
+                                        </div>
+                                        <h5 class="card-title">الإنجليزية للمبتدئين</h5>
+                                        <p class="card-text text-muted">تعلم اللغة الإنجليزية من الصفر</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="fas fa-user-tie me-1 text-primary"></i>
+                                                <small>أ. جون سميث</small>
+                                            </div>
+                                            <span class="badge bg-secondary price-badge">مجانية</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-white border-top-0">
+                                        <div class="d-flex justify-content-between">
+                                            <button class="btn btn-sm btn-outline-primary view-btn" data-id="3">
+                                                <i class="fas fa-eye me-1"></i> التفاصيل
+                                            </button>
+                                            <span class="badge bg-info align-self-center">25 متدرب</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal إضافة دورة جديدة -->
+    <div class="modal fade" id="addCourseModal" tabindex="-1" aria-labelledby="addCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="addCourseModalLabel"><i class="fas fa-plus me-2"></i>إضافة دورة جديدة</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCourseForm" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="courseName" class="form-label required">اسم الدورة</label>
+                                <input type="text" class="form-control" id="courseName" required>
+                                <div class="invalid-feedback">يرجى إدخال اسم الدورة</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseCode" class="form-label required">كود الدورة</label>
+                                <input type="text" class="form-control" id="courseCode" required>
+                                <div class="invalid-feedback">يرجى إدخال كود الدورة</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseTrainer" class="form-label required">المدرب</label>
+                                <select class="form-select" id="courseTrainer" required>
+                                    <option value="">اختر المدرب...</option>
+                                    <option value="1">أ. أحمد محمد</option>
+                                    <option value="2">أ. سارة عبد الله</option>
+                                    <option value="3">أ. جون سميث</option>
+                                </select>
+                                <div class="invalid-feedback">يرجى اختيار المدرب</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseCategory" class="form-label required">التصنيف</label>
+                                <select class="form-select" id="courseCategory" required>
+                                    <option value="">اختر التصنيف...</option>
+                                    <option value="programming">برمجة</option>
+                                    <option value="design">تصميم</option>
+                                    <option value="language">لغة</option>
+                                    <option value="business">أعمال</option>
+                                </select>
+                                <div class="invalid-feedback">يرجى اختيار التصنيف</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseHours" class="form-label required">عدد الساعات</label>
+                                <input type="number" class="form-control" id="courseHours" min="1" required>
+                                <div class="invalid-feedback">يرجى إدخال عدد الساعات</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseType" class="form-label required">نوع الدورة</label>
+                                <select class="form-select" id="courseType" required>
+                                    <option value="free">مجانية</option>
+                                    <option value="paid">مدفوعة</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6" id="priceUSDGroup">
+                                <label for="coursePriceUSD" class="form-label">السعر بالدولار</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="coursePriceUSD" min="0" step="0.01">
+                                </div>
+                            </div>
+                            <div class="col-md-6" id="priceSYPGroup">
+                                <label for="coursePriceSYP" class="form-label">السعر بالليرة السورية</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">ل.س</span>
+                                    <input type="number" class="form-control" id="coursePriceSYP" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseStartDate" class="form-label">تاريخ البدء</label>
+                                <input type="date" class="form-control" id="courseStartDate">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseEndDate" class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" class="form-control" id="courseEndDate">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseStatus" class="form-label required">حالة الدورة</label>
+                                <select class="form-select" id="courseStatus" required>
+                                    <option value="active">نشطة</option>
+                                    <option value="inactive">غير نشطة</option>
+                                    <option value="upcoming">قادمة</option>
+                                    <option value="completed">منتهية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseCapacity" class="form-label">السعة (عدد المتدربين)</label>
+                                <input type="number" class="form-control" id="courseCapacity" min="1">
+                            </div>
+                            <div class="col-12">
+                                <label for="courseDescription" class="form-label">وصف الدورة</label>
+                                <textarea class="form-control" id="courseDescription" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="courseImage" class="form-label">صورة الدورة</label>
+                                <input type="file" class="form-control" id="courseImage" accept="image/*">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="addCourseForm" class="btn btn-primary">حفظ الدورة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- تعديل دورة -->
+    <div class="modal fade" id="editCourseModal" tabindex="-1" aria-labelledby="editCourseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="editCourseModalLabel"><i class="fas fa-edit me-2"></i>تعديل دورة</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editCourseForm" novalidate>
+                    <input type="hidden" id="courseId" name="courseId">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="courseName" class="form-label required">اسم الدورة</label>
+                            <input type="text" class="form-control" id="courseName" required>
+                            <div class="invalid-feedback">يرجى إدخال اسم الدورة</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseCode" class="form-label required">كود الدورة</label>
+                            <input type="text" class="form-control" id="courseCode" required>
+                            <div class="invalid-feedback">يرجى إدخال كود الدورة</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseTrainer" class="form-label required">المدرب</label>
+                            <select class="form-select" id="courseTrainer" required>
+                                <option value="">اختر المدرب...</option>
+                                <option value="1">أ. أحمد محمد</option>
+                                <option value="2">أ. سارة عبد الله</option>
+                                <option value="3">أ. جون سميث</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار المدرب</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseCategory" class="form-label required">التصنيف</label>
+                            <select class="form-select" id="courseCategory" required>
+                                <option value="">اختر التصنيف...</option>
+                                <option value="programming">برمجة</option>
+                                <option value="design">تصميم</option>
+                                <option value="language">لغة</option>
+                                <option value="business">أعمال</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار التصنيف</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseHours" class="form-label required">عدد الساعات</label>
+                            <input type="number" class="form-control" id="courseHours" min="1" required>
+                            <div class="invalid-feedback">يرجى إدخال عدد الساعات</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseType" class="form-label required">نوع الدورة</label>
+                            <select class="form-select" id="courseType" required>
+                                <option value="free">مجانية</option>
+                                <option value="paid">مدفوعة</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6" id="priceUSDGroup">
+                            <label for="coursePriceUSD" class="form-label">السعر بالدولار</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" id="coursePriceUSD" min="0" step="0.01">
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="priceSYPGroup">
+                            <label for="coursePriceSYP" class="form-label">السعر بالليرة السورية</label>
+                            <div class="input-group">
+                                <span class="input-group-text">ل.س</span>
+                                <input type="number" class="form-control" id="coursePriceSYP" min="0">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseStartDate" class="form-label">تاريخ البدء</label>
+                            <input type="date" class="form-control" id="courseStartDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseEndDate" class="form-label">تاريخ الانتهاء</label>
+                            <input type="date" class="form-control" id="courseEndDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseStatus" class="form-label required">حالة الدورة</label>
+                            <select class="form-select" id="courseStatus" required>
+                                <option value="active">نشطة</option>
+                                <option value="inactive">غير نشطة</option>
+                                <option value="upcoming">قادمة</option>
+                                <option value="completed">منتهية</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseCapacity" class="form-label">السعة (عدد المتدربين)</label>
+                            <input type="number" class="form-control" id="courseCapacity" min="1">
+                        </div>
+                        <div class="col-12">
+                            <label for="courseDescription" class="form-label">وصف الدورة</label>
+                            <textarea class="form-control" id="courseDescription" rows="3"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="courseImage" class="form-label">صورة الدورة</label>
+                            <input type="file" class="form-control" id="courseImage" accept="image/*">
+                            <div id="currentImagePreview" class="mt-2">
+                                <img id="currentImage" src="" alt="Current Course Image" style="max-width: 100%; max-height: 200px; display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="submit" form="editCourseForm" class="btn btn-primary">تحديث الدورة</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Modal عرض بيانات الدورة -->
+    <div class="modal fade" id="viewCourseModal" tabindex="-1" aria-labelledby="viewCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="viewCourseModalLabel"><i class="fas fa-certificate me-2"></i>بيانات الدورة</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <img src="images/course6.jpg" alt="صورة الدورة" class="img-fluid rounded mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-success">نشطة</span>
+                                <span class="badge duration-badge">30 ساعة</span>
+                            </div>
+                            <h4 class="course-name">البرمجة الأساسية</h4>
+                            <p class="text-muted mb-2">الكود: <span class="course-code">CRS-001</span></p>
+                            <div class="course-price mb-3">
+                                <span class="badge bg-success price-badge">$100 / 500,000 ل.س</span>
+                            </div>
+                            <div class="course-trainer mb-3">
+                                <h6 class="mb-1">المدرب:</h6>
+                                <div class="d-flex align-items-center">
+                                    <img src="../assets/images/avatars/male.png" alt="صورة المدرب" class="rounded-circle me-2" width="40" height="40">
+                                    <span class="trainer-name">أ. أحمد محمد</span>
+                                </div>
+                            </div>
+                            <div class="course-dates">
+                                <p class="mb-1"><strong>تاريخ البدء:</strong> <span class="start-date">15/05/2023</span></p>
+                                <p class="mb-0"><strong>تاريخ الانتهاء:</strong> <span class="end-date">15/06/2023</span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <ul class="nav nav-tabs" id="courseDetailsTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">الوصف</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="trainees-tab" data-bs-toggle="tab" data-bs-target="#trainees" type="button" role="tab">المتدربون</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule" type="button" role="tab">الجدول</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="materials-tab" data-bs-toggle="tab" data-bs-target="#materials" type="button" role="tab">المواد</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content p-3 border border-top-0 rounded-bottom" id="courseDetailsTabContent">
+                                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                    <h5 class="mb-3">وصف الدورة</h5>
+                                    <p class="course-description">هذه الدورة تهدف إلى تعليم أساسيات البرمجة باستخدام لغة Python للمبتدئين. ستتعلم خلالها المفاهيم الأساسية للبرمجة وكيفية تطبيقها في مشاريع حقيقية.</p>
+                                    
+                                    <h5 class="mb-3 mt-4">الأهداف التعليمية</h5>
+                                    <ul class="course-objectives">
+                                        <li>فهم أساسيات البرمجة وهيكلة البيانات</li>
+                                        <li>تعلم كتابة أكواد Python باحترافية</li>
+                                        <li>تطوير مهارات حل المشكلات البرمجية</li>
+                                        <li>بناء مشاريع صغيرة باستخدام Python</li>
+                                    </ul>
+                                    
+                                    <h5 class="mb-3 mt-4">المتطلبات الأساسية</h5>
+                                    <ul class="course-prerequisites">
+                                        <li>لا يوجد متطلبات مسبقة</li>
+                                        <li>جهاز كمبيوتر شخصي</li>
+                                        <li>اتصال بالإنترنت</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="trainees" role="tabpanel">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="mb-0">قائمة المتدربين</h5>
+                                        <span class="badge bg-primary">15 متدرب</span>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>اسم المتدرب</th>
+                                                    <th>تاريخ التسجيل</th>
+                                                    <th>الحالة</th>
+                                                    <th>الإجراءات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>أحمد محمد علي</td>
+                                                    <td>10/05/2023</td>
+                                                    <td><span class="badge bg-success">نشط</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <!-- يمكن إضافة المزيد من المتدربين -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="schedule" role="tabpanel">
+                                    <h5 class="mb-3">جدول الدورة</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-bordered">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>اليوم</th>
+                                                    <th>الوقت</th>
+                                                    <th>المادة</th>
+                                                    <th>المدرب</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>السبت</td>
+                                                    <td>16:00 - 18:00</td>
+                                                    <td>مقدمة في البرمجة</td>
+                                                    <td>أ. أحمد محمد</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>الاثنين</td>
+                                                    <td>16:00 - 18:00</td>
+                                                    <td>أنواع البيانات</td>
+                                                    <td>أ. أحمد محمد</td>
+                                                </tr>
+                                                <!-- يمكن إضافة المزيد من الجدول -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="materials" role="tabpanel">
+                                    <h5 class="mb-3">المواد التعليمية</h5>
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <i class="fas fa-file-pdf text-danger me-2"></i>
+                                                    <span>ملف PDF - مقدمة في البرمجة</span>
+                                                </div>
+                                                <small class="text-muted">2.5 MB</small>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <i class="fas fa-file-video text-primary me-2"></i>
+                                                    <span>فيديو - أنواع البيانات</span>
+                                                </div>
+                                                <small class="text-muted">45 دقيقة</small>
+                                            </div>
+                                        </a>
+                                        <!-- يمكن إضافة المزيد من المواد -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-edit me-1"></i> تعديل
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- JS الخاص بالمدير -->
+    <script src="js/admin.js"></script>
+    <script>
+        // تهيئة DataTable
+        $(document).ready(function() {
+            var table = $('#coursesTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/ar.json'
+                },
+                responsive: true,
+                dom: '<"top"f>rt<"bottom"lip><"clear">',
+                pageLength: 10,
+                order: [[0, 'asc']]
+            });
+
+            // البحث في الجدول
+            $('#searchForm').on('submit', function(e) {
+                e.preventDefault();
+                table.search($('#searchInput').val()).draw();
+            });
+
+            // تصفية حسب نوع الدورة
+            $('#typeFilter').on('change', function() {
+                table.column(4).search(this.value).draw();
+            });
+
+            // تصفية حسب حالة الدورة
+            $('#statusFilter').on('change', function() {
+                table.column(6).search(this.value).draw();
+            });
+
+            // إعادة تعيين الفلاتر
+            $('#resetFilters').on('click', function() {
+                $('#searchInput').val('');
+                $('#typeFilter').val('');
+                $('#statusFilter').val('');
+                table.search('').columns().search('').draw();
+            });
+
+            // إظهار/إخفاء حقول السعر حسب نوع الدورة
+            $('#courseType').on('change', function() {
+                if ($(this).val() === 'paid') {
+                    $('#priceUSDGroup').show();
+                    $('#priceSYPGroup').show();
+                    $('#coursePriceUSD').attr('required', true);
+                    $('#coursePriceSYP').attr('required', true);
+                } else {
+                    $('#priceUSDGroup').hide();
+                    $('#priceSYPGroup').hide();
+                    $('#coursePriceUSD').removeAttr('required');
+                    $('#coursePriceSYP').removeAttr('required');
+                }
+            }).trigger('change');
+
+            // التحقق من صحة النموذج
+            (function() {
+                'use strict';
+                var forms = document.querySelectorAll('.needs-validation');
+                
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+            })();
+
+            // معالجة إضافة دورة جديدة
+            $('#addCourseForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                if (this.checkValidity()) {
+                    // هنا يمكنك إضافة كود الإضافة الفعلية
+                    alert('تم إضافة الدورة بنجاح');
+                    $('#addCourseModal').modal('hide');
+                    this.reset();
+                    $(this).removeClass('was-validated');
+                    
+                    // يمكنك هنا إضافة الدورة الجديدة للجدول دون الحاجة لإعادة تحميل الصفحة
+                }
+            });
+
+            // معالجة حذف الدورة
+            $(document).on('click', '.delete-btn', function() {
+                if(confirm('هل أنت متأكد من حذف هذه الدورة؟ سيتم حذف جميع بياناتها المرتبطة.')) {
+                    const courseId = $(this).data('id');
+                    const row = $(this).closest('tr');
+                    
+                    // هنا يمكنك إضافة كود الحذف الفعلي
+                    $.ajax({
+                        url: 'api/deleteCourse.php',
+                        method: 'POST',
+                        data: { id: courseId },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                row.fadeOut(500, function() {
+                                    table.row($(this)).remove().draw();
+                                });
+                                alert('تم حذف الدورة بنجاح');
+                            } else {
+                                alert('حدث خطأ أثناء حذف الدورة: ' + response.message);
+                            }
+                        },
+                        error: function() {
+                            alert('حدث خطأ أثناء الاتصال بالخادم');
+                        }
+                    });
+                }
+            });
+
+            // معالجة عرض بيانات الدورة
+            $(document).on('click', '.view-btn', function() {
+                const courseId = $(this).data('id');
+                
+                // هنا يمكنك جلب بيانات الدورة من الخادم
+                $.ajax({
+                    url: 'api/getCourse.php',
+                    method: 'GET',
+                    data: { id: courseId },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            const course = response.data;
+                            $('#viewCourseModal .course-name').text(course.name);
+                            $('#viewCourseModal .course-code').text(course.code);
+                            $('#viewCourseModal .course-description').text(course.description);
+                            $('#viewCourseModal .trainer-name').text(course.trainer);
+                            $('#viewCourseModal .start-date').text(course.start_date);
+                            $('#viewCourseModal .end-date').text(course.end_date);
+                            
+                            // تحديث حالة الدورة
+                            const statusBadge = $('#viewCourseModal .badge:first');
+                            statusBadge.removeClass('bg-success bg-warning bg-danger bg-info');
+                            if (course.status === 'active') {
+                                statusBadge.addClass('bg-success').text('نشطة');
+                            } else if (course.status === 'inactive') {
+                                statusBadge.addClass('bg-warning text-dark').text('غير نشطة');
+                            } else if (course.status === 'upcoming') {
+                                statusBadge.addClass('bg-primary').text('قادمة');
+                            } else {
+                                statusBadge.addClass('bg-info').text('منتهية');
+                            }
+                            
+                            // تحديث السعر
+                            const priceBadge = $('#viewCourseModal .course-price .badge');
+                            if (course.type === 'free') {
+                                priceBadge.removeClass('bg-success').addClass('bg-secondary').text('مجانية');
+                            } else {
+                                priceBadge.addClass('bg-success').text(`$${course.price_usd} / ${course.price_syp} ل.س`);
+                            }
+                            
+                            // تحديث الصورة
+                            const img = $('#viewCourseModal .img-fluid');
+                            if (course.image) {
+                                img.attr('src', 'uploads/courses/' + course.image);
+                            }
+                            
+                            // تحديث الأهداف التعليمية
+                            const objectivesList = $('#viewCourseModal .course-objectives');
+                            objectivesList.empty();
+                            course.objectives.forEach(obj => {
+                                objectivesList.append(`<li>${obj}</li>`);
+                            });
+                            
+                            // تحديث المتطلبات الأساسية
+                            const prereqsList = $('#viewCourseModal .course-prerequisites');
+                            prereqsList.empty();
+                            course.prerequisites.forEach(req => {
+                                prereqsList.append(`<li>${req}</li>`);
+                            });
+                        } else {
+                            alert('حدث خطأ أثناء جلب بيانات الدورة');
+                        }
+                    },
+                    error: function() {
+                        alert('حدث خطأ أثناء الاتصال بالخادم');
+                    }
+                });
+            });
+                
+            // تصدير إلى Excel
+            $('#exportExcel').on('click', function() {
+                // يمكنك استخدام مكتبة مثل SheetJS لتصدير البيانات
+                alert('سيتم تصدير البيانات إلى ملف Excel');
+            });
+
+            // طباعة الجدول
+            $('#printBtn').on('click', function() {
+                window.print();
+            });
+        });
+    </script>
+</body>
+</html>

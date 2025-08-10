@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الرسائل - الطالب | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/student.css">
+    <style>
+        .chat-container {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+        }
+        
+        .message.received {
+            justify-content: flex-start;
+        }
+        
+        .message.sent {
+            justify-content: flex-end;
+        }
+        
+        .message-content {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .message.received .message-content {
+            background-color: #f1f1f1;
+        }
+        
+        .message.sent .message-content {
+            background-color: #e3f2fd;
+        }
+        
+        .message-content small {
+            display: block;
+            text-align: right;
+            color: #777;
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+        
+        .chat-input {
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body class="student-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashbord_student.html">
+                <img src="../images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="40">
+                <span class="brand-text">لوحة الطالب</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">2</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">واجب جديد في الرياضيات</a></li>
+                        <li><a class="dropdown-item" href="#">تقرير الحضور الأسبوعي</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="studentName">أحمد محمد</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- القائمة الجانبية -->
+    <div class="student-wrapper">
+        <aside class="student-sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashbord_student.html">
+                        <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="schedule.html">
+                        <i class="fas fa-calendar-alt me-2"></i>الجدول الدراسي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="attendance.html">
+                        <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="grades.html">
+                        <i class="fas fa-chart-line me-2"></i>الدرجات والتقييم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="homework.html">
+                        <i class="fas fa-book me-2"></i>الواجبات المدرسية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="exams.html">
+                        <i class="fas fa-file-alt me-2"></i>الاختبارات
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="materials.html">
+                        <i class="fas fa-download me-2"></i>المواد التعليمية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="messages.html">
+                        <i class="fas fa-envelope me-2"></i>الرسائل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">
+                        <i class="fas fa-user me-2"></i>الملف الشخصي
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="student-content">
+            <div class="container-fluid py-4">
+                <h2 class="page-title mb-4"><i class="fas fa-envelope me-2"></i>الرسائل</h2>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- قائمة المحادثات -->
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">المحادثات</h5>
+                                    <button class="btn btn-sm btn-light">
+                                        <i class="fas fa-plus"></i> جديد
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    <a href="#" class="list-group-item list-group-item-action active">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="mb-1">أ. أحمد محمد</h6>
+                                            <small>اليوم</small>
+                                        </div>
+                                        <p class="mb-1 text-truncate">بخصوص الواجب المطلوب يوم الأحد...</p>
+                                        <small><i class="fas fa-circle text-success"></i> نشط الآن</small>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="mb-1">أ. سعاد عبد الله</h6>
+                                            <small>بالأمس</small>
+                                        </div>
+                                        <p class="mb-1 text-truncate">الرجاء مراجعة الدرس الجديد...</p>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="mb-1">إدارة المعهد</h6>
+                                            <small>3 أيام</small>
+                                        </div>
+                                        <p class="mb-1 text-truncate">إشعار هام بخصوص اجتماع أولياء الأمور...</p>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="mb-1">أ. يوسف خالد</h6>
+                                            <small>أسبوع</small>
+                                        </div>
+                                        <p class="mb-1 text-truncate">النتائج النهائية للاختبار...</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <!-- محتوى الرسائل -->
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-success text-white">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">أ. أحمد محمد</h5>
+                                    <div>
+                                        <button class="btn btn-sm btn-light me-2">
+                                            <i class="fas fa-phone"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-light">
+                                            <i class="fas fa-video"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body chat-container">
+                                <div class="chat-messages">
+                                    <div class="message received">
+                                        <div class="message-content">
+                                            <p>مرحباً أحمد، كيف حالك؟ هل لديك أي استفسار بخصوص الواجب المطلوب يوم الأحد؟</p>
+                                            <small>10:30 ص</small>
+                                        </div>
+                                    </div>
+                                    <div class="message sent">
+                                        <div class="message-content">
+                                            <p>السلام عليكم أستاذ، نعم لدي سؤال بخصوص المسألة رقم 3 في الواجب</p>
+                                            <small>10:32 ص</small>
+                                        </div>
+                                    </div>
+                                    <div class="message received">
+                                        <div class="message-content">
+                                            <p>وعليكم السلام، تفضل ما هو استفسارك؟</p>
+                                            <small>10:33 ص</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-input">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="اكتب رسالتك هنا...">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الجدول الدراسي - الطالب | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/student.css">
+</head>
+<body class="student-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashbord_student.html">
+                <img src="../images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="40">
+                <span class="brand-text">لوحة الطالب</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">2</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">واجب جديد في الرياضيات</a></li>
+                        <li><a class="dropdown-item" href="#">تقرير الحضور الأسبوعي</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="studentName">أحمد محمد</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- القائمة الجانبية -->
+    <div class="student-wrapper">
+        <aside class="student-sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashbord_student.html">
+                        <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="schedule.html">
+                        <i class="fas fa-calendar-alt me-2"></i>الجدول الدراسي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="attendance.html">
+                        <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="grades.html">
+                        <i class="fas fa-chart-line me-2"></i>الدرجات والتقييم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="homework.html">
+                        <i class="fas fa-book me-2"></i>الواجبات المدرسية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="exams.html">
+                        <i class="fas fa-file-alt me-2"></i>الاختبارات
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="materials.html">
+                        <i class="fas fa-download me-2"></i>المواد التعليمية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="messages.html">
+                        <i class="fas fa-envelope me-2"></i>الرسائل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">
+                        <i class="fas fa-user me-2"></i>الملف الشخصي
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="student-content">
+            <div class="container-fluid py-4">
+                <h2 class="page-title mb-4"><i class="fas fa-calendar-alt me-2"></i>الجدول الدراسي</h2>
+                
+                <!-- فلترة الجدول -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <form>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="weekFilter" class="form-label">الأسبوع</label>
+                                            <select class="form-select" id="weekFilter">
+                                                <option selected>الأسبوع الحالي</option>
+                                                <option>الأسبوع القادم</option>
+                                                <option>الأسبوع الماضي</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="subjectFilter" class="form-label">المادة</label>
+                                            <select class="form-select" id="subjectFilter">
+                                                <option selected>جميع المواد</option>
+                                                <option>الرياضيات</option>
+                                                <option>اللغة العربية</option>
+                                                <option>العلوم</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm bg-primary text-white">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="mb-1">الحصة الحالية</h5>
+                                        <p class="mb-0">اللغة العربية - مع أ. سعاد عبد الله</p>
+                                    </div>
+                                    <div class="bg-white text-primary p-3 rounded">
+                                        <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الجدول الدراسي -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-calendar-week me-2"></i>الجدول الأسبوعي</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>اليوم</th>
+                                        <th>8:00 - 9:00</th>
+                                        <th>9:00 - 10:00</th>
+                                        <th>10:30 - 11:30</th>
+                                        <th>11:30 - 12:30</th>
+                                        <th>12:30 - 1:30</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>الأحد</td>
+                                        <td>الرياضيات - أ. أحمد</td>
+                                        <td>اللغة العربية - أ. سعاد</td>
+                                        <td>العلوم - أ. يوسف</td>
+                                        <td>التربية الإسلامية - أ. خالد</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الإثنين</td>
+                                        <td>اللغة الإنجليزية - أ. محمد</td>
+                                        <td>الرياضيات - أ. أحمد</td>
+                                        <td>-</td>
+                                        <td>الحاسوب - أ. علي</td>
+                                        <td>التربية الفنية - أ. مريم</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الثلاثاء</td>
+                                        <td>العلوم - أ. يوسف</td>
+                                        <td>اللغة العربية - أ. سعاد</td>
+                                        <td>الرياضيات - أ. أحمد</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الأربعاء</td>
+                                        <td>التربية الإسلامية - أ. خالد</td>
+                                        <td>اللغة الإنجليزية - أ. محمد</td>
+                                        <td>الرياضيات - أ. أحمد</td>
+                                        <td>العلوم - أ. يوسف</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الخميس</td>
+                                        <td>اللغة العربية - أ. سعاد</td>
+                                        <td>التربية الرياضية - أ. وليد</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+</html>

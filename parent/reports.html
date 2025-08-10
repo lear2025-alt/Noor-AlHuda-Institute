@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - ولي الأمر | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS الخاص بولي الأمر -->
+    <link rel="stylesheet" href="css/parent.css">
+</head>
+
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark admin-navbar fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto" href="dashbord_parent.html">
+                <img src="../images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="40">
+                <span class="d-none d-sm-inline">لوحة ولي الأمر</span>
+            </a>
+            
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-start">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">تقرير حضور جديد</a></li>
+                        <li><a class="dropdown-item" href="#">درجة اختبار</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="parentName" class="d-none d-md-inline">وليد أحمد</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-start">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+        <aside class="admin-sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="dashbord_parent.html">
+                        <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="my_children.html">
+                        <i class="fas fa-users me-2"></i>أبنائي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="attendance.html">
+                        <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="grades.html">
+                        <i class="fas fa-check-circle me-2"></i>الدرجات والتقييم
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="timetable.html">
+                        <i class="fas fa-calendar-alt me-2"></i>الجداول الدراسية
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="assignments.html">
+                        <i class="fas fa-tasks me-2"></i>الواجبات والاختبارات
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="messages.html">
+                        <i class="fas fa-envelope me-2"></i>الرسائل
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reports.html">
+                        <i class="fas fa-chart-bar me-2"></i>التقارير
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </aside>
+        <main class="admin-content">
+            <h1 class="page-title"><i class="fas fa-file-alt"></i> التقارير</h1>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-header bg-dark text-white">
+                                <i class="fas fa-file-alt"></i> سجل التقارير
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <select class="form-select">
+                                            <option>اختر الطالب...</option>
+                                            <option>أحمد وليد - العاشر أ</option>
+                                            <option>سارة وليد - التاسع ب</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select">
+                                            <option>كل التقارير</option>
+                                            <option>تقرير الحضور</option>
+                                            <option>تقرير الدرجات</option>
+                                            <option>تقرير السلوك</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="month" class="form-control" value="2023-10">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-secondary"><i class="fas fa-sync-alt"></i> إعادة تعيين</button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>الطالب</th>
+                                                <th>نوع التقرير</th>
+                                                <th>التاريخ</th>
+                                                <th>الحالة</th>
+                                                <th>الإجراءات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>أحمد وليد</td>
+                                                <td>تقرير الحضور</td>
+                                                <td>2023-10-15</td>
+                                                <td><span class="badge bg-success">جديد</span></td>
+                                                <td class="action-btns">
+                                                    <button class="btn btn-sm btn-primary view-report-btn"><i class="fas fa-eye"></i> عرض</button>
+                                                    <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> تحميل</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>سارة وليد</td>
+                                                <td>تقرير الدرجات</td>
+                                                <td>2023-10-10</td>
+                                                <td><span class="badge bg-info">مقروء</span></td>
+                                                <td class="action-btns">
+                                                    <button class="btn btn-sm btn-primary view-report-btn"><i class="fas fa-eye"></i> عرض</button>
+                                                    <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> تحميل</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>أحمد وليد</td>
+                                                <td>تقرير السلوك</td>
+                                                <td>2023-09-28</td>
+                                                <td><span class="badge bg-info">مقروء</span></td>
+                                                <td class="action-btns">
+                                                    <button class="btn btn-sm btn-primary view-report-btn"><i class="fas fa-eye"></i> عرض</button>
+                                                    <button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> تحميل</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <nav aria-label="Page navigation" class="mt-4">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">السابق</a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">التالي</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal لعرض التقرير -->
+    <div class="modal fade report-modal" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">عرض التقرير</h5>
+                    <button type="button" class="btn-close btn-close-white " data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="report-info mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>اسم الطالب:</strong> <span id="reportStudentName">أحمد وليد</span></p>
+                                <p><strong>الصف:</strong> <span id="reportClass">العاشر أ</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>نوع التقرير:</strong> <span id="reportType">تقرير الحضور</span></p>
+                                <p><strong>تاريخ التقرير:</strong> <span id="reportDate">2023-10-15</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="report-details">
+                        <h6 class="mb-3"><i class="fas fa-info-circle me-2"></i>تفاصيل التقرير</h6>
+                        
+                        <!-- محتوى التقرير (سيتغير حسب نوع التقرير) -->
+                        <div id="attendanceReportContent">
+                            <div class="report-item">
+                                <h6>الحضور الشهري - أكتوبر 2023</h6>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>نسبة الحضور: 85% (17 يوم حضور من أصل 20 يوم دراسي)</p>
+                            </div>
+                            
+                            <div class="report-item">
+                                <h6>تفاصيل الغياب</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-times-circle text-danger me-2"></i> 10/5/2023 - غياب بدون عذر</li>
+                                    <li><i class="fas fa-exclamation-circle text-warning me-2"></i> 10/12/2023 - غياب بعذر</li>
+                                    <li><i class="fas fa-times-circle text-danger me-2"></i> 10/20/2023 - غياب بدون عذر</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="report-item">
+                                <h6>ملاحظات المدرس</h6>
+                                <p class="alert alert-info">الطالب يحتاج إلى تحسين في الحضور في أيام الأحد حيث سجل أعلى نسبة غياب في هذا اليوم.</p>
+                            </div>
+                        </div>
+                        
+                        <div id="gradesReportContent" style="display:none;">
+                            <div class="report-item">
+                                <h6>الدرجات الفصلية - الفصل الأول 2023</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>المادة</th>
+                                                <th>الدرجة</th>
+                                                <th>التقدير</th>
+                                                <th>ملاحظات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>القرآن الكريم</td>
+                                                <td>95</td>
+                                                <td>ممتاز</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>اللغة العربية</td>
+                                                <td>88</td>
+                                                <td>جيد جداً</td>
+                                                <td>تحسن في التعبير الكتابي</td>
+                                            </tr>
+                                            <tr>
+                                                <td>الرياضيات</td>
+                                                <td>76</td>
+                                                <td>جيد</td>
+                                                <td>يحتاج تحسين في الهندسة</td>
+                                            </tr>
+                                            <tr>
+                                                <td>العلوم</td>
+                                                <td>82</td>
+                                                <td>جيد جداً</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>اللغة الإنجليزية</td>
+                                                <td>90</td>
+                                                <td>ممتاز</td>
+                                                <td>أداء ممتاز</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="report-item">
+                                <h6>التقييم العام</h6>
+                                <p class="alert alert-success">أداء الطالب جيد بشكل عام مع وجود مجال للتحسين في مادة الرياضيات. نلاحظ التزامه وتفاعله الإيجابي في الصف.</p>
+                            </div>
+                        </div>
+                        
+                        <div id="behaviorReportContent" style="display:none;">
+                            <div class="report-item">
+                                <h6>تقييم السلوك</h6>
+                                <div class="row text-center">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <div class="circular-progress" data-value="85">
+                                                <svg class="progress-circle" width="100" height="100" viewBox="0 0 100 100">
+                                                    <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
+                                                    <circle class="progress-circle-fill" cx="50" cy="50" r="45" style="stroke-dashoffset: 283px;"></circle>
+                                                </svg>
+                                                <div class="progress-text">85%</div>
+                                            </div>
+                                            <h6>الالتزام</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <div class="circular-progress" data-value="90">
+                                                <svg class="progress-circle" width="100" height="100" viewBox="0 0 100 100">
+                                                    <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
+                                                    <circle class="progress-circle-fill" cx="50" cy="50" r="45" style="stroke-dashoffset: 283px;"></circle>
+                                                </svg>
+                                                <div class="progress-text">90%</div>
+                                            </div>
+                                            <h6>التعاون</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <div class="circular-progress" data-value="78">
+                                                <svg class="progress-circle" width="100" height="100" viewBox="0 0 100 100">
+                                                    <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
+                                                    <circle class="progress-circle-fill" cx="50" cy="50" r="45" style="stroke-dashoffset: 283px;"></circle>
+                                                </svg>
+                                                <div class="progress-text">78%</div>
+                                            </div>
+                                            <h6>الانضباط</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="report-item">
+                                <h6>ملاحظات السلوك</h6>
+                                <div class="alert alert-warning">
+                                    <h6><i class="fas fa-exclamation-triangle me-2"></i>ملاحظات سلبية</h6>
+                                    <ul>
+                                        <li>تأخر عن الحصة الأولى مرتين هذا الشهر</li>
+                                        <li>عدم إحضار الكتاب المدرسي في 3 أيام</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="alert alert-success">
+                                    <h6><i class="fas fa-check-circle me-2"></i>ملاحظات إيجابية</h6>
+                                    <ul>
+                                        <li>مساعدة زملائه في فهم الدروس</li>
+                                        <li>مشاركة فعالة في الأنشطة الصفية</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="report-item">
+                                <h6>توصيات المرشد</h6>
+                                <p>نوصي بمتابعة الطالب فيما يخص التأخر الصباحي، مع تشجيعه على الاستمرار في مشاركته الإيجابية في الصف.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times me-2"></i>إغلاق</button>
+                    <button type="button" class="btn btn-primary"><i class="fas fa-download me-2"></i>تحميل التقرير</button>
+                    <button type="button" class="btn btn-outline-primary"><i class="fas fa-print me-2"></i>طباعة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // عند النقر على زر عرض في الجدول
+            $('.view-report-btn').on('click', function() {
+                var row = $(this).closest('tr');
+                var studentName = row.find('td:eq(0)').text();
+                var reportType = row.find('td:eq(1)').text();
+                var reportDate = row.find('td:eq(2)').text();
+                
+                // تعبئة بيانات التقرير في النموذج
+                $('#reportStudentName').text(studentName);
+                $('#reportType').text(reportType);
+                $('#reportDate').text(reportDate);
+                
+                // تحديد محتوى التقرير حسب النوع
+                $('#attendanceReportContent').hide();
+                $('#gradesReportContent').hide();
+                $('#behaviorReportContent').hide();
+                
+                if (reportType.includes('الحضور')) {
+                    $('#attendanceReportContent').show();
+                    $('#reportClass').text('العاشر أ');
+                } else if (reportType.includes('الدرجات')) {
+                    $('#gradesReportContent').show();
+                    $('#reportClass').text('التاسع ب');
+                } else if (reportType.includes('السلوك')) {
+                    $('#behaviorReportContent').show();
+                    $('#reportClass').text('العاشر أ');
+                    
+                    // تحديث دوائر التقدم للسلوك
+                    $('.circular-progress').each(function() {
+                        var value = $(this).data('value');
+                        var circumference = 2 * Math.PI * 45;
+                        var offset = circumference - (value / 100) * circumference;
+                        $(this).find('.progress-circle-fill').css('stroke-dashoffset', offset);
+                    });
+                }
+                
+                // عرض النموذج
+                var reportModal = new bootstrap.Modal(document.getElementById('reportModal'));
+                reportModal.show();
+            });
+            
+        });
+    </script>
+</body>
+</html>

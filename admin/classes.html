@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الصفوف | معهد نور الهدى</title>
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        
+        .class-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #0d6efd;
+            border: 2px solid #dee2e6;
+        }
+        .action-btns .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            margin: 0 2px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .card-header {
+            font-weight: 600;
+        }
+        .form-label.required:after {
+            content: " *";
+            color: #dc3545;
+        }
+          /* أنماط جدول الطلاب */
+        #studentsSection {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        #studentsSection h5 {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+
+        #studentsTableBody img {
+            border: 2px solid #dee2e6;
+        }
+        
+            /* إضافة هامش علوي لتجنب التداخل مع الشريط العلوي */
+        body {
+            padding-top: 25px; /* يمكنك تعديل القيمة حسب ارتفاع الشريط العلوي */
+        }
+
+        /* ضبط القائمة الجانبية */
+        .admin-sidebar {
+            margin-top: 0; /* لضمان عدم إضافة هامش إضافي إذا كان body يتحكم بالمسافة */
+        }
+        
+        @media (max-width: 991.98px) {
+        body {
+            padding-top: 56px; /* ارتفاع أقل للشريط العلوي على الشاشات الصغيرة */
+        }
+        }
+    </style>
+</head>
+<body class="admin-dashboard">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <img src="images/Noor_Alhuda_logo.png" alt="شعار المعهد" height="60" width="60">
+                <span class="brand-text">لوحة المدير</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" id="notificationsDropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">2</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown">
+                        <li><h6 class="dropdown-header">الإشعارات الجديدة</h6></li>
+                        <li><a class="dropdown-item" href="#">طلب جديد من ولي الأمر</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">عرض الكل</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" id="userDropdown">
+                        <i class="fas fa-user-circle me-1"></i>
+                        <span id="adminName">أ. محمد المدير</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>الملف الشخصي</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>الإعدادات</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt me-2"></i>تسجيل الخروج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القائمة الجانبية -->
+    <div class="admin-wrapper">
+         <aside class="admin-sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-2"></i>لوحة التحكم
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order_management.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلبات
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="students.html">
+                            <i class="fas fa-users me-2"></i>إدارة الطلاب
+                        </a>
+                    </li>
+                     <li class="nav-item">
+                    <a class="nav-link " href="parents_management.html"><i class="fas fa-user-friends me-2"></i> إدارة أولياء الأمور</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة المعلمين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.html">
+                            <i class="fas fa-school me-2"></i>إدارة الصفوف
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="subjects.html">
+                            <i class="fas fa-book me-2"></i>إدارة المواد
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="timetable.html">
+                            <i class="fas fa-calendar-alt me-2"></i>الجداول الدراسية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attendance.html">
+                            <i class="fas fa-clipboard-list me-2"></i>الحضور والغياب
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar me-2"></i>التقارير
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainees.html">
+                            <i class="fas fa-users me-2"></i>إدارة المتدربين
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainings.html">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>إدارة الدورات التدريبية
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">
+                            <i class="fas fa-cog me-2"></i>الإعدادات
+                        </a>
+                    </li>
+                </ul>
+            
+        </aside>
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+            <div class="container-fluid py-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="page-title mb-0"><i class="fas fa-school me-2"></i>إدارة الصفوف</h2>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addClassModal" id="addClassBtn">
+                        <i class="fas fa-plus me-2"></i>إضافة صف جديد
+                    </button>
+                </div>
+
+                <!-- فلترة البحث -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <form class="row g-3" id="searchForm">
+                            <div class="col-md-6">
+                                <label for="searchInput" class="form-label">بحث</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="searchInput" placeholder="ابحث باسم الصف أو المرحلة...">
+                                    <button class="btn btn-outline-secondary" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="gradeFilter" class="form-label">المرحلة</label>
+                                <select id="gradeFilter" class="form-select">
+                                    <option value="">كل المراحل</option>
+                                    <option value="primary">الابتدائية</option>
+                                    <option value="intermediate">المتوسطة</option>
+                                    <option value="secondary">الثانوية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <button type="reset" class="btn btn-outline-secondary w-100" id="resetFilters">
+                                    <i class="fas fa-undo me-2"></i> إعادة تعيين
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- جدول الصفوف -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">قائمة الصفوف</h5>
+                        <div>
+                            <button class="btn btn-sm btn-light me-2" id="exportExcel">
+                                <i class="fas fa-file-excel me-1"></i> تصدير
+                            </button>
+                            <button class="btn btn-sm btn-light" id="printBtn">
+                                <i class="fas fa-print me-1"></i> طباعة
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="classesTable" class="table table-hover table-striped w-100">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th width="50">#</th>
+                                        <th>الصف</th>
+                                        <th>المرحلة</th>
+                                        <th>الفصل</th>
+                                        <th>المعلم الرئيسي</th>
+                                        <th>عدد الطلاب</th>
+                                        <th>الحالة</th>
+                                        <th width="120">إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="class-icon me-2">
+                                                    <i class="fas fa-chalkboard"></i>
+                                                </div>
+                                                <span>الصف الأول</span>
+                                            </div>
+                                        </td>
+                                        <td>الابتدائية</td>
+                                        <td>أ</td>
+                                        <td>أحمد محمد</td>
+                                        <td>25</td>
+                                        <td><span class="badge bg-success">نشط</span></td>
+                                        <td class="action-btns">
+                                            <button class="btn btn-sm btn-outline-primary view-btn" title="عرض" data-bs-toggle="modal" data-bs-target="#viewClassModal" data-id="1">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-warning edit-btn" title="تعديل" data-bs-toggle="modal" data-bs-target="#editClassModal" data-id="1">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger delete-btn" title="حذف" data-id="1">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="class-icon me-2">
+                                                    <i class="fas fa-chalkboard"></i>
+                                                </div>
+                                                <span>الصف الثاني</span>
+                                            </div>
+                                        </td>
+                                        <td>الابتدائية</td>
+                                        <td>ب</td>
+                                        <td>سارة عبد الله</td>
+                                        <td>30</td>
+                                        <td><span class="badge bg-success">نشط</span></td>
+                                        <td class="action-btns">
+                                            <button class="btn btn-sm btn-outline-primary view-btn" title="عرض" data-id="2">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-warning edit-btn" title="تعديل" data-id="2">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger delete-btn" title="حذف" data-id="2">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <!-- يمكن إضافة المزيد من الصفوف هنا -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal إضافة صف جديد -->
+    <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="addClassModalLabel"><i class="fas fa-plus me-2"></i>إضافة صف جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addClassForm" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="className" class="form-label required">اسم الصف</label>
+                                <select class="form-select" id="className" required>
+                                    <option value="">اختر الصف...</option>
+                                    <option value="1">الصف الأول</option>
+                                    <option value="2">الصف الثاني</option>
+                                    <option value="3">الصف الثالث</option>
+                                    <option value="4">الصف الرابع</option>
+                                    <option value="5">الصف الخامس</option>
+                                    <option value="6">الصف السادس</option>
+                                </select>
+                                <div class="invalid-feedback">يرجى اختيار الصف</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="classGrade" class="form-label required">المرحلة</label>
+                                <select class="form-select" id="classGrade" required>
+                                    <option value="">اختر المرحلة...</option>
+                                    <option value="primary">الابتدائية</option>
+                                    <option value="intermediate">المتوسطة</option>
+                                    <option value="secondary">الثانوية</option>
+                                </select>
+                                <div class="invalid-feedback">يرجى اختيار المرحلة</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="classSection" class="form-label required">الفصل</label>
+                                <select class="form-select" id="classSection" required>
+                                    <option value="">اختر الفصل...</option>
+                                    <option value="a">أ</option>
+                                    <option value="b">ب</option>
+                                    <option value="c">ج</option>
+                                    <option value="d">د</option>
+                                </select>
+                                <div class="invalid-feedback">يرجى اختيار الفصل</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="classTeacher" class="form-label required">المعلم الرئيسي</label>
+                                <select class="form-select" id="classTeacher" required>
+                                    <option value="">اختر المعلم...</option>
+                                    <option value="1">أحمد محمد</option>
+                                    <option value="2">سارة عبد الله</option>
+                                    <option value="3">محمد خالد</option>
+                                </select>
+                                <div class="invalid-feedback">يرجى اختيار المعلم الرئيسي</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="classCapacity" class="form-label">السعة القصوى</label>
+                                <input type="number" class="form-control" id="classCapacity" min="10" max="40" value="30">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="classStatus" class="form-label required">الحالة</label>
+                                <select class="form-select" id="classStatus" required>
+                                    <option value="active" selected>نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="classDescription" class="form-label">وصف الصف (اختياري)</label>
+                                <textarea class="form-control" id="classDescription" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="submit" form="addClassForm" class="btn btn-primary">حفظ الصف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal عرض بيانات الصف -->
+    <div class="modal fade" id="viewClassModal" tabindex="-1" aria-labelledby="viewClassModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="viewClassModalLabel"><i class="fas fa-school me-2"></i>بيانات الصف</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="class-icon mx-auto mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                                <i class="fas fa-chalkboard"></i>
+                            </div>
+                            <h4 class="class-name">الصف الأول أ</h4>
+                            <span class="badge bg-success">نشط</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">المرحلة</label>
+                                    <p class="form-control-static grade">الابتدائية</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">المعلم الرئيسي</label>
+                                    <p class="form-control-static teacher">أحمد محمد</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">عدد الطلاب</label>
+                                    <p class="form-control-static students">25 / 30</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">تاريخ الإنشاء</label>
+                                    <p class="form-control-static created-at">2023-09-01</p>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">المواد الدراسية</label>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="badge bg-info">الرياضيات</span>
+                                        <span class="badge bg-info">اللغة العربية</span>
+                                        <span class="badge bg-info">العلوم</span>
+                                        <span class="badge bg-info">اللغة الإنجليزية</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">الوصف</label>
+                                    <p class="form-control-static description">صف الصف الأول أ - المرحلة الابتدائية</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                   <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        <button type="button" class="btn btn-primary" id="viewStudentsBtn" data-class-id="1">
+                            <i class="fas fa-users me-1"></i> عرض الطلاب
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+       
+
+<!-- Modal تعديل الصف -->
+<div class="modal fade" id="editClassModal" tabindex="-1" aria-labelledby="editClassModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="editClassModalLabel"><i class="fas fa-edit me-2"></i>تعديل بيانات الصف</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editClassForm" novalidate>
+                    <input type="hidden" id="editClassId">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="editClassName" class="form-label required">اسم الصف</label>
+                            <select class="form-select" id="editClassName" required>
+                                <option value="">اختر الصف...</option>
+                                <option value="1">الصف الأول</option>
+                                <option value="2">الصف الثاني</option>
+                                <option value="3">الصف الثالث</option>
+                                <option value="4">الصف الرابع</option>
+                                <option value="5">الصف الخامس</option>
+                                <option value="6">الصف السادس</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار الصف</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editClassGrade" class="form-label required">المرحلة</label>
+                            <select class="form-select" id="editClassGrade" required>
+                                <option value="">اختر المرحلة...</option>
+                                <option value="primary">الابتدائية</option>
+                                <option value="intermediate">المتوسطة</option>
+                                <option value="secondary">الثانوية</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار المرحلة</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editClassSection" class="form-label required">الفصل</label>
+                            <select class="form-select" id="editClassSection" required>
+                                <option value="">اختر الفصل...</option>
+                                <option value="a">أ</option>
+                                <option value="b">ب</option>
+                                <option value="c">ج</option>
+                                <option value="d">د</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار الفصل</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editClassTeacher" class="form-label required">المعلم الرئيسي</label>
+                            <select class="form-select" id="editClassTeacher" required>
+                                <option value="">اختر المعلم...</option>
+                                <option value="1">أحمد محمد</option>
+                                <option value="2">سارة عبد الله</option>
+                                <option value="3">محمد خالد</option>
+                            </select>
+                            <div class="invalid-feedback">يرجى اختيار المعلم الرئيسي</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editClassCapacity" class="form-label">السعة القصوى</label>
+                            <input type="number" class="form-control" id="editClassCapacity" min="10" max="40">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="editClassStatus" class="form-label required">الحالة</label>
+                            <select class="form-select" id="editClassStatus" required>
+                                <option value="active">نشط</option>
+                                <option value="inactive">غير نشط</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="editClassDescription" class="form-label">وصف الصف (اختياري)</label>
+                            <textarea class="form-control" id="editClassDescription" rows="2"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="submit" form="editClassForm" class="btn btn-primary">حفظ التعديلات</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- JS الخاص بالمدير -->
+    <script src="js/admin.js"></script>
+    <script>
+        // تهيئة DataTable
+        $(document).ready(function() {
+            var table = $('#classesTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/ar.json'
+                },
+                responsive: true,
+                dom: '<"top"f>rt<"bottom"lip><"clear">',
+                pageLength: 10,
+                order: [[0, 'asc']]
+            });
+
+            // البحث في الجدول
+            $('#searchForm').on('submit', function(e) {
+                e.preventDefault();
+                table.search($('#searchInput').val()).draw();
+            });
+
+            // تصفية حسب المرحلة
+            $('#gradeFilter').on('change', function() {
+                table.column(2).search(this.value).draw();
+            });
+
+            // إعادة تعيين الفلاتر
+            $('#resetFilters').on('click', function() {
+                $('#searchInput').val('');
+                $('#gradeFilter').val('');
+                table.search('').columns().search('').draw();
+            });
+
+            // التحقق من صحة النموذج
+            (function() {
+                'use strict';
+                var forms = document.querySelectorAll('.needs-validation');
+                
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+            })();
+
+            // معالجة إضافة صف جديد
+            $('#addClassForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                if (this.checkValidity()) {
+                    // هنا يمكنك إضافة كود الإضافة الفعلية
+                    alert('تم إضافة الصف بنجاح');
+                    $('#addClassModal').modal('hide');
+                    this.reset();
+                    $(this).removeClass('was-validated');
+                    
+                    // يمكنك هنا إضافة الصف الجديد للجدول دون الحاجة لإعادة تحميل الصفحة
+                }
+            });
+
+            // معالجة حذف الصف
+            $(document).on('click', '.delete-btn', function() {
+                if(confirm('هل أنت متأكد من حذف هذا الصف؟ سيتم حذف جميع بياناته المرتبطة.')) {
+                    const classId = $(this).data('id');
+                    const row = $(this).closest('tr');
+                    
+                    // هنا يمكنك إضافة كود الحذف الفعلي
+                    $.ajax({
+                        url: 'api/deleteClass.php',
+                        method: 'POST',
+                        data: { id: classId },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                row.fadeOut(500, function() {
+                                    table.row($(this)).remove().draw();
+                                });
+                                alert('تم حذف الصف بنجاح');
+                            } else {
+                                alert('حدث خطأ أثناء حذف الصف: ' + response.message);
+                            }
+                        },
+                        error: function() {
+                            alert('حدث خطأ أثناء الاتصال بالخادم');
+                        }
+                    });
+                }
+            });
+
+            // معالجة عرض بيانات الصف
+            $(document).on('click', '.view-btn', function() {
+                const classId = $(this).data('id');
+                
+                // هنا يمكنك جلب بيانات الصف من الخادم
+                $.ajax({
+                    url: 'api/getClass.php',
+                    method: 'GET',
+                    data: { id: classId },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            const classData = response.data;
+                            $('#viewClassModal .class-name').text(classData.name);
+                            $('#viewClassModal .grade').text(classData.grade);
+                            $('#viewClassModal .teacher').text(classData.teacher);
+                            $('#viewClassModal .students').text(classData.students + ' / ' + classData.capacity);
+                            $('#viewClassModal .created-at').text(classData.createdAt);
+                            $('#viewClassModal .description').text(classData.description || 'لا يوجد وصف');
+                            
+                            // تحديث حالة الصف
+                            const statusBadge = $('#viewClassModal .badge');
+                            statusBadge.removeClass('bg-success bg-warning');
+                            if (classData.status === 'active') {
+                                statusBadge.addClass('bg-success').text('نشط');
+                            } else {
+                                statusBadge.addClass('bg-warning text-dark').text('غير نشط');
+                            }
+                            
+                            // تحديث المواد الدراسية
+                            const subjectsContainer = $('#viewClassModal .d-flex.flex-wrap');
+                            subjectsContainer.empty();
+                            classData.subjects.forEach(subject => {
+                                subjectsContainer.append(`<span class="badge bg-info">${subject}</span>`);
+                            });
+                        } else {
+                            alert('حدث خطأ أثناء جلب بيانات الصف');
+                        }
+                    },
+                    error: function() {
+                        alert('حدث خطأ أثناء الاتصال بالخادم');
+                    }
+                });
+            });
+
+            // تصدير إلى Excel
+            $('#exportExcel').on('click', function() {
+                // يمكنك استخدام مكتبة مثل SheetJS لتصدير البيانات
+                alert('سيتم تصدير البيانات إلى ملف Excel');
+            });
+
+            // طباعة الجدول
+            $('#printBtn').on('click', function() {
+                window.print();
+            });
+        });
+       
+                // في ملف JavaScript الأصلي
+        $(document).on('click', '#viewStudentsBtn', function() {
+            const classId = $(this).data('class-id');
+            window.open(`class_students.html?class_id=${classId}`, '_blank');
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام التسجيل - معهد نور الهدى التعليمي</title>
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Bootstrap RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS -->
+     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary-color: #2c5f8a;
+            --secondary-color: #4b8b9d;
+            --accent-color: #f5a623;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            height: 60px;
+            margin-left: 15px;
+        }
+        
+        .form-section {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .teacher-form-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin: 30px auto;
+            border-top: 4px solid var(--secondary-color);
+            max-width: 800px;
+        }
+        
+        .form-section.active, .teacher-form-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .teacher-form-section h3 {
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .section-title:after, .teacher-form-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #234a6d;
+            border-color: #234a6d;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        
+        .salary-input-group {
+            max-width: 300px;
+        }
+        
+        .form-switch .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--primary-color);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--primary-color);
+        }
+       /* تعريف المتغيرات للألوان والانتقالات إذا لم تكن معرفة مسبقًا */
+
+                /* تعريف المتغيرات للألوان والانتقالات */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #343a40;
+            --accent-color: #28a745;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+        /* Footer */
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            position: relative;
+        }
+        .footer a{
+            text-decoration: none;
+        }
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        }
+
+        .footer-about img {
+            margin-bottom: 15px;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3 {
+            color: var(--white);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-right: 5px;
+        }
+
+        .footer-contact ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-contact li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            margin-left: 10px;
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-top: 3px;
+        }
+
+        .footer-contact p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        .footer-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التقدم -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- الرأس -->
+    <header class="header">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <img src="images/Noor_Alhuda_logo.png" alt="شعار معهد نور الهدى" class="logo">
+                <div>
+                    <h3 class="mb-0">نظام التسجيل الإلكتروني</h3>
+                    <p class="mb-0">معهد نور الهدى التعليمي</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+   
+
+<div id="teacherRegistrationFormContainer">
+    <div class="container py-4">
+        <form id="teacherRegistrationForm">
+            <div class="form-section active">
+                <h3 class="section-title">نموذج تسجيل المعلم</h3>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>ملاحظة:</strong> يرجى تعبئة جميع الحقول المطلوبة بدقة لتسهيل عملية المراجعة.
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherFullName" class="form-label">الاسم الكامل</label>
+                        <input type="text" class="form-control" id="teacherFullName" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherId" class="form-label">رقم الهوية</label>
+                        <input type="number" class="form-control" id="teacherId" pattern="[0-9]*" required>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherBirthDate" class="form-label">تاريخ الميلاد</label>
+                        <input type="date" class="form-control" id="teacherBirthDate" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">الجنس</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="teacherGender" id="teacherMale" value="male" required>
+                                <label class="form-check-label" for="teacherMale">ذكر</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="teacherGender" id="teacherFemale" value="female">
+                                <label class="form-check-label" for="teacherFemale">أنثى</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherEducation" class="form-label">الشهادة العلمية</label>
+                        <select class="form-select" id="teacherEducation" required>
+                            <option value="" selected disabled>اختر الشهادة</option>
+                            <option value="diploma">دبلوم</option>
+                            <option value="bachelor">بكالوريوس</option>
+                            <option value="master">ماجستير</option>
+                            <option value="phd">دكتوراه</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherSpecialization" class="form-label">التخصص</label>
+                        <input type="text" class="form-control" id="teacherSpecialization" required>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherExperience" class="form-label">سنوات الخبرة</label>
+                        <input type="number" class="form-control" id="teacherExperience" min="0" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherPreviousWork" class="form-label">الأعمال السابقة</label>
+                        <input type="text" class="form-control" id="teacherPreviousWork" required>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherSalarySYP" class="form-label">الراتب المتوقع (ليرة سورية)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="teacherSalarySYP" min="0" required>
+                            <span class="input-group-text">ل.س</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherSalaryUSD" class="form-label">الراتب المتوقع (دولار)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="teacherSalaryUSD" min="0" required>
+                            <span class="input-group-text">$</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherEmail" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="teacherEmail">
+                    </div>
+                     <div class="col-md-6 mb-3">
+                        <label for="teacherPassword" class="form-label">كلمة المرور </label>
+                        <input type="password" class="form-control" id="teacherPassword">
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="teacherPhone" class="form-label">رقم الهاتف</label>
+                        
+                        <input type="tel" class="form-control" id="teacherPhone" pattern="[0-9]*" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                    <label for="teacherAddress" class="form-label">العنوان الحالي</label>
+                    <input type="text" class="form-control" id="teacherAddress" required>
+                    </div>
+                    
+                </div>
+                
+                <div class="mb-3">
+                    <label for="teacherPhoto" class="form-label">صورة شخصية (اختيارية)</label>
+                    <input type="file" class="form-control" id="teacherPhoto" accept="image/*">
+                </div>
+                
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="teacherAgreement" required>
+                    <label class="form-check-label" for="teacherAgreement">أوافق على شروط وسياسات المعهد</label>
+                </div>
+                
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-paper-plane me-2"></i> إرسال الطلب
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    
+    <!-- التذييل -->
+  <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-about">
+                        <img src="images/Noor_Alhuda_logo.png" alt="شعار معهد نور الهدى" height="50" width="40">
+                        <p class="mt-3">معهد نور الهدى التعليمي يقدم تعليماً حديثاً يجمع بين الأصالة والمعاصرة، ويسهم في بناء شخصية الطالب بناءً متكاملاً.</p>
+                        <div class="social-links">
+                        <a href="https://wa.me/+963951742878" class="social-icon"><i class="fab fa-whatsapp"></i></a>                   
+                        <a href="https://www.facebook.com/share/1Et35C8YKg/" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://t.me/+963951742878" class="social-icon"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="mailto:I.nooralhuda2025@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>             
+                        <a href="https://www.instagram.com/i.nooralhuda2025" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h3>روابط سريعة</h3>
+                        <ul>
+                            <li><a href="#home">الرئيسية</a></li>
+                            <li><a href="#about">عن المعهد</a></li>
+                            <li><a href="#departments">الأقسام</a></li>
+                            <li><a href="#courses">الدورات</a></li>
+                            <li><a href="#teachers">المعلمون</a></li>
+                            <li><a href="#contact">التواصل</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h3>الدورات</h3>
+                        <ul>
+                            <li><a href="#courses">برمجة الأطفال</a></li>
+                            <li><a href="#courses">قيادة الحاسب الآلي</a></li>
+                            <li><a href="#courses">الإنجليزية المحادثة</a></li>
+                            <li><a href="#courses">التصميم الجرافيكي</a></li>
+                            <li><a href="#courses">تطوير الويب للمبتدئين</a></li>
+                            <li><a href="#courses">التسويق الرقمي</a></li>
+                            <li><a href="#toggle-courses">عرض جميع الدورات</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-contact">
+                        <h3>معلومات التواصل</h3>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt">
+
+                            </i> حلب مخيم النيرب مفرق الشنكل _ مقابل منزل آل زيدان</li>
+
+                            <li><i class="fas fa-phone-alt"></i> 878 742 951 963+</li>
+                            <li><i class="fas fa-envelope"></i> I.nooralhuda2025@gmail.com</li>
+                            <li><i class="fas fa-clock"></i> الأحد - الخميس: 7:30ص - 3:30م</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0"> جميع الحقوق محفوظة © معهد نور الهدى 2025</p>
+                   
+                </div>   
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">تصميم وتطوير <a href="#" class="text-white">فريق المعهد</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- مكتبات JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            
+            // إرسال نموذج المعلم
+            $('#teacherRegistrationForm').submit(function(e) {
+                e.preventDefault();
+                
+                // جمع بيانات النموذج
+                const teacherData = {
+                    fullName: $('#teacherFullName').val(),
+                    idNumber: $('#teacherId').val(),
+                    birthDate: $('#teacherBirthDate').val(),
+                    gender: $('input[name="teacherGender"]:checked').val(),
+                    education: $('#teacherEducation').val(),
+                    specialization: $('#teacherSpecialization').val(),
+                    experience: $('#teacherExperience').val(),
+                    previousWork: $('#teacherPreviousWork').val(),
+                    salary: {
+                        sy: $('#teacherSalarySYP').val(),
+                        usd: $('#teacherSalaryUSD').val()
+                    },
+                    contact: {
+                        phone: $('#teacherPhone').val(),
+                        email: $('#teacherEmail').val(),
+                        address: $('#teacherAddress').val()
+                    },
+                    photo: $('#teacherPhoto').val()
+                };
+                
+                // هنا يمكنك إرسال البيانات إلى السيرفر باستخدام Ajax
+                console.log('بيانات المعلم:', teacherData);
+                
+                // عرض رسالة نجاح
+                Swal.fire({
+                    icon: 'success',
+                    title: 'تم إرسال طلبك بنجاح',
+                    text: 'سيتم مراجعة طلبك من قبل إدارة المعهد وسيتم التواصل معكم في حال الموافقة',
+                    confirmButtonText: 'حسناً',
+                    confirmButtonColor: '#2c5f8a'
+                }).then(() => {
+                    // إعادة تعيين النموذج
+                    $('#teacherRegistrationForm')[0].reset();
+                });
+            });
+        });
+    </script>
+    <!-- SweetAlert لعرض الرسائل -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
